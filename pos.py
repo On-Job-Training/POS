@@ -5,6 +5,7 @@ from kivy.config import Config
 import xlwt
 import xlrd
 import re
+import datetime
 from kivy.uix.popup import Popup
 from xlutils.copy import copy
 from kivy.properties import StringProperty
@@ -18,13 +19,77 @@ rows=1
 cols=0
 gender=''
 screen_manager = ScreenManager()
-
+waktu=datetime.datetime.now()
+simpanwaktu= waktu.strftime("%d-%m-%Y %H:%M:%S")
 class setNamePopup(Popup):
     def FadePopup(self):
         #self.manager.current='login'#program untuk pindah ke layout yang lain berdasarkan name window
         self.dismiss()
+        print('keluar')
 class WelcomeBack(Screen):
-    pass
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.username=[]
+        self.password=[]
+    def loginreset(self):
+        self.ids.username_field.text=''
+        self.ids.pwd_field.text=''
+        self.ids.money_field.text=''
+        self.ids.info.text=''
+    def validate_userwelcome(self):
+        loc = ("data.xls")
+        wb = xlrd.open_workbook(loc)
+        sheet = wb.sheet_by_index(0)
+        for row in range(1,sheet.nrows):
+            print(sheet.cell_value(row,5))
+            print('\n')
+            print(sheet.cell_value(row,6))
+            self.username.append(sheet.cell_value(row, 5))
+            self.password.append(sheet.cell_value(row,6))
+            print(self.username)
+            print(self.password)
+
+        #parameter untuk mengecheck nilai pada array
+        UserData=-1
+        user= self.ids.username_field
+        pwd= self.ids.pwd_field
+        kembalian= self.ids.money_field
+        info= self.ids.info
+
+        uname=user.text
+        passw=pwd.text
+        UangKembalian=kembalian.text
+        #Parameter untuk mengecheck format yang dimasukkan untuk uang kembalian
+        xparamUangKembalian=re.findall("[a-zA-Z]",UangKembalian)
+        xparamUangKembalian2= UangKembalian.startswith('0')
+        if uname== '' or passw=='' or UangKembalian=='' :
+            info.text='[color=#FF0000]Username ,Password,and Change  required[/color]'
+        elif xparamUangKembalian or xparamUangKembalian2:
+            info.text='[color=#FF0000]Masukkan jumlah uang dengan format yang benar[/color]'
+        else:
+            for i,c in enumerate(self.username):
+                if c == uname:
+                    UserData=i
+            if UserData>=0:
+                if uname==self.username[UserData] and passw==self.password[UserData]:
+                    info.text='[color=#1764ff]Logged In Successfully!!![/color]'
+                    self.manager.current='Home_Win'#program untuk pindah ke layout yang lain berdasarkan name window
+                    self.ids.username_field.text=''
+                    self.ids.pwd_field.text=''
+                    self.ids.money_field.text=''
+                    self.ids.info.text=''
+                else:
+                    info.text='[color=#1764ff]Invalid Username or Password!!![/color]'
+                    self.ids.pwd_field.text=''
+                    self.ids.money_field.text=''
+
+            else:
+                info.text='[color=#FF0000]Username and Password not registered[/color]'
+                self.ids.username_field.text=''
+                self.ids.pwd_field.text=''
+                self.ids.money_field.text=''
+        self.username=[]
+        self.password=[]
 class HomeWindow(Screen):
     def setName(self,*args):
         setNamePopup().open()
@@ -36,9 +101,8 @@ class HomeWindow(Screen):
         self.HargaBarang=[]
         #self.waktu.text=d1
         #waktuSaatIni= Label(text=d1,color=(.06,.45,.45,1))
-       
+
         #self.waktu.text = time.asctime()   
-           
            
     def barang1(self):
         global scandata
@@ -135,16 +199,21 @@ class LoginWindow(Screen):
         super().__init__(**kwargs)
         self.username=[]
         self.password=[]
+    def loginreset(self):
+        self.ids.username_field.text=''
+        self.ids.pwd_field.text=''
+        self.ids.money_field.text=''
+        self.ids.info.text=''
     def validate_user(self):
         loc = ("data.xls")
         wb = xlrd.open_workbook(loc)
         sheet = wb.sheet_by_index(0)
         for row in range(1,sheet.nrows):
-            print(sheet.cell_value(row,4))
-            print('\n')
             print(sheet.cell_value(row,5))
-            self.username.append(sheet.cell_value(row, 4))
-            self.password.append(sheet.cell_value(row,5))
+            print('\n')
+            print(sheet.cell_value(row,6))
+            self.username.append(sheet.cell_value(row, 5))
+            self.password.append(sheet.cell_value(row,6))
             print(self.username)
             print(self.password)
 
@@ -158,8 +227,12 @@ class LoginWindow(Screen):
         uname=user.text
         passw=pwd.text
         UangKembalian=kembalian.text
+        xparamUangKembalian=re.findall("[a-zA-Z]",UangKembalian)
+        xparamUangKembalian2= UangKembalian.startswith('0')
         if uname== '' or passw=='' or UangKembalian=='' :
             info.text='[color=#FF0000]Username ,Password,and Change  required[/color]'
+        elif xparamUangKembalian or xparamUangKembalian2:
+            info.text='[color=#FF0000]Masukkan jumlah uang dengan format yang benar[/color]'
         else:
             for i,c in enumerate(self.username):
                 if c == uname:
@@ -185,17 +258,26 @@ class LoginWindow(Screen):
         self.username=[]
         self.password=[]
 #Register
-class WelcomeBack(Screen):
-    pass
+   
 class RegistWindow(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.username=[]
         self.nomorHand=[]
+    def reset(self):
+        self.usernameku.text=''
+        self.namaAwal.text=''
+        self.namaAkhir.text=''
+        self.nomorTelp.text=''
+        self.passwrd.text=''
+        self.address.text=''
+        self.confpasswr.text=''
+        self.ids.info_regist.text=''
     def regist(self):
         global rows
         global cols
         global gender
+        global simpanwaktu
         info= self.ids.info_regist
         # create a workbook and add a worksheet 
         #write some data headers
@@ -204,11 +286,11 @@ class RegistWindow(Screen):
         sheet = rb.sheet_by_index(0)
         w_sheet = wb.get_sheet(0)
         for row in range(1,sheet.nrows):
-            print(sheet.cell_value(row,4))
+            print(sheet.cell_value(row,5))
             print('\n')
-            print(sheet.cell_value(row,2))
-            self.username.append(sheet.cell_value(row, 4))
-            self.nomorHand.append(sheet.cell_value(row,2))
+            print(sheet.cell_value(row,3))
+            self.username.append(sheet.cell_value(row, 5))
+            self.nomorHand.append(sheet.cell_value(row,3))
             print(self.username)
             print(self.nomorHand)
 
@@ -221,59 +303,83 @@ class RegistWindow(Screen):
         confPass=self.confpasswr.text
         #check username atau nomorHP yang sama
         UserData=-1
+        xparamPhoneFront=1
         for i,c in enumerate(self.username):
                 if c == emaildata:
                     UserData=i
         namalengkap=dataFirstName+' '+dataLastName
         xparamname=re.findall("\d",namalengkap)
-
+        temp = re.findall('\d', nomorHP)
+        res=list(map(int,temp))
+        #parameter untuk mengecheck format pada nomortelp
+        if temp:
+            if res[0]== 0:
+                xparamPhoneFront=0
+            else:
+                print('tidak')
         xparamPhoneNumber=re.findall("[a-zA-Z]",nomorHP)
-
         xparamPasswNumber=re.findall("\d",passw)
         xparamPasswType=re.findall("[a-zA-Z]",passw)
         LengthPass=len(passw)
+        lengthNumberP=len(nomorHP)
+        print(xparamPhoneFront)
         if emaildata=='' or dataFirstName=='' or dataLastName=='' or gender=='' or nomorHP=='' or passw=='' or confPass=='':
-            print('data ada yang kosong')
-            info.text='[color=#FF0000]data ada yang kosong[/color]'
+            print('Harap Lengkapi Data Diri Anda')
+            info.text='[color=#FF0000]Harap Lengkapi Data Diri Anda[/color]'
         elif xparamname:
             info.text='[color=#FF0000]tulis nama dengan format yang benar[/color]'
+        elif lengthNumberP<10 or lengthNumberP>12:
+            info.text='[color=#FF0000]jumlah digit nomor telepon anda tidak sesuai [/color]'
         elif xparamPhoneNumber:
-            print('NomorHp anda tidak sesuai')
-            info.text='[color=#FF0000]NomorHP anda tidak sesuai[/color]'
+            info.text='[color=#FF0000]Masukkan Nomor Telepon berupa angka saja[/color]'
+        elif xparamPhoneFront == 1 :
+            info.text='[color=#FF0000]invalid Phone Number[/color]'
         #elif xparamPasswNumber == None or xparamPasswType == None:
             #print('Password harus terdiri dari huruf dan angka')
         elif UserData >= 0:
             if emaildata==self.username[UserData]:
                 info.text='[color=#FF0000]Username Telah Digunakan[/color]'
-            if nomorHP==self.nomorHand[UserData]:
+            elif nomorHP==self.nomorHand[UserData]:
                 info.text='[color=#FF0000]Nomor Handphone ini telah terdaftar[/color]'
         elif confPass!= passw:
             print('ulangi password yang anda masukkan')
             info.text='[color=#FF0000]Ulangi Password Yang Anda Masukkan[/color]'
             self.passwrd.text=''
             self.confpasswr.text=''
-        elif xparamPasswNumber and xparamPasswType:
+        elif xparamPasswNumber and xparamPasswType and xparamPhoneFront==0:
             if LengthPass<8:
                 print('Minimal terdapat 8 karakter')
                 info.text='[color=#FF0000]password minimal terdapat 8 karakter[/color]'
             else:
                 w_sheet = wb.get_sheet(0)
-                w_sheet.write(rows,0,namalengkap)
-                w_sheet.write(rows,1,addr)
-                w_sheet.write(rows,2,nomorHP)
-                w_sheet.write(rows,3,gender)
-                w_sheet.write(rows,4,emaildata)
-                w_sheet.write(rows,5,confPass)
+                w_sheet.write(rows,0,simpanwaktu)
+                w_sheet.write(rows,1,namalengkap)
+                w_sheet.write(rows,2,addr)
+                w_sheet.write(rows,3,nomorHP)
+                w_sheet.write(rows,4,gender)
+                w_sheet.write(rows,5,emaildata)
+                w_sheet.write(rows,6,confPass)
                 rows+=1
                 wb.save('data.xls')
                 info.text='[color=#1764ff]Success Registered!!![/color]'
                 print(namalengkap+' '+addr+' '+nomorHP+' '+emaildata+' '+confPass)
+                self.usernameku.text=''
+                self.namaAwal.text=''
+                self.namaAkhir.text=''
+                self.nomorTelp.text=''
+                self.passwrd.text=''
+                self.address.text=''
+                self.confpasswr.text=''
+                self.ids.info_regist.text=''
                 self.manager.current='welcome'#program untuk pindah ke layout yang lain berdasarkan name window
         else:
             print('password anda harus terdiri dari huruf dan angka')
+            self.passwrd.text=''
+            self.confpasswr.text=''
             info.text='[color=#FF0000]password anda harus terdiri dari huruf dan angka[/color]'
         self.username=[]
         self.nomorHand=[]
+        print(res)
     def checkboxMale(self,instance,value):
         global gender
         if value is True:
@@ -286,7 +392,7 @@ class RegistWindow(Screen):
             gender='female'
         else:
             gender=''
-            
+    
 presentation=Builder.load_file("designpos.kv")
 class ForcaPOSApp(App):
     def build(self):
