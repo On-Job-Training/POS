@@ -1,0 +1,1139 @@
+#:kivy 1.10.0
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
+#:import utils kivy.utils
+#:import Button kivy.uix.button.Button
+<FlatButton@ButtonBehavior+Label>:
+    font_size: 14
+ScreenManager:
+    transition : FadeTransition()
+    LoginWindow : 
+    HomeWindow : 
+    RegistWindow :
+#:import utils kivy.utils
+
+<FlatButton@ButtonBehavior+Label>:
+    font_size: 16
+
+<LoginWindow>:
+    id: main_win
+    name:'login'
+    orientation: "vertical"
+    
+    canvas.before:
+        Color:
+            rgba: (1,1,1, 1)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+            source: 'registrasi.png'
+    GridLayout:
+        cols:2
+        FlatButton:
+            Image:
+                source: 'sisi.png'
+                pos: 3,550
+                size: 120,40
+                allow_stretch: True
+            Image:
+                source: 'logo.png'
+                pos: 40,400
+                size: 280,90
+                allow_stretch: True
+            Label:
+                text:'Boosting your Business Perfomance'
+                pos: 130,330
+                bold: True
+                font_size: 17
+            Label:
+                text:'Forca Point Of Sales is an online inventory management'
+                pos: 130,300
+                bold: True
+                font_size: 12
+            Label:
+                text:'application for cashier and manager store'
+                pos: 130,285
+                bold: True
+                font_size: 12
+        FlatButton:                 
+            FlatButton:
+                text: 'Welcome to FORCA POS'
+                bold: True
+                color: utils.get_color_from_hex('#000000')        
+                font_size: 30 
+                #pos_hint: {'center_x': 0.5, 'center_y': -1.5}  
+                pos: 530,470
+            Label:
+                id: info
+                markup: True
+                size_hint_y: None
+                bold:True
+                text:''
+                font_size:15
+                pos: 530,430
+            Label:
+                
+                text:'Username'
+                bold:True
+                font_size:15
+                pos: 382, 400
+                color: utils.get_color_from_hex('#7D7A7A')    
+            FlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#F2EFEF') 
+                    RoundedRectangle:
+                        pos: 393, 405
+                        size:  370, 30
+                        radius: [13, 13, 13, 13]
+                TextInput:
+                    id: username_field
+                    hint_text: "Username"
+                    background_color: 0,0,0,0  
+                    foreground_color: utils.get_color_from_hex('#000000')
+                    pos:425,408
+                    font_size: 13
+                    size: 330, 28
+                    size_hint: None, None
+                    color:utils.get_color_from_hex('#B5B8BC')
+                    background_normal:''
+                Image:
+                    pos:405,412
+                    source:'people.png'
+                    size:20,20
+            Label:
+                text:'Password'
+                bold:True
+                pos: 380, 327
+                color: utils.get_color_from_hex('#7D7A7A')    
+            FlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#F2EFEF') 
+                    RoundedRectangle:
+                        pos: 395,331
+                        size:  370, 30
+                        radius: [13, 13, 13, 13]
+                Image:
+                    pos:405,338
+                    source:'password.png'
+                    size:20,20
+                TextInput:
+                    id: pwd_field
+                    hint_text: "Password"
+                    password:True
+                    background_color: 0,0,0,0  
+                    foreground_color: utils.get_color_from_hex('#000000')
+                    pos:425,333
+                    font_size: 13
+                    size: 330, 28
+                    size_hint: None, None
+                    color:utils.get_color_from_hex('#B5B8BC')
+                    background_normal:''
+            Label:
+                text:'Change'
+                bold:True
+                pos: 375, 255
+                color: utils.get_color_from_hex('#7D7A7A')    
+            FlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#F2EFEF') 
+                    RoundedRectangle:
+                        pos: 395,258
+                        size:  370, 30
+                        radius: [13, 13, 13, 13]
+                Image:
+                    pos:405,262
+                    source:'dolar.png'
+                    size:20,25
+                TextInput:
+                    id: money_field
+                    hint_text: "Change"
+                    background_color: 0,0,0,0  
+                    foreground_color: utils.get_color_from_hex('#000000')
+                    pos:425,261
+                    font_size: 13
+                    size:330, 28
+                    size_hint: None, None
+                    color:utils.get_color_from_hex('#B5B8BC')
+                    background_normal:''
+            FlatButton:
+                #pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#0096FB') 
+                    RoundedRectangle:
+                        pos: 535, 200
+                        size:  84, 34
+                        radius: [15, 15, 15, 15]
+                Button:
+                    on_press: root.validate_user()  
+                    pos:537, 203
+                    size: 79, 28
+                    bold:True
+                    font_size:18
+                    background_color:0,0,0,0
+                    background_normal:''
+                    text:'login' 
+            GridLayout:
+                pos: 500, 120
+                cols:2
+                size: 200, 25
+                orientation:'horizontal'
+                spacing:40
+                FlatButton:
+                    text: 'Do Not have account ?'
+                    bold: True
+                    color: utils.get_color_from_hex('#000000')        
+                    font_size: 15                         
+                        
+                FlatButton:
+                    on_release : app.root.current = "Home_Win"
+                    text: 'Sign Up here'
+                    color: utils.get_color_from_hex('#ff0004')  
+                    bold: True
+                    color: 		    
+                    font_size: 15  
+
+<FlatButton@ButtonBehavior+Label>:
+    font_size: 16
+
+<RegistWindow>:   
+    name:"register"
+    namaAwal:FirstName
+    namaAkhir:LastName
+    usernameku:email
+    nomorTelp:PhoneNumber
+    passwrd:pass_field
+    address:addr_field
+    confpasswr:confpass_field
+    id: main_win
+    orientation: "vertical"
+    
+    canvas.before:
+        Color:
+            rgba: (1,1,1, 1)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+            source: 'registrasi.png'
+    GridLayout:
+        cols:2
+        FlatButton:
+            Image:
+                source: 'sisi.png'
+                pos: 3,550
+                size: 120,40
+                allow_stretch: True
+            Image:
+                source: 'logo.png'
+                pos: 40,400
+                size: 280,90
+                allow_stretch: True
+            Label:
+                text:'Boosting your Business Perfomance'
+                pos: 130,330
+                bold: True
+                font_size: 17
+            Label:
+                text:'Forca Point Of Sales is an online inventory management'
+                pos: 130,300
+                bold: True
+                font_size: 12
+            Label:
+                text:'application for cashier and manager store'
+                pos: 130,285
+                bold: True
+                font_size: 12
+        FlatButton:                 
+            FlatButton:
+                text: 'Register New Member'
+                bold: True
+                color: utils.get_color_from_hex('#000000')        
+                font_size: 30 
+                #pos_hint: {'center_x': 0.5, 'center_y': -1.5}  
+                pos: 540, 510
+            Label:
+                text:'Username'
+                bold:True
+                pos: 380, 470
+                color: utils.get_color_from_hex('#7D7A7A')    
+            FlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#F2EFEF') 
+                    RoundedRectangle:
+                        pos: 393, 477
+                        size:  370, 30
+                        radius: [13, 13, 13, 13]
+                TextInput:
+                    id: email
+                    hint_text: "Username"
+                    background_color: 0,0,0,0  
+                    foreground_color: utils.get_color_from_hex('#000000')
+                    pos:398,479
+                    font_size: 13
+                    size: 362, 28
+                    size_hint: None, None
+                    color:utils.get_color_from_hex('#B5B8BC')
+                    background_normal:''
+            Label:
+                text:'First Name'
+                bold:True
+                font_size:15
+                pos: 382, 400
+                color: utils.get_color_from_hex('#7D7A7A')    
+            FlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#F2EFEF') 
+                    RoundedRectangle:
+                        pos: 393, 405
+                        size:  170, 30
+                        radius: [13, 13, 13, 13]
+                TextInput:
+                    id: FirstName
+                    hint_text: "First Name"
+                    background_color: 0,0,0,0  
+                    foreground_color: utils.get_color_from_hex('#000000')
+                    pos:398,408
+                    font_size: 13
+                    size: 165, 28
+                    size_hint: None, None
+                    color:utils.get_color_from_hex('#B5B8BC')
+                    background_normal:''
+            Label:
+                text:'Last Name'
+                bold:True
+                pos: 580, 400
+                color: utils.get_color_from_hex('#7D7A7A')    
+            FlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#F2EFEF') 
+                    RoundedRectangle:
+                        pos: 593, 405
+                        size:  170, 30
+                        radius: [13, 13, 13, 13]
+                TextInput:
+                    id:LastName
+                    hint_text: "Last Name"
+                    background_color: 0,0,0,0  
+                    foreground_color: utils.get_color_from_hex('#000000')
+                    pos:600,408
+                    font_size: 13
+                    size: 165, 28
+                    size_hint: None, None
+                    color:utils.get_color_from_hex('#B5B8BC')
+                    background_normal:''
+            Label:
+                text:'Phone Number'
+                bold:True
+                pos: 395, 327
+                color: utils.get_color_from_hex('#7D7A7A')    
+            FlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#F2EFEF') 
+                    RoundedRectangle:
+                        pos: 395,331
+                        size:  370, 30
+                        radius: [13, 13, 13, 13]
+                TextInput:
+                    id: PhoneNumber
+                    hint_text: "Phone Number"
+                    background_color: 0,0,0,0  
+                    foreground_color: utils.get_color_from_hex('#000000')
+                    pos:397,333
+                    font_size: 13
+                    size: 362, 28
+                    size_hint: None, None
+                    color:utils.get_color_from_hex('#B5B8BC')
+                    background_normal:''
+            Label:
+                text:'Address'
+                bold:True
+                pos: 375, 255
+                color: utils.get_color_from_hex('#7D7A7A')    
+            FlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#F2EFEF') 
+                    RoundedRectangle:
+                        pos: 395,258
+                        size:  370, 30
+                        radius: [13, 13, 13, 13]
+                TextInput:
+                    id:addr_field
+                    hint_text: "Address"
+                    background_color: 0,0,0,0  
+                    foreground_color: utils.get_color_from_hex('#000000')
+                    pos:397,261
+                    font_size: 13
+                    size: 362, 28
+                    size_hint: None, None
+                    color:utils.get_color_from_hex('#B5B8BC')
+                    background_normal:''
+            Label:
+                text:'Password'
+                bold:True
+                font_size:15
+                pos: 380, 120
+                color: utils.get_color_from_hex('#7D7A7A')    
+            FlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#F2EFEF') 
+                    RoundedRectangle:
+                        pos: 393, 123
+                        size:  170, 30
+                        radius: [13, 13, 13, 13]
+                TextInput:
+                    id: pass_field
+                    hint_text: "Password"
+                    background_color: 0,0,0,0  
+                    foreground_color: utils.get_color_from_hex('#000000')
+                    password:True
+                    pos:398,126
+                    font_size: 13
+                    size: 165, 28
+                    size_hint: None, None
+                    color:utils.get_color_from_hex('#B5B8BC')
+                    background_normal:''
+            Label:
+                text:'Gender'
+                bold:True
+                font_size:15
+                pos: 370, 180
+                color: utils.get_color_from_hex('#7D7A7A')
+            Label:
+                text:'Female'               
+                font_size:12
+                pos: 395, 155
+                color: utils.get_color_from_hex('#7D7A7A')
+            CheckBox:
+                on_active: root.checkboxFemale(self,self.active)
+                id:female
+                pos: 360, 155
+                group:'check'
+                color: utils.get_color_from_hex('#7D7A7A')
+            
+            Label:
+                text:'Male'               
+                font_size:12
+                pos: 488, 155
+                color: utils.get_color_from_hex('#7D7A7A')
+            CheckBox:
+                id:male
+                pos: 460, 155
+                group:'check'
+                color: utils.get_color_from_hex('#7D7A7A')
+                on_active: root.checkboxMale(self,self.active)
+            Label:
+                text:'Confirm Password'
+                bold:True
+                font_size:15
+                pos: 605, 120
+                color: utils.get_color_from_hex('#7D7A7A')    
+            FlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#F2EFEF') 
+                    RoundedRectangle:
+                        pos: 593, 123
+                        size:  170, 30
+                        radius: [13, 13, 13, 13]
+                TextInput:
+                    id: confpass_field
+                    hint_text: "Confirm Password"
+                    password:True
+                    background_color: 0,0,0,0  
+                    foreground_color: utils.get_color_from_hex('#000000')
+                    pos:600,126
+                    font_size: 13
+                    size: 165, 28
+                    size_hint: None, None
+                    color:utils.get_color_from_hex('#B5B8BC')
+                    background_normal:''
+            FlatButton:
+                #pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#FB3930') 
+                    RoundedRectangle:
+                        pos: 580, 67
+                        size:  84, 34
+                        radius: [15, 15, 15, 15]
+                Button:   
+                    pos: 582,70
+                    size: 79, 28
+                    bold:True
+                    background_color:0,0,0,0
+                    background_normal:'' 
+                    text:'Reset'
+            FlatButton:
+                #pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#0096FB') 
+                    RoundedRectangle:
+                        pos: 677, 67
+                        size:  84, 34
+                        radius: [15, 15, 15, 15]
+                Button:
+                    on_press: root.regist()   
+                    pos: 680,70
+                    size: 79, 28
+                    bold:True
+                    background_color:0,0,0,0
+                    background_normal:'' 
+                    text:'Register'
+            GridLayout:
+                pos: 500, 20
+                cols:2
+                size: 200, 25
+                orientation:'horizontal'
+                spacing:40
+                FlatButton:
+                    text: 'Already have account ?'
+                    bold: True
+                    color: utils.get_color_from_hex('#000000')        
+                    font_size: 15                         
+                        
+                FlatButton:
+                    on_release : app.root.current = "login"
+                    text: 'Sign In here'
+                    color: utils.get_color_from_hex('#ff0004')  
+                    bold: True
+                    color: 		    
+                    font_size: 15  
+<FlatButton@ButtonBehavior+Label>:
+    font_size: 16
+<HomeWindow>:
+    waktu:waktu
+    jam:jam
+    id: main_win
+    name:'Home_Win'
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgba: (1,1,1, 1)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    BoxLayout:
+        orientation:'vertical'
+        BoxLayout:
+            id: header
+            size_hint_y: None
+            height: 40
+            canvas.before:
+                Color:
+                    rgba: utils.get_color_from_hex('#81CCFE')
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            Image:
+                pos:self.pos
+                source:'forca.png'
+                size:25,25
+                size_hint_x:.2       
+            BoxLayout:
+                Label:
+                    id: jam
+                    size_hint_x: .1
+                Label:
+                    id: waktu
+                FlatButton:
+                    id: loggedin_user
+                    text: 'Uswa'
+                    color: utils.get_color_from_hex('#000000')
+                Button:
+                    text:'Logout'
+                    size_hint_x: .4
+                    color:utils.get_color_from_hex('#ffffff')  
+                    background_color: utils.get_color_from_hex('#F60A0A')  
+                    background_normal:''
+        BoxLayout:
+            padding:5
+            BoxLayout:
+                id: product_details
+                orientation: "vertical"
+                size_hint_x: .3
+                
+                BoxLayout:
+                    orientation:"horizontal"
+                    size_hint_y: .1
+                    TextInput:
+                        hint_text: "Name/ Product Code"
+                        id: qty_inp_scan
+                        size_hint_x: .7
+                        foreground_color:utils.get_color_from_hex('#000000')  
+                        background_color:0,0,0,0
+                        multiline: False
+                        on_text_validate: root.list_data() 
+                    Button:
+                        background_color: utils.get_color_from_hex('#EBE7E7')  
+                        background_normal:''
+                        size_hint_x: .1
+                        #on_press: root.list_data() 
+                        Image:
+                            source: 'add.png'
+                            center_x: self.parent.center_x
+                            center_y: self.parent.center_y
+                            size: 20, 20
+                            allow_stretch: True
+                BoxLayout:
+                    id: add_to_cart
+                    orientation: 'vertical'
+                    size_hint_y: .8
+                    BoxLayout:
+                        
+                        size_hint_y: None
+                        height: 30
+                        canvas.before:
+                            Color:
+                                rgb: utils.get_color_from_hex('#0099FF')
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+                        Label:
+                            bold:True
+                            text: 'Product'
+                            size_hint_x: .3
+                        Label:
+                            bold:True
+                            text: 'Price'
+                            size_hint_x: .2
+                        Label:
+                            bold:True
+                            text: 'Qty'
+                            size_hint_x: .1
+                        Label:
+                            bold:True
+                            text: 'Subtotal'
+                            size_hint_x: .2
+                    BoxLayout: 
+                        pos: self.pos 
+                        size: root.size 
+                        orientation:'horizontal'
+                        id: test2
+                        canvas.before:
+                            Color:
+                                rgb: utils.get_color_from_hex('#EBE7E7')
+                            Rectangle:
+                                size: self.size
+                                pos: self.pos
+                        BoxLayout:
+                            size_hint_x: .3
+                            TextInput:
+                                id: NameProduct
+                                halign:'left'
+                                color:utils.get_color_from_hex('#000000')
+                                font_size: 14
+                                text_size: self.size
+                                readonly: True
+                                background_color: 0,0,0,0  
+                                foreground_color: utils.get_color_from_hex('#000000')
+                        BoxLayout:
+                            size_hint_x: .2
+                            TextInput:
+                                id: HargaProduct
+                                halign:'center'
+                                color:utils.get_color_from_hex('#000000')
+                                font_size: 14
+                                text_size: self.size
+                                readonly: True
+                                background_color: 0,0,0,0  
+                                foreground_color: utils.get_color_from_hex('#000000')
+                        BoxLayout:
+                            size_hint_x: .1
+                            TextInput:
+                                id: JumlahProduct
+                                halign:'center'
+                                color:utils.get_color_from_hex('#000000')
+                                font_size: 14
+                                text_size: self.size
+                                readonly: True
+                                background_color: 0,0,0,0  
+                                foreground_color: utils.get_color_from_hex('#000000')
+                        BoxLayout:
+                            size_hint_x: .2
+                            TextInput:
+                                id: subt_pro
+                                halign:'right'
+                                color:utils.get_color_from_hex('#000000')
+                                font_size: 14
+                                text_size: self.size
+                                readonly: True
+                                background_color: 0,0,0,0  
+                                foreground_color: utils.get_color_from_hex('#000000')
+                            
+                            
+                BoxLayout:
+                    orientation:"horizontal"
+                    size_hint_y: .1
+                    canvas.before:
+                        Color:
+                            rgb: utils.get_color_from_hex('#F57F0A')
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+                    BoxLayout:
+                        orientation:'horizontal'
+                        TextInput:
+                            text: "Items"
+                            color:utils.get_color_from_hex('#000000')
+                            font_size: 14
+                            text_size: self.size
+                            #size_hint_x:.3
+                            readonly: True
+                            id: qty_inp
+                            background_color: 0,0,0,0  
+                            foreground_color: utils.get_color_from_hex('#000000')
+                        TextInput:
+                            text: "0"
+                            halign:'right'
+                            color:utils.get_color_from_hex('#000000')
+                            font_size: 14
+                            text_size: self.size
+                            size_hint_x:.2
+                            readonly: True
+                            id: qty_inp
+                            background_color: 0,0,0,0  
+                            foreground_color: utils.get_color_from_hex('#000000')
+                        
+                                
+                    BoxLayout:
+                        orientation:'horizontal'
+                        TextInput:
+                            text: "Total"
+                            color:utils.get_color_from_hex('#000000')
+                            font_size: 14
+                            text_size: self.size
+                            #size_hint_x:.3
+                            readonly: True
+                            background_color: 0,0,0,0  
+                            foreground_color: utils.get_color_from_hex('#000000')
+                        TextInput:
+                            text: "0"
+                            halign:'right'
+                            color:utils.get_color_from_hex('#000000')
+                            font_size: 14
+                            text_size: self.size
+                            size_hint_x:.2
+                            readonly: True
+                            background_color: 0,0,0,0  
+                            foreground_color: utils.get_color_from_hex('#000000')
+                        
+                                
+                BoxLayout:
+                    orientation:"vertical"
+                    size_hint_y: .2
+                    canvas.before:
+                        Color:
+                            rgb: utils.get_color_from_hex('#D2E1F8')
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+                    BoxLayout:
+                        orientation:'horizontal'
+                        TextInput:
+                            text: "Total Payable"
+                            color:utils.get_color_from_hex('#000000')
+                            font_size: 14
+                            text_size: self.size
+                            readonly: True
+                            background_color: 0,0,0,0  
+                            foreground_color: utils.get_color_from_hex('#000000')
+                        TextInput:
+                            text: "0.0"
+                            halign:'right'
+                            color:utils.get_color_from_hex('#000000')
+                            font_size: 14
+                            text_size: self.size
+                            size_hint_x:.2
+                            readonly: True
+                            background_color: 0,0,0,0  
+                            foreground_color: utils.get_color_from_hex('#000000')
+                    BoxLayout:
+                        orientation:'horizontal'
+                        TextInput:
+                            text: "Cash"
+                            color:utils.get_color_from_hex('#000000')
+                            font_size: 14
+                            text_size: self.size
+                            size_hint_x:.5
+                            readonly: True
+                            id: qty_inp
+                            background_color: 0,0,0,0  
+                            foreground_color: utils.get_color_from_hex('#000000')
+                        TextInput:
+                        
+                            hint_text: "0.0"
+                            font_size: 14
+                            text_size: self.size
+                            halign:'right'
+                            background_color: 0,0,0,0  
+                            foreground_color: utils.get_color_from_hex('#000000')
+                    BoxLayout:
+                        orientation:'horizontal'
+                        TextInput:
+                            text: "Change"
+                            color:utils.get_color_from_hex('#000000')
+                            font_size: 14
+                            text_size: self.size
+                            size_hint_x:.5
+                            readonly: True
+                            id: qty_inp
+                            background_color: 0,0,0,0  
+                            foreground_color: utils.get_color_from_hex('#000000')
+                        TextInput:
+                        
+                            hint_text: "0.0"
+                            font_size: 14
+                            text_size: self.size
+                            halign:'right'
+                            background_color: 0,0,0,0  
+                            foreground_color: utils.get_color_from_hex('#000000')
+                        
+                                
+                BoxLayout:
+                    orientation:"horizontal"
+                    size_hint_y: .1
+                    spacing:5
+                    padding:5
+                    BoxLayout:   
+                    BoxLayout: 
+                    BoxLayout:    
+                        size_hint_x:.8   
+                        canvas:
+                            Color:
+                                rgba: utils.get_color_from_hex('#F60A0A') 
+                            RoundedRectangle:
+                                pos: self.pos
+                                size:self.size
+                                radius: [15, 15, 15, 15]
+                        Button:   
+                            bold:True
+                            font_size:15
+                            background_color:0,0,0,0
+                            background_normal:'' 
+                            text:'Cancel'
+                            pos:self.pos
+                            color:utils.get_color_from_hex('#ffffff') 
+                    BoxLayout:
+                        size_hint_x:.8 
+                        canvas:
+                            Color:
+                                rgba: utils.get_color_from_hex('#0096FB') 
+                            RoundedRectangle:
+                                pos: self.pos
+                                size:self.size
+                                radius: [15, 15, 15, 15]
+                        Button:   
+                            bold:True
+                            font_size:15
+                            background_color:0,0,0,0
+                            background_normal:'' 
+                            text:'OK'
+                            pos:self.pos
+                            color:utils.get_color_from_hex('#ffffff') 
+            BoxLayout:
+                orientation: "vertical"
+                size_hint_x:.4 
+                Accordion:
+                    orientation:'vertical'
+                    size_hint_y:.1
+                    AccordionItem: 
+                        title: 'Product Makanan'
+                        size_hint_y:.1
+                        GridLayout:
+                            cols:3
+                            row:4
+                            spacing:5
+                            Button:
+                                on_press: root.barang1()
+                                font_size: 13
+                                text_size: self.size     
+                                halign: 'center'
+                                valign:'top'
+                                padding_y:3
+                                background_color: utils.get_color_from_hex('#f0f1f2')
+                                background_normal:''
+                                Image:
+                                    source: 'beng_beng.png'
+                                    center_x: self.parent.center_x
+                                    center_y: self.parent.center_y
+                                    keep_ratio: True
+                                    allow_stretch: True
+                            Button:
+                                on_press: root.barang2()
+                                font_size: 13
+                                text_size: self.size     
+                                halign: 'center'
+                                valign:'top'
+                                padding_y:3
+                                background_color: utils.get_color_from_hex('#f0f1f2')
+                                background_normal:''
+                                Image:
+                                    source: 'nextar.png'
+                                    center_x: self.parent.center_x
+                                    center_y: self.parent.center_y
+                                    keep_ratio: True
+                                    allow_stretch: True
+                            Button:
+                                font_size: 13
+                                text_size: self.size     
+                                halign: 'center'
+                                valign:'top'
+                                padding_y:3
+                                background_color: utils.get_color_from_hex('#f0f1f2')
+                                background_normal:''
+                                Image:
+                                    source: 'oreo.png'
+                                    center_x: self.parent.center_x
+                                    center_y: self.parent.center_y
+                                    keep_ratio: True
+                                    allow_stretch: True
+                            Button:
+                                font_size: 13
+                                text_size: self.size     
+                                halign: 'center'
+                                valign:'top'
+                                padding_y:3
+                                background_color: utils.get_color_from_hex('#f0f1f2')
+                                background_normal:''
+                                Image:
+                                    source: 'taro.png'
+                                    center_x: self.parent.center_x
+                                    center_y: self.parent.center_y
+                                    keep_ratio: True
+                                    allow_stretch: True
+                            Button:
+                                font_size: 13
+                                text_size: self.size     
+                                halign: 'center'
+                                valign:'top'
+                                padding_y:3
+                                background_color: utils.get_color_from_hex('#f0f1f2')
+                                background_normal:''
+                                Image:
+                                    source: 'lays.png'
+                                    center_x: self.parent.center_x
+                                    center_y: self.parent.center_y
+                                    keep_ratio: True
+                                    allow_stretch: True
+                            Button:
+                                font_size: 13
+                                text_size: self.size     
+                                halign: 'center'
+                                valign:'top'
+                                padding_y:3
+                                background_color: utils.get_color_from_hex('#f0f1f2')
+                                background_normal:''
+                                Image:
+                                    source: 'slay.png'
+                                    center_x: self.parent.center_x
+                                    center_y: self.parent.center_y
+                                    keep_ratio: True
+                                    allow_stretch: True
+                            Button:
+                                font_size: 13
+                                text_size: self.size     
+                                halign: 'center'
+                                valign:'top'
+                                padding_y:3
+                                background_color: utils.get_color_from_hex('#f0f1f2')
+                                background_normal:''
+                                Image:
+                                    source: 'pota_bee.png'
+                                    center_x: self.parent.center_x
+                                    center_y: self.parent.center_y
+                                    keep_ratio: True
+                                    allow_stretch: True
+                            Button:
+                                font_size: 13
+                                text_size: self.size     
+                                halign: 'center'
+                                valign:'top'
+                                padding_y:3
+                                background_color: utils.get_color_from_hex('#f0f1f2')
+                                background_normal:''
+                                Image:
+                                    source: 'chitato.png'
+                                    center_x: self.parent.center_x
+                                    center_y: self.parent.center_y
+                                    keep_ratio: True
+                                    allow_stretch: True
+                            Button:
+                                font_size: 13
+                                text_size: self.size     
+                                halign: 'center'
+                                valign:'top'
+                                padding_y:3
+                                background_color: utils.get_color_from_hex('#f0f1f2')
+                                background_normal:''
+                                Image:
+                                    source: 'roma.png'
+                                    center_x: self.parent.center_x
+                                    center_y: self.parent.center_y
+                                    keep_ratio: True
+                                    allow_stretch: True
+                    AccordionItem: 
+                        title: 'Produk Minuman'
+                        size_hint_y:.1
+                        #background_normal:''
+                        GridLayout:
+                            cols:3
+                            row:4
+                            spacing:5
+                            Button:
+                                font_size: 13
+                                text_size: self.size     
+                                halign: 'center'
+                                valign:'top'
+                                padding_y:3
+                                background_color: utils.get_color_from_hex('#f0f1f2')
+                                background_normal:''
+                                Image:
+                                    source: 'ultramilk.png'
+                                    center_x: self.parent.center_x
+                                    center_y: self.parent.center_y
+                                    keep_ratio: True
+                                    allow_stretch: True
+                            Button:
+                                font_size: 13
+                                text_size: self.size     
+                                halign: 'center'
+                                valign:'top'
+                                padding_y:3
+                                background_color: utils.get_color_from_hex('#f0f1f2')
+                                background_normal:''
+                                Image:
+                                    source: 'teh_kotak.png'
+                                    center_x: self.parent.center_x
+                                    center_y: self.parent.center_y
+                                    keep_ratio: True
+                                    allow_stretch: True
+                            Button:
+                                font_size: 13
+                                text_size: self.size     
+                                halign: 'center'
+                                valign:'top'
+                                padding_y:3
+                                background_color: utils.get_color_from_hex('#f0f1f2')
+                                background_normal:''
+                                Image:
+                                    source: 'leminerale.png'
+                                    center_x: self.parent.center_x
+                                    center_y: self.parent.center_y
+                                    keep_ratio: True
+                                    allow_stretch: True
+                            Button:
+                                font_size: 13
+                                text_size: self.size     
+                                halign: 'center'
+                                valign:'top'
+                                padding_y:3
+                                background_color: utils.get_color_from_hex('#f0f1f2')
+                                background_normal:''
+                                Image:
+                                    source: 'ichi.png'
+                                    center_x: self.parent.center_x
+                                    center_y: self.parent.center_y
+                                    keep_ratio: True
+                                    allow_stretch: True
+                            Button:
+                                font_size: 13
+                                text_size: self.size     
+                                halign: 'center'
+                                valign:'top'
+                                padding_y:3
+                                background_color: utils.get_color_from_hex('#f0f1f2')
+                                background_normal:''
+                                Image:
+                                    source: 'goodday.png'
+                                    center_x: self.parent.center_x
+                                    center_y: self.parent.center_y
+                                    keep_ratio: True
+                                    allow_stretch: True
+                            Button:
+                                font_size: 13
+                                text_size: self.size     
+                                halign: 'center'
+                                valign:'top'
+                                padding_y:3
+                                background_color: utils.get_color_from_hex('#f0f1f2')
+                                background_normal:''
+                                Image:
+                                    source: 'bear_brand.png'
+                                    center_x: self.parent.center_x
+                                    center_y: self.parent.center_y
+                                    keep_ratio: True
+                                    allow_stretch: True
+                            Button:
+                                font_size: 13
+                                text_size: self.size     
+                                halign: 'center'
+                                valign:'top'
+                                padding_y:3
+                                background_color: utils.get_color_from_hex('#f0f1f2')
+                                background_normal:''
+                                Image:
+                                    source: 'minute_maid.png'
+                                    center_x: self.parent.center_x
+                                    center_y: self.parent.center_y
+                                    keep_ratio: True
+                                    allow_stretch: True
+                            Button:
+                                font_size: 13
+                                text_size: self.size     
+                                halign: 'center'
+                                valign:'top'
+                                padding_y:3
+                                background_color: utils.get_color_from_hex('#f0f1f2')
+                                background_normal:''
+                                Image:
+                                    source: 'frestea.png'
+                                    center_x: self.parent.center_x
+                                    center_y: self.parent.center_y
+                                    keep_ratio: True
+                                    allow_stretch: True
+                            Button:
+                                font_size: 13
+                                text_size: self.size     
+                                halign: 'center'
+                                valign:'top'
+                                padding_y:3
+                                background_color: utils.get_color_from_hex('#f0f1f2')
+                                background_normal:''
+                                Image:
+                                    source: 'teh_pucuk.png'
+                                    center_x: self.parent.center_x
+                                    center_y: self.parent.center_y
+                                    keep_ratio: True
+                                    allow_stretch: True
+        BoxLayout:
+            id: footer
+            size_hint_y: None
+            height: 30
+            canvas.before:
+                Color:
+                    rgb: utils.get_color_from_hex('#34c0eb')
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+            Label:
+                text: 'maintained by Uswa'
+                            

@@ -1,0 +1,521 @@
+#:import utils kivy.utils
+<FlatButton@ButtonBehavior+Label>:
+    font_size: 14
+
+<KasirWindow>:
+    waktu:waktu
+    id: main_win
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgba: (1,1,1, 1)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+    BoxLayout:
+        id: header
+        size_hint_y: None
+        height: 40
+        canvas.before:
+            Color:
+                rgba: utils.get_color_from_hex('#000000')
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        Label:
+            text: 'Forca POS'
+            size_hint_x: .9
+            bold: True
+            color: utils.get_color_from_hex('#ffffff')        
+        BoxLayout:
+            Label:
+                id: waktu
+            FlatButton:
+                id: loggedin_user
+                text: 'Uswa'
+                color: utils.get_color_from_hex('#ffffff')
+    BoxLayout:
+        padding: 10
+        height: 40
+        canvas.before:
+            Color:
+                rgba: utils.get_color_from_hex('#ffffff')
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        BoxLayout:
+            id: product_details
+            orientation: "vertical"
+            size_hint_x: .3
+            BoxLayout:
+                orientation:"horizontal"
+                size_hint_y: .1
+                TextInput:
+                    hint_text: "Undefined"
+                    id: qty_inp
+                Button:
+                    size_hint_x: .2      
+                    Image:
+                        source: 'edit.png'
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
+                        size: 20, 20
+                        allow_stretch: True
+                Button:
+                    size_hint_x: .2      
+                    Image:
+                        source: 'eyes.png'
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
+                        size: 20, 20
+                        allow_stretch: True
+                Button:
+                    size_hint_x: .2      
+                    Image:
+                        source: 'add.png'
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
+                        size: 20, 20
+                        allow_stretch: True
+                        
+                         
+            BoxLayout:
+                orientation:"horizontal"
+                size_hint_y: .1
+                TextInput:
+                    hint_text: "Scan"
+                    id: qty_inp_scan
+                    size_hint_x: .7
+                    multiline: False
+                    on_text_validate: root.list_data() 
+                Button:
+                    size_hint_x: .1
+                    on_press: root.list_data() 
+                    Image:
+                        source: 'add.png'
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
+                        size: 20, 20
+                        allow_stretch: True
+            BoxLayout:
+                id: add_to_cart
+                orientation: 'vertical'
+                size_hint_y: .4
+                BoxLayout:
+                    
+                    size_hint_y: None
+                    height: 30
+                    canvas.before:
+                        Color:
+                            rgb: utils.get_color_from_hex('#34c0eb')
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+                    Label:
+                        text: 'Product'
+                        size_hint_x: .3
+                    Label:
+                        text: 'Price'
+                        size_hint_x: .2
+                    Label:
+                        text: 'Qty'
+                        size_hint_x: .1
+                    Label:
+                        text: 'Subtotal'
+                        size_hint_x: .2
+                RelativeLayout: 
+                    pos: self.pos 
+                    size: root.size 
+                    id: test2
+                    TextInput:
+                        id: list_item
+                        readonly: True
+                        hint_text:'Enter text'
+                        pos_hint: {'center_x': 0.5, 'center_y': -1.5} 
+                        size_hint: 0.95, 5
+
+                                         
+                    
+
+                                          
+            BoxLayout:
+                BoxLayout:
+                    orientation:"horizontal"
+                    size_hint_y: .3
+                    BoxLayout:
+                        id: product_details
+                        orientation: "vertical"                        
+                        BoxLayout:   
+                            TextInput:
+                                text: "total point\t\t\t  0.00\ngross price\t\t\t0.00\nShipping\t\t\t\t 0.00"
+                                readonly: True
+                                id: qty_inp
+                    BoxLayout:
+                        id: product_details
+                        BoxLayout:
+                            TextInput:
+                                text: "Point\t\t\t\t\t0.00\nDiscount\t\t\t  0.00\nOrder Tax\t\t\t 0.00"
+                                readonly: True
+                                id: qty_inp                                                 
+            BoxLayout:
+                orientation:"horizontal"
+                size_hint_y: .1
+                BoxLayout:
+                    TextInput:
+                        text: "Items\t\t\t\t\t\t\t\t0"
+                        font_size: 14
+                        text_size: self.size
+                        readonly: True
+                        id: qty_inp
+                BoxLayout:
+                    TextInput:
+                        text: "Total\t\t\t\t\t\t\t\t0"
+                        font_size: 14
+                        text_size: self.size
+                        readonly: True
+                        id: qty_inp
+            BoxLayout:
+                orientation:"horizontal"
+                size_hint_y: .1
+                TextInput:
+                    background_color: (1,1,1,1) if self.focus else utils.get_color_from_hex('#78d2ff')
+                    text: "Total Payable" 
+                    font_size: 12
+                    text_size: self.size
+                    readonly: True
+                    id: qty_inp
+            BoxLayout:
+                orientation:"horizontal"
+                size_hint_y: .2
+                BoxLayout:
+                    orientation:"vertical"
+                    Button:
+                        text: "Suspend"
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
+                        font_size: 13
+                        text_size: self.size     
+                        halign: 'center'
+                        valign: 'center'
+                        background_color: utils.get_color_from_hex('#ff9100')
+                    Button:
+                        text: "Cancel"
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
+                        font_size: 13
+                        text_size: self.size     
+                        halign: 'center'
+                        valign: 'center'
+                        background_color: utils.get_color_from_hex('#ff2605')
+                BoxLayout:
+                    orientation:"vertical"
+                    Button:
+                        size_hint_y: .1
+                        text: "Order"
+                        font_size: 13
+                        text_size: self.size     
+                        halign: 'center'
+                        valign: 'center'
+                        background_color: utils.get_color_from_hex('#00fff7')
+                    Button:
+                        size_hint_y: .1
+                        text: "Bill"
+                        font_size: 13
+                        text_size: self.size     
+                        halign: 'center'
+                        valign: 'center'
+                        background_color: utils.get_color_from_hex('#172aff')
+                       
+                BoxLayout:
+                    
+                    Button:
+                        text: "Payment"
+                        halign: 'center'
+                        valign: 'center'
+                        
+                        font_size: 13
+                        text_size: self.size     
+                        background_color: utils.get_color_from_hex('#08fc14')
+                BoxLayout:
+                    size_hint_x:.4
+                    BoxLayout:
+                        orientation:"horizontal"
+                        Button:
+                            halign: 'center'
+                            valign: 'center'
+                            font_size: 13
+                            text_size: self.size     
+                            background_color: utils.get_color_from_hex('#d2d5fa')
+                            Image:
+                                source: 'calculator.png'
+                                center_x: self.parent.center_x
+                                center_y: self.parent.center_y
+                                size: 30,30
+                                keep_ratio: True
+                                allow_stretch: True                                                
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_x:.4    
+            Accordion:
+                orientation:'vertical'
+                size_hint_y:.1
+                AccordionItem: 
+                    title: 'Barang Elektronik'
+                    size_hint_y:.1
+                    GridLayout:
+                        cols:3
+                        row:4
+                        Button:
+                            on_press: root.barang1()
+                            font_size: 13
+                            text_size: self.size     
+                            halign: 'center'
+                            valign:'top'
+                            padding_y:3
+                            background_color: utils.get_color_from_hex('#02469e')
+                            Image:
+                                source: 'android.png'
+                                center_x: self.parent.center_x
+                                center_y: self.parent.center_y
+                                keep_ratio: True
+                                allow_stretch: True
+                        Button:
+                            on_press: root.barang2()
+                            font_size: 13
+                            text_size: self.size     
+                            halign: 'center'
+                            valign:'top'
+                            padding_y:3
+                            background_color: utils.get_color_from_hex('#02469e')
+                            Image:
+                                source: 'laptop.png'
+                                center_x: self.parent.center_x
+                                center_y: self.parent.center_y
+                                keep_ratio: True
+                                allow_stretch: True
+                        Button:
+                            font_size: 13
+                            text_size: self.size     
+                            halign: 'center'
+                            valign:'top'
+                            padding_y:3
+                            background_color: utils.get_color_from_hex('#02469e')
+                            Image:
+                                source: 'computer-screen.png'
+                                center_x: self.parent.center_x
+                                center_y: self.parent.center_y
+                                keep_ratio: True
+                                allow_stretch: True
+                        Button:
+                            font_size: 13
+                            text_size: self.size     
+                            halign: 'center'
+                            valign:'top'
+                            padding_y:3
+                            background_color: utils.get_color_from_hex('#02469e')
+                            Image:
+                                source: 'watermelon.png'
+                                center_x: self.parent.center_x
+                                center_y: self.parent.center_y
+                                keep_ratio: True
+                                allow_stretch: True
+                        Button:
+                            font_size: 13
+                            text_size: self.size     
+                            halign: 'center'
+                            valign:'top'
+                            padding_y:3
+                            background_color: utils.get_color_from_hex('#02469e')
+                            Image:
+                                source: 'watermelon.png'
+                                center_x: self.parent.center_x
+                                center_y: self.parent.center_y
+                                keep_ratio: True
+                                allow_stretch: True
+                        Button:
+                            font_size: 13
+                            text_size: self.size     
+                            halign: 'center'
+                            valign:'top'
+                            padding_y:3
+                            background_color: utils.get_color_from_hex('#02469e')
+                            Image:
+                                source: 'watermelon.png'
+                                center_x: self.parent.center_x
+                                center_y: self.parent.center_y
+                                keep_ratio: True
+                                allow_stretch: True
+                        Button:
+                            font_size: 13
+                            text_size: self.size     
+                            halign: 'center'
+                            valign:'top'
+                            padding_y:3
+                            background_color: utils.get_color_from_hex('#02469e')
+                            Image:
+                                source: 'watermelon.png'
+                                center_x: self.parent.center_x
+                                center_y: self.parent.center_y
+                                keep_ratio: True
+                                allow_stretch: True
+                        Button:
+                            font_size: 13
+                            text_size: self.size     
+                            halign: 'center'
+                            valign:'top'
+                            padding_y:3
+                            background_color: utils.get_color_from_hex('#02469e')
+                            Image:
+                                source: 'watermelon.png'
+                                center_x: self.parent.center_x
+                                center_y: self.parent.center_y
+                                keep_ratio: True
+                                allow_stretch: True
+                        Button:
+                            font_size: 13
+                            text_size: self.size     
+                            halign: 'center'
+                            valign:'top'
+                            padding_y:3
+                            background_color: utils.get_color_from_hex('#02469e')
+                            Image:
+                                source: 'watermelon.png'
+                                center_x: self.parent.center_x
+                                center_y: self.parent.center_y
+                                keep_ratio: True
+                                allow_stretch: True
+                AccordionItem: 
+                    title: 'Produk Makanan'
+                    size_hint_y:.1
+                    GridLayout:
+                        cols:3
+                        row:4
+                        Button:
+                            font_size: 13
+                            text_size: self.size     
+                            halign: 'center'
+                            valign:'top'
+                            padding_y:3
+                            background_color: utils.get_color_from_hex('#02469e')
+                            Image:
+                                source: 'watermelon.png'
+                                center_x: self.parent.center_x
+                                center_y: self.parent.center_y
+                                keep_ratio: True
+                                allow_stretch: True
+                        Button:
+                            font_size: 13
+                            text_size: self.size     
+                            halign: 'center'
+                            valign:'top'
+                            padding_y:3
+                            background_color: utils.get_color_from_hex('#02469e')
+                            Image:
+                                source: 'watermelon.png'
+                                center_x: self.parent.center_x
+                                center_y: self.parent.center_y
+                                keep_ratio: True
+                                allow_stretch: True
+                        Button:
+                            font_size: 13
+                            text_size: self.size     
+                            halign: 'center'
+                            valign:'top'
+                            padding_y:3
+                            background_color: utils.get_color_from_hex('#02469e')
+                            Image:
+                                source: 'watermelon.png'
+                                center_x: self.parent.center_x
+                                center_y: self.parent.center_y
+                                keep_ratio: True
+                                allow_stretch: True
+                        Button:
+                            font_size: 13
+                            text_size: self.size     
+                            halign: 'center'
+                            valign:'top'
+                            padding_y:3
+                            background_color: utils.get_color_from_hex('#02469e')
+                            Image:
+                                source: 'watermelon.png'
+                                center_x: self.parent.center_x
+                                center_y: self.parent.center_y
+                                keep_ratio: True
+                                allow_stretch: True
+                        Button:
+                            font_size: 13
+                            text_size: self.size     
+                            halign: 'center'
+                            valign:'top'
+                            padding_y:3
+                            background_color: utils.get_color_from_hex('#02469e')
+                            Image:
+                                source: 'watermelon.png'
+                                center_x: self.parent.center_x
+                                center_y: self.parent.center_y
+                                keep_ratio: True
+                                allow_stretch: True
+                        Button:
+                            font_size: 13
+                            text_size: self.size     
+                            halign: 'center'
+                            valign:'top'
+                            padding_y:3
+                            background_color: utils.get_color_from_hex('#02469e')
+                            Image:
+                                source: 'watermelon.png'
+                                center_x: self.parent.center_x
+                                center_y: self.parent.center_y
+                                keep_ratio: True
+                                allow_stretch: True
+                        Button:
+                            font_size: 13
+                            text_size: self.size     
+                            halign: 'center'
+                            valign:'top'
+                            padding_y:3
+                            background_color: utils.get_color_from_hex('#02469e')
+                            Image:
+                                source: 'watermelon.png'
+                                center_x: self.parent.center_x
+                                center_y: self.parent.center_y
+                                keep_ratio: True
+                                allow_stretch: True
+                        Button:
+                            font_size: 13
+                            text_size: self.size     
+                            halign: 'center'
+                            valign:'top'
+                            padding_y:3
+                            background_color: utils.get_color_from_hex('#02469e')
+                            Image:
+                                source: 'watermelon.png'
+                                center_x: self.parent.center_x
+                                center_y: self.parent.center_y
+                                keep_ratio: True
+                                allow_stretch: True
+                        Button:
+                            font_size: 13
+                            text_size: self.size     
+                            halign: 'center'
+                            valign:'top'
+                            padding_y:3
+                            background_color: utils.get_color_from_hex('#02469e')
+                            Image:
+                                source: 'watermelon.png'
+                                center_x: self.parent.center_x
+                                center_y: self.parent.center_y
+                                keep_ratio: True
+                                allow_stretch: True
+    BoxLayout:
+        id: footer
+        size_hint_y: None
+        height: 30
+        canvas.before:
+            Color:
+                rgb: utils.get_color_from_hex('#34c0eb')
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        Label:
+            text: 'maintained by Uswa'

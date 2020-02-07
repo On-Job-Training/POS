@@ -1,0 +1,20 @@
+#:include login.kv
+#:include regist.kv
+#:include designKasir.kv
+
+#:import utils kivy.utils
+
+<FlatButton@ButtonBehavior+Label>:
+    font_size: 16
+
+ScreenManager:
+    id:screen_manager
+    LoginWindow:
+        name:"login_screen"
+        id:login_screen
+    RegistWindow:
+        name:"regist_screen"
+        id:regist_screen
+    KasirWindow:
+        name:"kasir_screen"
+        id:kasir_screen

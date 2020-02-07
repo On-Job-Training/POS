@@ -1,0 +1,315 @@
+#:import utils kivy.utils
+
+<FlatButton@ButtonBehavior+Label>:
+    font_size: 16
+
+<RegistWindow>:
+    
+    namaAwal:FirstName
+    namaAkhir:LastName
+    emailku:email
+    nomorTelp:PhoneNumber
+    passwrd:pass_field
+    confpasswr:confpass_field
+    id: main_win
+    orientation: "vertical"
+    
+    canvas.before:
+        Color:
+            rgba: (1,1,1, 1)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+            source: 'registrasi.png'
+    GridLayout:
+        cols:2
+        FlatButton:
+            Image:
+                source: 'sisi.png'
+                pos: 3,550
+                size: 120,40
+                allow_stretch: True
+            Image:
+                source: 'logo.png'
+                pos: 40,400
+                size: 280,90
+                allow_stretch: True
+            Label:
+                text:'Boosting your Business Perfomance'
+                pos: 130,330
+                bold: True
+                font_size: 17
+            Label:
+                text:'Forca Point Of Sales is an online inventory management'
+                pos: 130,300
+                bold: True
+                font_size: 12
+            Label:
+                text:'application for cashier and manager store'
+                pos: 130,285
+                bold: True
+                font_size: 12
+        FlatButton:                 
+            FlatButton:
+                text: 'Register New Member'
+                bold: True
+                color: utils.get_color_from_hex('#000000')        
+                font_size: 30 
+                #pos_hint: {'center_x': 0.5, 'center_y': -1.5}  
+                pos: 540, 510
+            Label:
+                text:'Username'
+                bold:True
+                pos: 380, 470
+                color: utils.get_color_from_hex('#7D7A7A')    
+            FlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#F2EFEF') 
+                    RoundedRectangle:
+                        pos: 393, 477
+                        size:  370, 30
+                        radius: [13, 13, 13, 13]
+                TextInput:
+                    id: email
+                    hint_text: "Username"
+                    background_color: 0,0,0,0  
+                    foreground_color: utils.get_color_from_hex('#000000')
+                    pos:398,479
+                    font_size: 13
+                    size: 362, 28
+                    size_hint: None, None
+                    color:utils.get_color_from_hex('#B5B8BC')
+                    background_normal:''
+            Label:
+                text:'First Name'
+                bold:True
+                font_size:15
+                pos: 382, 400
+                color: utils.get_color_from_hex('#7D7A7A')    
+            FlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#F2EFEF') 
+                    RoundedRectangle:
+                        pos: 393, 405
+                        size:  170, 30
+                        radius: [13, 13, 13, 13]
+                TextInput:
+                    id: FirstName
+                    hint_text: "First Name"
+                    background_color: 0,0,0,0  
+                    foreground_color: utils.get_color_from_hex('#000000')
+                    pos:398,408
+                    font_size: 13
+                    size: 165, 28
+                    size_hint: None, None
+                    color:utils.get_color_from_hex('#B5B8BC')
+                    background_normal:''
+            Label:
+                text:'Last Name'
+                bold:True
+                pos: 580, 400
+                color: utils.get_color_from_hex('#7D7A7A')    
+            FlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#F2EFEF') 
+                    RoundedRectangle:
+                        pos: 593, 405
+                        size:  170, 30
+                        radius: [13, 13, 13, 13]
+                TextInput:
+                    id:LastName
+                    hint_text: "Last Name"
+                    background_color: 0,0,0,0  
+                    foreground_color: utils.get_color_from_hex('#000000')
+                    pos:600,408
+                    font_size: 13
+                    size: 165, 28
+                    size_hint: None, None
+                    color:utils.get_color_from_hex('#B5B8BC')
+                    background_normal:''
+            Label:
+                text:'Phone Number'
+                bold:True
+                pos: 395, 327
+                color: utils.get_color_from_hex('#7D7A7A')    
+            FlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#F2EFEF') 
+                    RoundedRectangle:
+                        pos: 395,331
+                        size:  370, 30
+                        radius: [13, 13, 13, 13]
+                TextInput:
+                    id: PhoneNumber
+                    hint_text: "Phone Number"
+                    background_color: 0,0,0,0  
+                    foreground_color: utils.get_color_from_hex('#000000')
+                    pos:397,333
+                    font_size: 13
+                    size: 362, 28
+                    size_hint: None, None
+                    color:utils.get_color_from_hex('#B5B8BC')
+                    background_normal:''
+            Label:
+                text:'Address'
+                bold:True
+                pos: 375, 255
+                color: utils.get_color_from_hex('#7D7A7A')    
+            FlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#F2EFEF') 
+                    RoundedRectangle:
+                        pos: 395,258
+                        size:  370, 30
+                        radius: [13, 13, 13, 13]
+                TextInput:
+                    id:addr_field
+                    hint_text: "Address"
+                    background_color: 0,0,0,0  
+                    foreground_color: utils.get_color_from_hex('#000000')
+                    pos:397,261
+                    font_size: 13
+                    size: 362, 28
+                    size_hint: None, None
+                    color:utils.get_color_from_hex('#B5B8BC')
+                    background_normal:''
+            Label:
+                text:'Password'
+                bold:True
+                font_size:15
+                pos: 380, 120
+                color: utils.get_color_from_hex('#7D7A7A')    
+            FlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#F2EFEF') 
+                    RoundedRectangle:
+                        pos: 393, 123
+                        size:  170, 30
+                        radius: [13, 13, 13, 13]
+                TextInput:
+                    id: pass_field
+                    hint_text: "Password"
+                    background_color: 0,0,0,0  
+                    foreground_color: utils.get_color_from_hex('#000000')
+                    pos:398,126
+                    font_size: 13
+                    size: 165, 28
+                    size_hint: None, None
+                    color:utils.get_color_from_hex('#B5B8BC')
+                    background_normal:''
+            Label:
+                text:'Gender'
+                bold:True
+                font_size:15
+                pos: 370, 180
+                color: utils.get_color_from_hex('#7D7A7A')
+            Label:
+                text:'Female'               
+                font_size:12
+                pos: 395, 155
+                color: utils.get_color_from_hex('#7D7A7A')
+            CheckBox:
+                id:female
+                pos: 360, 155
+                group:'check'
+                color: utils.get_color_from_hex('#7D7A7A')
+            
+            Label:
+                text:'Male'               
+                font_size:12
+                pos: 488, 155
+                color: utils.get_color_from_hex('#7D7A7A')
+            CheckBox:
+                id:male
+                pos: 460, 155
+                group:'check'
+                color: utils.get_color_from_hex('#7D7A7A')
+            Label:
+                text:'Confirm Password'
+                bold:True
+                font_size:15
+                pos: 605, 120
+                color: utils.get_color_from_hex('#7D7A7A')    
+            FlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#F2EFEF') 
+                    RoundedRectangle:
+                        pos: 593, 123
+                        size:  170, 30
+                        radius: [13, 13, 13, 13]
+                TextInput:
+                    id: confpass_field
+                    hint_text: "Confirm Password"
+                    password:True
+                    background_color: 0,0,0,0  
+                    foreground_color: utils.get_color_from_hex('#000000')
+                    pos:600,126
+                    font_size: 13
+                    size: 165, 28
+                    size_hint: None, None
+                    color:utils.get_color_from_hex('#B5B8BC')
+                    background_normal:''
+            FlatButton:
+                #pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#FB3930') 
+                    RoundedRectangle:
+                        pos: 580, 67
+                        size:  84, 34
+                        radius: [15, 15, 15, 15]
+                Button:   
+                    pos: 582,70
+                    size: 79, 28
+                    bold:True
+                    background_color:0,0,0,0
+                    background_normal:'' 
+                    text:'Reset'
+            FlatButton:
+                #pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#0096FB') 
+                    RoundedRectangle:
+                        pos: 677, 67
+                        size:  84, 34
+                        radius: [15, 15, 15, 15]
+                Button:   
+                    pos: 680,70
+                    size: 79, 28
+                    bold:True
+                    background_color:0,0,0,0
+                    background_normal:'' 
+                    text:'Register'
+            GridLayout:
+                pos: 500, 20
+                cols:2
+                size: 200, 25
+                orientation:'horizontal'
+                spacing:40
+                FlatButton:
+                    text: 'Already have account ?'
+                    bold: True
+                    color: utils.get_color_from_hex('#000000')        
+                    font_size: 15                         
+                        
+                FlatButton:
+                    text: 'Sign In here'
+                    color: utils.get_color_from_hex('#ff0004')  
+                    bold: True
+                    color: 		    
+                    font_size: 15  

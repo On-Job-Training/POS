@@ -1,0 +1,228 @@
+from kivy.app import App
+from kivy.lang import Builder
+from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
+from kivy.config import Config
+import xlwt
+import xlrd
+import re
+from xlutils.copy import copy
+from kivy.properties import StringProperty
+from kivy.uix.screenmanager import ScreenManager, Screen 
+from kivy.config import Config
+Config.set('graphics', 'width', '800')
+Config.set('graphics', 'height', '600')
+data=0
+scandata=0
+rows=1
+cols=0
+paramLogin=''
+gender=''
+screen_manager = ScreenManager() 
+class HomeWindow(Screen):
+    def __init__(self, **kwargs):
+        global d1
+        super().__init__(**kwargs)
+        self.JumlahProduct=[]
+        self.codeItem=[]
+        self.HargaBarang=[]
+    def barang1(self):
+        global scandata
+        scandata=1234
+        self.list_data()
+    def barang2(self):
+        global scandata
+        scandata=2345
+        self.list_data()
+    def list_data(self):
+        global data
+        global scandata
+        if scandata== 0:
+            scanproduct = self.ids.qty_inp_scan.text
+        else:
+            scanproduct=str(scandata)
+        if scanproduct == '1234' or scanproduct =='2345':
+            if scanproduct == '1234':
+                pname="product one"
+                pprice='3500'
+                pqty=str(1)
+                subtotal=3500
+            elif scanproduct == '2345':
+                pname="product two"
+                pprice='2000'
+                pqty = str(1)
+                subtotal=2000
+            preview_nameProduct = self.ids.NameProduct
+            prev_NameProduct=preview_nameProduct.text
+            _prev_nameProduct = prev_NameProduct.find('`')
+
+            preview_Hargabarang = self.ids.HargaProduct
+            prev_HargaProduct=preview_Hargabarang.text
+            _prev_HargaProduct = prev_HargaProduct.find('`')
+
+            preview_jumlahProduct = self.ids.JumlahProduct
+            prev_jumlahProduct=preview_jumlahProduct.text
+            _prev_jumlahProduct = prev_jumlahProduct.find('`')
+
+            preview_SubtPro = self.ids.subt_pro
+            prev_subtPro=preview_SubtPro.text
+            _prev_subtPro = prev_subtPro.find('`')
+
+            if _prev_nameProduct > 0 and _prev_HargaProduct > 0 and _prev_jumlahProduct > 0 and _prev_subtPro > 0:
+                prev_NameProduct=prev_NameProduct[:_prev_nameProduct]
+                prev_HargaProduct=prev_HargaProduct[:_prev_HargaProduct]
+                prev_jumlahProduct=prev_jumlahProduct[:_prev_jumlahProduct]
+                prev_subtPro=prev_subtPro[:_prev_subtPro]
+            ptarget = -1
+
+            for i,c in enumerate(self.codeItem):
+                if c == scanproduct:
+                    ptarget=i
+            if ptarget >= 0:
+                pqty=self.JumlahProduct[ptarget]+1
+                self.JumlahProduct[ptarget]=pqty
+                if scanproduct=='1234':
+                    subtotal=self.HargaBarang[ptarget]+3500
+                    self.HargaBarang[ptarget]=subtotal
+                elif scanproduct=='2345':
+                    subtotal=self.HargaBarang[ptarget]+2000
+                    self.HargaBarang[ptarget]=subtotal
+                expr_productName='%s'%(pname)
+                rexpr_productname=pname
+                nu_text_nameproduct=re.sub(expr_productName,rexpr_productname,prev_NameProduct)
+                preview_nameProduct.text=nu_text_nameproduct
+
+                expr_HargaProduct='%s'%(pprice)
+                rexpr_HargaProduct=str(pprice)
+                nu_text_HargaProduct=re.sub(expr_HargaProduct,rexpr_HargaProduct,prev_HargaProduct)
+                preview_Hargabarang.text=nu_text_HargaProduct
+
+                expr_JumlahProduct='\d+'
+                rexpr_JumlahProduct=str(pqty)
+                nu_text_JumlahProduct=re.sub(expr_JumlahProduct,rexpr_JumlahProduct,prev_jumlahProduct)
+                preview_jumlahProduct.text=nu_text_JumlahProduct
+
+                expr_SubtProduct='\d+'
+                rexpr_SubtProduct=str(subtotal)
+                nu_text_SubtProduct=re.sub(expr_SubtProduct,rexpr_SubtProduct,prev_subtPro)
+                preview_SubtPro.text=nu_text_SubtProduct
+
+
+
+
+                
+
+            else:
+                self.codeItem.append(scanproduct)
+                self.HargaBarang.append(subtotal)
+                self.JumlahProduct.append(1)
+                nu_preview_nameProduct='\n'.join([prev_NameProduct,str(pname)+'`'])
+                nu_preview_hargaProduct='\n'.join([prev_HargaProduct,str(pprice)+'`'])
+                nu_preview_jumlahProduct='\n'.join([prev_jumlahProduct,str(pqty)+'`'])
+                nu_preview_subtotal='\n'.join([prev_subtPro,str(subtotal)+'`'])
+                preview_nameProduct.text=nu_preview_nameProduct
+                preview_Hargabarang.text=nu_preview_hargaProduct
+                preview_jumlahProduct.text=nu_preview_jumlahProduct
+                preview_SubtPro.text=nu_preview_subtotal
+
+
+class LoginWindow(Screen):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.username=[]
+        self.password=[]
+    def validate_user(self):
+        global paramLogin
+        loc = ("data.xls")
+        wb = xlrd.open_workbook(loc)
+        sheet = wb.sheet_by_index(0)
+        for row in range(1,sheet.nrows):
+            print(sheet.cell_value(row,4))
+            print('\n')
+            print(sheet.cell_value(row,5))
+            self.username.append(sheet.cell_value(row, 4))
+            self.password.append(sheet.cell_value(row,5))
+            print(self.username)
+            print(self.password)
+
+        #parameter untuk mengecheck nilai pada array
+        UserData=-1
+        user= self.ids.username_field
+        pwd= self.ids.pwd_field
+        kembalian= self.ids.money_field
+        info= self.ids.info
+
+        uname=user.text
+        passw=pwd.text
+        UangKembalian=kembalian.text
+        if uname== '' or passw=='' or UangKembalian=='' :
+            info.text='[color=#FF0000]Username ,Password,and Change  required[/color]'
+        else:
+            for i,c in enumerate(self.username):
+                if c == uname:
+                    UserData=i
+            for i,c in enumerate(self.password):
+                if c == passw:
+                    PassData=i
+            if UserData>=0:
+                if uname==self.username[UserData] and passw==self.password[UserData]:
+                    info.text='[color=#1764ff]Logged In Successfully!!![/color]'
+                    self.manager.current='Home_Win'#program untuk pindah ke layout yang lain berdasarkan name window
+                else:
+                    info.text='[color=#1764ff]Invalid Username or Password!!![/color]'
+
+            else:
+                info.text='[color=#FF0000]Username and Password not registered[/color]'
+        self.username=[]
+        self.password=[]
+
+class RegistWindow(Screen):
+    def regist(self):
+        global rows
+        global cols
+        global gender
+        # create a workbook and add a worksheet 
+        #write some data headers
+        rb = xlrd.open_workbook('data.xls')
+        wb = copy(rb)
+        w_sheet = wb.get_sheet(0)
+        emaildata= self.usernameku.text
+        dataFirstName = self.namaAwal.text
+        dataLastName = self.namaAkhir.text
+        nomorHP = self.nomorTelp.text
+        passw = self.passwrd.text
+        addr = self.address.text
+        confPass=self.confpasswr.text
+
+        namalengkap=dataFirstName+' '+dataLastName
+        if emaildata=='' or dataFirstName=='' or dataLastName=='' or gender=='' or nomorHP=='' or passw=='' or confPass=='':
+            print('data ada yang kosong')
+        else:
+            w_sheet = wb.get_sheet(0)
+            w_sheet.write(rows,0,namalengkap)
+            w_sheet.write(rows,1,addr)
+            w_sheet.write(rows,2,nomorHP)
+            w_sheet.write(rows,3,gender)
+            w_sheet.write(rows,4,emaildata)
+            w_sheet.write(rows,5,confPass)
+            rows+=1
+            wb.save('data.xls')
+            print(namalengkap+' '+addr+' '+nomorHP+' '+emaildata+' '+confPass)
+    def checkboxMale(self,instance,value):
+        global gender
+        if value is True:
+            gender='Male'
+        else:
+            gender=''
+    def checkboxFemale(self,instance,value):
+        global gender
+        if value is True:
+            gender='female'
+        else:
+            gender=''
+            
+presentation=Builder.load_file("designpos.kv")
+class ForcaPOSApp(App):
+    def build(self):
+        return presentation
+if __name__ == "__main__":
+    ForcaPOSApp().run()

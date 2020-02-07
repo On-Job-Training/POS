@@ -1,0 +1,185 @@
+#:import utils kivy.utils
+
+<FlatButton@ButtonBehavior+Label>:
+    font_size: 16
+
+<LoginWindow>:
+    id: main_win
+    orientation: "vertical"
+    
+    canvas.before:
+        Color:
+            rgba: (1,1,1, 1)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+            source: 'registrasi.png'
+    GridLayout:
+        cols:2
+        FlatButton:
+            Image:
+                source: 'sisi.png'
+                pos: 3,550
+                size: 120,40
+                allow_stretch: True
+            Image:
+                source: 'logo.png'
+                pos: 40,400
+                size: 280,90
+                allow_stretch: True
+            Label:
+                text:'Boosting your Business Perfomance'
+                pos: 130,330
+                bold: True
+                font_size: 17
+            Label:
+                text:'Forca Point Of Sales is an online inventory management'
+                pos: 130,300
+                bold: True
+                font_size: 12
+            Label:
+                text:'application for cashier and manager store'
+                pos: 130,285
+                bold: True
+                font_size: 12
+        FlatButton:                 
+            FlatButton:
+                text: 'Welcome to FORCA POS'
+                bold: True
+                color: utils.get_color_from_hex('#000000')        
+                font_size: 30 
+                #pos_hint: {'center_x': 0.5, 'center_y': -1.5}  
+                pos: 530,470
+            Label:
+                id: info
+                markup: True
+                size_hint_y: None
+                bold:True
+                text:''
+                font_size:15
+                pos: 530,430
+            Label:
+                
+                text:'Username'
+                bold:True
+                font_size:15
+                pos: 382, 400
+                color: utils.get_color_from_hex('#7D7A7A')    
+            FlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#F2EFEF') 
+                    RoundedRectangle:
+                        pos: 393, 405
+                        size:  370, 30
+                        radius: [13, 13, 13, 13]
+                TextInput:
+                    id: username_field
+                    hint_text: "Username"
+                    background_color: 0,0,0,0  
+                    foreground_color: utils.get_color_from_hex('#000000')
+                    pos:425,408
+                    font_size: 13
+                    size: 330, 28
+                    size_hint: None, None
+                    color:utils.get_color_from_hex('#B5B8BC')
+                    background_normal:''
+                Image:
+                    pos:405,412
+                    source:'people.png'
+                    size:20,20
+            Label:
+                text:'Password'
+                bold:True
+                pos: 380, 327
+                color: utils.get_color_from_hex('#7D7A7A')    
+            FlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#F2EFEF') 
+                    RoundedRectangle:
+                        pos: 395,331
+                        size:  370, 30
+                        radius: [13, 13, 13, 13]
+                Image:
+                    pos:405,338
+                    source:'password.png'
+                    size:20,20
+                TextInput:
+                    id: pwd_field
+                    hint_text: "Password"
+                    background_color: 0,0,0,0  
+                    foreground_color: utils.get_color_from_hex('#000000')
+                    pos:425,333
+                    font_size: 13
+                    size: 330, 28
+                    size_hint: None, None
+                    color:utils.get_color_from_hex('#B5B8BC')
+                    background_normal:''
+            Label:
+                text:'Change'
+                bold:True
+                pos: 375, 255
+                color: utils.get_color_from_hex('#7D7A7A')    
+            FlatButton:
+                pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#F2EFEF') 
+                    RoundedRectangle:
+                        pos: 395,258
+                        size:  370, 30
+                        radius: [13, 13, 13, 13]
+                Image:
+                    pos:405,262
+                    source:'dolar.png'
+                    size:20,25
+                TextInput:
+                    id: money_field
+                    hint_text: "Change"
+                    background_color: 0,0,0,0  
+                    foreground_color: utils.get_color_from_hex('#000000')
+                    pos:425,261
+                    font_size: 13
+                    size:330, 28
+                    size_hint: None, None
+                    color:utils.get_color_from_hex('#B5B8BC')
+                    background_normal:''
+            FlatButton:
+                #pos_hint: {'center_x': 0.5, 'center_y': -1.5}
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#0096FB') 
+                    RoundedRectangle:
+                        pos: 535, 200
+                        size:  84, 34
+                        radius: [15, 15, 15, 15]
+                Button:
+                    on_press:root.validate_user()
+                    pos:537, 203
+                    size: 79, 28
+                    bold:True
+                    font_size:18
+                    background_color:0,0,0,0
+                    background_normal:'' 
+                    text:'Login'
+            GridLayout:
+                pos: 500, 120
+                cols:2
+                size: 200, 25
+                orientation:'horizontal'
+                spacing:40
+                FlatButton:
+                    text: 'Do Not have account ?'
+                    bold: True
+                    color: utils.get_color_from_hex('#000000')        
+                    font_size: 15                         
+                        
+                FlatButton:
+                    text: 'Sign Up here'
+                    color: utils.get_color_from_hex('#ff0004')  
+                    bold: True
+                    color: 		    
+                    font_size: 15  
