@@ -18,6 +18,7 @@ scandata=0
 rows=1
 cols=0
 gender=''
+JumlahUser=1
 screen_manager = ScreenManager()
 waktu=datetime.datetime.now()
 simpanwaktu= waktu.strftime("%d-%m-%Y %H:%M:%S")
@@ -228,17 +229,27 @@ class LoginWindow(Screen):
         passw=pwd.text
         UangKembalian=kembalian.text
         xparamUangKembalian=re.findall("[a-zA-Z]",UangKembalian)
-        xparamUangKembalian2= UangKembalian.startswith('0')
+        xparamUangKembalian2=1
+        panjangChange=len(UangKembalian)
+        if UangKembalian < '0' :
+            xparamUangKembalian2=0
+        elif panjangChange>1:
+            if UangKembalian.startswith('0'):
+                xparamUangKembalian2=0
+            else:
+                xparamUangKembalian2=1
+        #xparamUangKembaliancond3= UangKembalian.startswith('[0][0-9]')
         if uname== '' or passw=='' or UangKembalian=='' :
             info.text='[color=#FF0000]Username ,Password,and Change  required[/color]'
-        elif xparamUangKembalian or xparamUangKembalian2:
+        elif xparamUangKembalian or xparamUangKembalian2==0 :
             info.text='[color=#FF0000]Masukkan jumlah uang dengan format yang benar[/color]'
+            self.ids.money_field.text=''
         else:
             for i,c in enumerate(self.username):
                 if c == uname:
                     UserData=i
             if UserData>=0:
-                if uname==self.username[UserData] and passw==self.password[UserData]:
+                if uname==self.username[UserData] and passw==self.password[UserData] and xparamUangKembalian2==1:
                     info.text='[color=#1764ff]Logged In Successfully!!![/color]'
                     self.manager.current='Home_Win'#program untuk pindah ke layout yang lain berdasarkan name window
                     self.ids.username_field.text=''
@@ -278,6 +289,7 @@ class RegistWindow(Screen):
         global cols
         global gender
         global simpanwaktu
+        global JumlahUser
         info= self.ids.info_regist
         # create a workbook and add a worksheet 
         #write some data headers
@@ -291,9 +303,11 @@ class RegistWindow(Screen):
             print(sheet.cell_value(row,3))
             self.username.append(sheet.cell_value(row, 5))
             self.nomorHand.append(sheet.cell_value(row,3))
+            #Mengecheck jumlah user account yang terdaftar
+            JumlahUser+=1
             print(self.username)
             print(self.nomorHand)
-
+        print(JumlahUser)
         emaildata= self.usernameku.text
         dataFirstName = self.namaAwal.text
         dataLastName = self.namaAkhir.text
@@ -309,6 +323,7 @@ class RegistWindow(Screen):
                     UserData=i
         namalengkap=dataFirstName+' '+dataLastName
         xparamname=re.findall("\d",namalengkap)
+        #parameter untuk memasukkan digit nomor telp pada array
         temp = re.findall('\d', nomorHP)
         res=list(map(int,temp))
         #parameter untuk mengecheck format pada nomortelp
@@ -351,6 +366,8 @@ class RegistWindow(Screen):
                 print('Minimal terdapat 8 karakter')
                 info.text='[color=#FF0000]password minimal terdapat 8 karakter[/color]'
             else:
+                #mengecheck jumlah user yang terdaftar
+                rows=JumlahUser
                 w_sheet = wb.get_sheet(0)
                 w_sheet.write(rows,0,simpanwaktu)
                 w_sheet.write(rows,1,namalengkap)
@@ -379,7 +396,8 @@ class RegistWindow(Screen):
             info.text='[color=#FF0000]password anda harus terdiri dari huruf dan angka[/color]'
         self.username=[]
         self.nomorHand=[]
-        print(res)
+        JumlahUser=1
+        #print(res)
     def checkboxMale(self,instance,value):
         global gender
         if value is True:
