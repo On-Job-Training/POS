@@ -202,13 +202,11 @@ ScreenManager:
 
 
 <RegistWindow>:   
-    name:"register"
     namaAwal:FirstName
     namaAkhir:LastName
-    usernameku:email
+    emailku:email
     nomorTelp:PhoneNumber
     passwrd:pass_field
-    address:addr_field
     confpasswr:confpass_field
     id: main_win
     orientation: "vertical"
@@ -219,7 +217,7 @@ ScreenManager:
         Rectangle:
             size: self.size
             pos: self.pos
-            source: 'registrasi.png'
+            source: 'login_bg.png'
     GridLayout:
         cols:2
         FlatButton:
@@ -229,22 +227,22 @@ ScreenManager:
                 size: 120,40
                 allow_stretch: True
             Image:
-                source: 'logo.png'
+                source: 'logo_putih.png'
                 pos: 40,400
                 size: 280,90
                 allow_stretch: True
             Label:
-                text:'Boosting your Business Perfomance'
+                text:'Boosting your Store Perfomance'
                 pos: 130,330
                 bold: True
                 font_size: 17
             Label:
-                text:'Forca Point Of Sales is an online inventory management'
+                text:'Posberrry is a Raspberry Pi based Cashier Application'
                 pos: 130,300
                 bold: True
                 font_size: 12
             Label:
-                text:'application for cashier and manager store'
+                text:'to manage your store easily'
                 pos: 130,285
                 bold: True
                 font_size: 12
@@ -258,12 +256,8 @@ ScreenManager:
                 pos: 540, 520
             Label:
                 id:info_regist
-                text:''
-                markup: True
-                size_hint_y: None
-                bold:True
-                text:''
-                #color: utils.get_color_from_hex('#ff0505')   
+                text:'Username is required'
+                color: utils.get_color_from_hex('#ff0505')   
                 font_size:15
                 pos: 520, 490
             Label:
@@ -358,7 +352,6 @@ ScreenManager:
                         radius: [13, 13, 13, 13]
                 TextInput:
                     id: PhoneNumber
-                    input_type: 'number'
                     hint_text: "Phone Number"
                     background_color: 0,0,0,0  
                     foreground_color: utils.get_color_from_hex('#000000')
@@ -413,7 +406,6 @@ ScreenManager:
                     hint_text: "Password"
                     background_color: 0,0,0,0  
                     foreground_color: utils.get_color_from_hex('#000000')
-                    password:True
                     pos:398,126
                     font_size: 13
                     size: 165, 28
@@ -432,7 +424,6 @@ ScreenManager:
                 pos: 395, 155
                 color: utils.get_color_from_hex('#7D7A7A')
             CheckBox:
-                on_active: root.checkboxFemale(self,self.active)
                 id:female
                 pos: 360, 155
                 group:'check'
@@ -448,7 +439,6 @@ ScreenManager:
                 pos: 460, 155
                 group:'check'
                 color: utils.get_color_from_hex('#7D7A7A')
-                on_active: root.checkboxMale(self,self.active)
             Label:
                 text:'Confirm Password'
                 bold:True
@@ -501,8 +491,7 @@ ScreenManager:
                         pos: 677, 67
                         size:  84, 34
                         radius: [15, 15, 15, 15]
-                Button:
-                    on_press: root.regist()   
+                Button:   
                     pos: 680,70
                     size: 79, 28
                     bold:True
@@ -522,12 +511,11 @@ ScreenManager:
                     font_size: 15                         
                         
                 FlatButton:
-                    on_release : app.root.current = "login"
                     text: 'Sign In here'
                     color: utils.get_color_from_hex('#ff0004')  
                     bold: True
                     color: 		    
-                    font_size: 15  
+                    font_size: 15   
 
 #:import utils kivy.utils
 <FlatButton@ButtonBehavior+Label>:
