@@ -17,7 +17,6 @@ ScreenManager:
 
 <LoginWindow>:
     id: main_win
-    name:'login'
     orientation: "vertical"
     
     canvas.before:
@@ -26,7 +25,7 @@ ScreenManager:
         Rectangle:
             size: self.size
             pos: self.pos
-            source: 'registrasi.png'
+            source: 'login_bg.png'
     GridLayout:
         cols:2
         FlatButton:
@@ -36,28 +35,28 @@ ScreenManager:
                 size: 120,40
                 allow_stretch: True
             Image:
-                source: 'logo.png'
+                source: 'logo_putih.png'
                 pos: 40,400
                 size: 280,90
                 allow_stretch: True
             Label:
-                text:'Boosting your Business Perfomance'
+                text:'Boosting your Store Perfomance'
                 pos: 130,330
                 bold: True
                 font_size: 17
             Label:
-                text:'Forca Point Of Sales is an online inventory management'
+                text:'Posberrry is a Raspberry Pi based Cashier Application'
                 pos: 130,300
                 bold: True
                 font_size: 12
             Label:
-                text:'application for cashier and manager store'
+                text:'to manage your store easily'
                 pos: 130,285
                 bold: True
                 font_size: 12
         FlatButton:                 
             FlatButton:
-                text: 'Welcome to FORCA POS'
+                text: 'Welcome to POSBERRY'
                 bold: True
                 color: utils.get_color_from_hex('#000000')        
                 font_size: 30 
@@ -123,7 +122,6 @@ ScreenManager:
                 TextInput:
                     id: pwd_field
                     hint_text: "Password"
-                    password:True
                     background_color: 0,0,0,0  
                     foreground_color: utils.get_color_from_hex('#000000')
                     pos:425,333
@@ -170,15 +168,16 @@ ScreenManager:
                         pos: 535, 200
                         size:  84, 34
                         radius: [15, 15, 15, 15]
-                Button:
-                    on_press: root.validate_user()  
+                Button:   
                     pos:537, 203
                     size: 79, 28
                     bold:True
                     font_size:18
                     background_color:0,0,0,0
-                    background_normal:''
-                    text:'login' 
+                    background_normal:'' 
+                    text:'Login'
+                    on_release: app.validate_user()
+                    
             GridLayout:
                 pos: 500, 120
                 cols:2
@@ -192,7 +191,6 @@ ScreenManager:
                     font_size: 15                         
                         
                 FlatButton:
-                    on_release : app.root.current = "register"
                     text: 'Sign Up here'
                     color: utils.get_color_from_hex('#ff0004')  
                     bold: True
