@@ -99,7 +99,11 @@ class HomeWindow(Screen):
         super().__init__(**kwargs)
         self.JumlahProduct=[]
         self.codeItem=[]
+        self.NamaProduct=[]
         self.HargaBarang=[]
+        self.checkscanproduct=[]
+        self.checknamaProduct=[]
+        self.checkhargabarang=[]
         #self.waktu.text=d1
         #waktuSaatIni= Label(text=d1,color=(.06,.45,.45,1))
 
@@ -116,13 +120,33 @@ class HomeWindow(Screen):
     def list_data(self):
         global data
         global scandata
-   
         if scandata== 0:
             scanproduct = self.ids.qty_inp_scan.text
         else:
             scanproduct=str(scandata)
+        loc = ("ListProduk.xls")
+        wb = xlrd.open_workbook(loc)
+        sheet = wb.sheet_by_index(0)
+        for row in range(1,sheet.nrows):
+            print(sheet.cell_value(row,0))
+            print(sheet.cell_value(row,1))
+            print(sheet.cell_value(row,2))
+            self.checkscanproduct.append(str(int(sheet.cell_value(row,0))))
+            self.checknamaProduct.append(sheet.cell_value(row,1))
+            self.checkhargabarang.append(int(sheet.cell_value(row,2)))
+            print(self.checkscanproduct)
+            print(self.checknamaProduct)
+            print(self.checkhargabarang)
+        ParamProduct= -1
+        print(scanproduct)
+        for i,c in enumerate(self.checkscanproduct):
+            print(c)
+            if c == scanproduct:
+                ParamProduct=i
+        print(ParamProduct)
         #scandata=scanproduct
-        if scanproduct == '1234' or scanproduct =='2345':
+        if ParamProduct>=0:
+            print('halo')
             """detail_item= BoxLayout(size_hint_y=None,height=30,pos_hint={'top':1})
             product_list.add_widget(detail_item) 
             if scanproduct== '1':
@@ -145,7 +169,11 @@ class HomeWindow(Screen):
                 detail_item.add_widget(price)
                 detail_item.add_widget(jumlah_barang)
                 detail_item.add_widget(subtotal)"""
-            if scanproduct == '1234':
+            pname=self.checknamaProduct[ParamProduct]
+            pprice=self.checkhargabarang[ParamProduct]
+            pqty=str(1)
+            subtotal=int(pprice)
+            '''if scanproduct == '1234':
                 pname ="Product One"
                 pprice = '3500'
                 pqty = str(1)
@@ -154,7 +182,7 @@ class HomeWindow(Screen):
                 pname ="Product Two"
                 pprice = '2000'
                 pqty = str(1)
-                subtotal=2000
+                subtotal=2000'''
             preview = self.ids.list_item
             prev_text = preview.text
             _prev = prev_text.find('`')
@@ -168,12 +196,9 @@ class HomeWindow(Screen):
             if ptarget >=0 :
                 pqty= self.JumlahProduct[ptarget]+1
                 self.JumlahProduct[ptarget]=pqty
-                if scanproduct=='1234':
-                    subtotal=self.HargaBarang[ptarget]+3500
-                    self.HargaBarang[ptarget]=subtotal
-                elif scanproduct=='2345':
-                    subtotal=self.HargaBarang[ptarget]+2000
-                    self.HargaBarang[ptarget]=subtotal
+                subtotal=self.HargaBarang[ptarget]+self.checkhargabarang[ParamProduct]
+                self.HargaBarang[ptarget]=subtotal
+             
                 #regexPython berdasarkan rexpr
                 #\d+ = untuk mengganti suatu digit jika + maka 1 atau lebih digit dibelakangnya
                 expr ='%s\t\t\t\t%s\t\t\tx\d+\t\t\d+'%(pname,pprice)
@@ -190,6 +215,8 @@ class HomeWindow(Screen):
                 self.JumlahProduct.append(1)
                 nu_preview = '\n'.join([prev_text,pname+'\t\t\t\t'+str(pprice)+'\t\t\tx'+pqty+'\t\t'+str(subtotal)+'\t`'])
                 preview.text = nu_preview
+        else :
+            print('data tdk masuk')
         print(self.JumlahProduct)
         self.ids.qty_inp_scan.text=""
         #nilai scancode di nolkan kembali agar tidak mempegaruhi button sebelah scan
