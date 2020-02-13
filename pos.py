@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
 from kivy.config import Config
+from kivy.core.window import Window
 import xlwt
 import xlrd
 import re
@@ -36,24 +37,28 @@ class WelcomeBack(Screen):
         super().__init__(**kwargs)
         self.username=[]
         self.password=[]
+        self.namauser=[]
     def loginreset(self):
         self.ids.username_field.text=''
         self.ids.pwd_field.text=''
         self.ids.money_field.text=''
         self.ids.info.text=''
     def validate_userwelcome(self):
+        global NamaUser
+        global reset
         loc = ("data.xls")
         wb = xlrd.open_workbook(loc)
         sheet = wb.sheet_by_index(0)
         for row in range(1,sheet.nrows):
             print(sheet.cell_value(row,5))
-            print('\n')
             print(sheet.cell_value(row,6))
+            print(sheet.cell_value(row,1))
             self.username.append(sheet.cell_value(row, 5))
             self.password.append(sheet.cell_value(row,6))
+            self.namauser.append(sheet.cell_value(row,1))
             print(self.username)
             print(self.password)
-
+            print(self.namauser)
         #parameter untuk mengecheck nilai pada array
         UserData=-1
         user= self.ids.username_field
@@ -64,25 +69,37 @@ class WelcomeBack(Screen):
         uname=user.text
         passw=pwd.text
         UangKembalian=kembalian.text
-        #Parameter untuk mengecheck format yang dimasukkan untuk uang kembalian
         xparamUangKembalian=re.findall("[a-zA-Z]",UangKembalian)
-        xparamUangKembalian2= UangKembalian.startswith('0')
+        xparamUangKembalian2=1
+        panjangChange=len(UangKembalian)
+        if UangKembalian < '0' :
+            xparamUangKembalian2=0
+        elif panjangChange>1:
+            if UangKembalian.startswith('0'):
+                xparamUangKembalian2=0
+            else:
+                xparamUangKembalian2=1
+        #xparamUangKembaliancond3= UangKembalian.startswith('[0][0-9]')
         if uname== '' or passw=='' or UangKembalian=='' :
             info.text='[color=#FF0000]Username ,Password,and Change  required[/color]'
-        elif xparamUangKembalian or xparamUangKembalian2:
+        elif xparamUangKembalian or xparamUangKembalian2==0 :
             info.text='[color=#FF0000]Masukkan jumlah uang dengan format yang benar[/color]'
+            self.ids.money_field.text=''
         else:
             for i,c in enumerate(self.username):
                 if c == uname:
                     UserData=i
             if UserData>=0:
-                if uname==self.username[UserData] and passw==self.password[UserData]:
+                if uname==self.username[UserData] and passw==self.password[UserData] and xparamUangKembalian2==1:
                     info.text='[color=#1764ff]Logged In Successfully!!![/color]'
                     self.manager.current='Home_Win'#program untuk pindah ke layout yang lain berdasarkan name window
                     self.ids.username_field.text=''
                     self.ids.pwd_field.text=''
                     self.ids.money_field.text=''
                     self.ids.info.text=''
+                    NamaUser=self.namauser[UserData]
+                    self.manager.get_screen('Home_Win').labelText = NamaUser
+                
                 else:
                     info.text='[color=#1764ff]Invalid Username or Password!!![/color]'
                     self.ids.pwd_field.text=''
@@ -253,13 +270,20 @@ class LoginWindow(Screen):
         xparamUangKembalian=re.findall("[a-zA-Z]",UangKembalian)
         xparamUangKembalian2=1
         panjangChange=len(UangKembalian)
+        l2=[ord(c) for c in UangKembalian]
+        print(l2)
         if UangKembalian < '0' :
             xparamUangKembalian2=0
         elif panjangChange>1:
             if UangKembalian.startswith('0'):
                 xparamUangKembalian2=0
             else:
-                xparamUangKembalian2=1
+                for i,c in enumerate(l2):
+                    if c >= 33 and c < 48 or c>=58 and c< 65 or c >=91 and c < 97 or c == 126:
+                        xparamUangKembalian2=0
+                        break
+                    else:
+                        xparamUangKembalian2=1
         #xparamUangKembaliancond3= UangKembalian.startswith('[0][0-9]')
         if uname== '' or passw=='' or UangKembalian=='' :
             info.text='[color=#FF0000]Username ,Password,and Change  required[/color]'
