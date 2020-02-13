@@ -7,7 +7,7 @@
 ScreenManager:
     transition : FadeTransition()
     LoginWindow : 
-    HomeWindow : 
+    HomeWindow :
     WelcomeBack :
     RegistWindow :
 #:import utils kivy.utils
@@ -778,7 +778,7 @@ ScreenManager:
                     id: waktu
                 FlatButton:
                     id: loggedin_user
-                    text: 'Uswa'
+                    text: root.labelText
                     color: utils.get_color_from_hex('#000000')
                 Button:
                     background_color: utils.get_color_from_hex('#81CCFE')  
@@ -868,8 +868,10 @@ ScreenManager:
                         id: list_item
                         readonly: True
                         hint_text:'Enter text'
+                        text:root.listbarang#mengclear text input melalui class lain
                         pos_hint: {'center_x': 0.5, 'center_y': -1.5} 
                         size_hint: 1, 4
+                       
                     
                 BoxLayout:
                     orientation:"horizontal"
@@ -2515,6 +2517,7 @@ ScreenManager:
                     background_normal:'' 
                     text:'YES'
                     on_press: root.FadePopup()
+                    #on_press: root.reset()
                     on_press: app.root.current = "login"
                     pos:self.pos
                     color:utils.get_color_from_hex('#ffffff') 
