@@ -16,16 +16,20 @@ Config.set('graphics', 'height', '600')
 data=0
 scandata=0
 rows=1
+NamaUser=''
 cols=0
 gender=''
+reset=''
 JumlahUser=1
 screen_manager = ScreenManager()
 waktu=datetime.datetime.now()
 simpanwaktu= waktu.strftime("%d-%m-%Y %H:%M:%S")
 class setNamePopup(Popup):
     def FadePopup(self):
+        global reset
         #self.manager.current='login'#program untuk pindah ke layout yang lain berdasarkan name window
         self.dismiss()
+        reset=''
         print('keluar')
 class WelcomeBack(Screen):
     def __init__(self, **kwargs):
@@ -92,6 +96,10 @@ class WelcomeBack(Screen):
         self.username=[]
         self.password=[]
 class HomeWindow(Screen):
+    global reset
+    labelText = StringProperty('')
+    listbarang=StringProperty(reset)
+    #datanama = StringProperty(0)
     def setName(self,*args):
         setNamePopup().open()
     def __init__(self, **kwargs):
@@ -104,11 +112,16 @@ class HomeWindow(Screen):
         self.checkscanproduct=[]
         self.checknamaProduct=[]
         self.checkhargabarang=[]
-        #self.waktu.text=d1
+        #self.waktu.text=simpanwaktu
         #waktuSaatIni= Label(text=d1,color=(.06,.45,.45,1))
 
         #self.waktu.text = time.asctime()   
-           
+    def reset(self):
+        self.ids.loggedin_user.text=''
+        self.ids.list_item.text=''
+    def nameUser(self):
+        global NamaUser
+        self.datanama=NamaUser
     def barang1(self):
         global scandata
         scandata=1234
@@ -147,28 +160,6 @@ class HomeWindow(Screen):
         #scandata=scanproduct
         if ParamProduct>=0:
             print('halo')
-            """detail_item= BoxLayout(size_hint_y=None,height=30,pos_hint={'top':1})
-            product_list.add_widget(detail_item) 
-            if scanproduct== '1':
-                simpandata=data+1
-                data=simpandata
-                product= Label(text='Apel',size_hint_x=.3,color=(.06,.45,.45,1))
-                price= Label(text='12000',size_hint_x=.2,color=(.06,.45,.45,1))
-                jumlah_barang= Label (text=str(simpandata),size_hint_x=.1,color=(.06,.45,.45,1),id="check")
-                subtotal= Label(text='1',size_hint_x=.3,color=(.06,.45,.45,1))   
-                detail_item.add_widget(product) 
-                detail_item.add_widget(price)
-                detail_item.add_widget(jumlah_barang)
-                detail_item.add_widget(subtotal)
-            elif scanproduct== '2':
-                product= Label(text='Durian',size_hint_x=.3,color=(.06,.45,.45,1))
-                price= Label(text='6000',size_hint_x=.2,color=(.06,.45,.45,1))
-                jumlah_barang= Label (text='1',size_hint_x=.1,color=(.06,.45,.45,1))
-                subtotal= Label(text='1',size_hint_x=.3,color=(.06,.45,.45,1))   
-                detail_item.add_widget(product) 
-                detail_item.add_widget(price)
-                detail_item.add_widget(jumlah_barang)
-                detail_item.add_widget(subtotal)"""
             pname=self.checknamaProduct[ParamProduct]
             pprice=self.checkhargabarang[ParamProduct]
             pqty=str(1)
@@ -227,24 +218,28 @@ class LoginWindow(Screen):
         super().__init__(**kwargs)
         self.username=[]
         self.password=[]
+        self.namauser=[]
     def loginreset(self):
         self.ids.username_field.text=''
         self.ids.pwd_field.text=''
         self.ids.money_field.text=''
         self.ids.info.text=''
     def validate_user(self):
+        global NamaUser
+        global reset
         loc = ("data.xls")
         wb = xlrd.open_workbook(loc)
         sheet = wb.sheet_by_index(0)
         for row in range(1,sheet.nrows):
             print(sheet.cell_value(row,5))
-            print('\n')
             print(sheet.cell_value(row,6))
+            print(sheet.cell_value(row,1))
             self.username.append(sheet.cell_value(row, 5))
             self.password.append(sheet.cell_value(row,6))
+            self.namauser.append(sheet.cell_value(row,1))
             print(self.username)
             print(self.password)
-
+            print(self.namauser)
         #parameter untuk mengecheck nilai pada array
         UserData=-1
         user= self.ids.username_field
@@ -283,6 +278,9 @@ class LoginWindow(Screen):
                     self.ids.pwd_field.text=''
                     self.ids.money_field.text=''
                     self.ids.info.text=''
+                    NamaUser=self.namauser[UserData]
+                    self.manager.get_screen('Home_Win').labelText = NamaUser
+                
                 else:
                     info.text='[color=#1764ff]Invalid Username or Password!!![/color]'
                     self.ids.pwd_field.text=''
