@@ -7,7 +7,7 @@
 ScreenManager:
     transition : FadeTransition()
     LoginWindow : 
-    HomeWindow : 
+    HomeWindow :
     WelcomeBack :
     RegistWindow :
 #:import utils kivy.utils
@@ -17,6 +17,7 @@ ScreenManager:
 
 <LoginWindow>:
     id: main_win
+    name:'login'
     orientation: "vertical"
     
     canvas.before:
@@ -88,6 +89,7 @@ ScreenManager:
                         radius: [13, 13, 13, 13]
                 TextInput:
                     id: username_field
+                    multiline: False
                     hint_text: "Username"
                     background_color: 0,0,0,0  
                     foreground_color: utils.get_color_from_hex('#000000')
@@ -97,6 +99,7 @@ ScreenManager:
                     size_hint: None, None
                     color:utils.get_color_from_hex('#B5B8BC')
                     background_normal:''
+                   
                 Image:
                     pos:405,412
                     source:'people.png'
@@ -122,6 +125,8 @@ ScreenManager:
                 TextInput:
                     id: pwd_field
                     hint_text: "Password"
+                    password:True
+                    multiline:False
                     background_color: 0,0,0,0  
                     foreground_color: utils.get_color_from_hex('#000000')
                     pos:425,333
@@ -150,6 +155,7 @@ ScreenManager:
                     size:20,25
                 TextInput:
                     id: money_field
+                    multiline:False
                     hint_text: "Change"
                     background_color: 0,0,0,0  
                     foreground_color: utils.get_color_from_hex('#000000')
@@ -159,6 +165,7 @@ ScreenManager:
                     size_hint: None, None
                     color:utils.get_color_from_hex('#B5B8BC')
                     background_normal:''
+                    input_type:'number'
             FlatButton:
                 #pos_hint: {'center_x': 0.5, 'center_y': -1.5}
                 canvas:
@@ -168,16 +175,15 @@ ScreenManager:
                         pos: 535, 200
                         size:  84, 34
                         radius: [15, 15, 15, 15]
-                Button:   
+                Button:
+                    on_press: root.validate_user()  
                     pos:537, 203
                     size: 79, 28
                     bold:True
                     font_size:18
                     background_color:0,0,0,0
-                    background_normal:'' 
-                    text:'Login'
-                    on_release: app.validate_user()
-                    
+                    background_normal:''
+                    text:'login' 
             GridLayout:
                 pos: 500, 120
                 cols:2
@@ -191,6 +197,8 @@ ScreenManager:
                     font_size: 15                         
                         
                 FlatButton:
+                    on_release : app.root.current = "register"
+                    on_press: root.loginreset()
                     text: 'Sign Up here'
                     color: utils.get_color_from_hex('#ff0004')  
                     bold: True
@@ -202,11 +210,13 @@ ScreenManager:
 
 
 <RegistWindow>:   
+    name:"register"
     namaAwal:FirstName
     namaAkhir:LastName
-    emailku:email
+    usernameku:email
     nomorTelp:PhoneNumber
     passwrd:pass_field
+    address:addr_field
     confpasswr:confpass_field
     id: main_win
     orientation: "vertical"
@@ -256,10 +266,14 @@ ScreenManager:
                 pos: 540, 520
             Label:
                 id:info_regist
-                text:'Username is required'
-                color: utils.get_color_from_hex('#ff0505')   
+                text:''
+                markup: True
+                size_hint_y: None
+                bold:True
+                text:''
+                #color: utils.get_color_from_hex('#ff0505')   
                 font_size:15
-                pos: 520, 490
+                pos: 540, 490
             Label:
                 text:'Username'
                 bold:True
@@ -277,6 +291,7 @@ ScreenManager:
                 TextInput:
                     id: email
                     hint_text: "Username"
+                    multiline:False
                     background_color: 0,0,0,0  
                     foreground_color: utils.get_color_from_hex('#000000')
                     pos:398,479
@@ -303,6 +318,7 @@ ScreenManager:
                 TextInput:
                     id: FirstName
                     hint_text: "First Name"
+                    multiline: False
                     background_color: 0,0,0,0  
                     foreground_color: utils.get_color_from_hex('#000000')
                     pos:398,408
@@ -328,6 +344,7 @@ ScreenManager:
                 TextInput:
                     id:LastName
                     hint_text: "Last Name"
+                    multiline: False
                     background_color: 0,0,0,0  
                     foreground_color: utils.get_color_from_hex('#000000')
                     pos:600,408
@@ -352,6 +369,8 @@ ScreenManager:
                         radius: [13, 13, 13, 13]
                 TextInput:
                     id: PhoneNumber
+                    multiline: False
+                    input_type: 'number'
                     hint_text: "Phone Number"
                     background_color: 0,0,0,0  
                     foreground_color: utils.get_color_from_hex('#000000')
@@ -378,6 +397,7 @@ ScreenManager:
                 TextInput:
                     id:addr_field
                     hint_text: "Address"
+                    multiline: False
                     background_color: 0,0,0,0  
                     foreground_color: utils.get_color_from_hex('#000000')
                     pos:397,261
@@ -403,9 +423,11 @@ ScreenManager:
                         radius: [13, 13, 13, 13]
                 TextInput:
                     id: pass_field
+                    multiline:False
                     hint_text: "Password"
                     background_color: 0,0,0,0  
                     foreground_color: utils.get_color_from_hex('#000000')
+                    password:True
                     pos:398,126
                     font_size: 13
                     size: 165, 28
@@ -424,6 +446,7 @@ ScreenManager:
                 pos: 395, 155
                 color: utils.get_color_from_hex('#7D7A7A')
             CheckBox:
+                on_active: root.checkboxFemale(self,self.active)
                 id:female
                 pos: 360, 155
                 group:'check'
@@ -439,6 +462,7 @@ ScreenManager:
                 pos: 460, 155
                 group:'check'
                 color: utils.get_color_from_hex('#7D7A7A')
+                on_active: root.checkboxMale(self,self.active)
             Label:
                 text:'Confirm Password'
                 bold:True
@@ -456,6 +480,7 @@ ScreenManager:
                         radius: [13, 13, 13, 13]
                 TextInput:
                     id: confpass_field
+                    multiline: False
                     hint_text: "Confirm Password"
                     password:True
                     background_color: 0,0,0,0  
@@ -476,6 +501,7 @@ ScreenManager:
                         size:  84, 34
                         radius: [15, 15, 15, 15]
                 Button:   
+                    on_press: root.reset()
                     pos: 582,70
                     size: 79, 28
                     bold:True
@@ -491,7 +517,8 @@ ScreenManager:
                         pos: 677, 67
                         size:  84, 34
                         radius: [15, 15, 15, 15]
-                Button:   
+                Button:
+                    on_press: root.regist()   
                     pos: 680,70
                     size: 79, 28
                     bold:True
@@ -511,11 +538,13 @@ ScreenManager:
                     font_size: 15                         
                         
                 FlatButton:
+                    on_release : app.root.current = "login"
                     text: 'Sign In here'
+                    on_press: root.reset()
                     color: utils.get_color_from_hex('#ff0004')  
                     bold: True
                     color: 		    
-                    font_size: 15   
+                    font_size: 15  
 
 #:import utils kivy.utils
 <FlatButton@ButtonBehavior+Label>:
@@ -585,7 +614,6 @@ ScreenManager:
                 font_size:15
                 pos: 530,430
             Label:
-                
                 text:'Username'
                 bold:True
                 font_size:15
@@ -602,6 +630,7 @@ ScreenManager:
                         radius: [13, 13, 13, 13]
                 TextInput:
                     id: username_field
+                    multiline:False
                     hint_text: "Username"
                     background_color: 0,0,0,0  
                     foreground_color: utils.get_color_from_hex('#000000')
@@ -637,6 +666,7 @@ ScreenManager:
                     id: pwd_field
                     hint_text: "Password"
                     password:True
+                    multiline:False
                     background_color: 0,0,0,0  
                     foreground_color: utils.get_color_from_hex('#000000')
                     pos:425,333
@@ -684,7 +714,7 @@ ScreenManager:
                         size:  84, 34
                         radius: [15, 15, 15, 15]
                 Button:
-                    on_press: root.validate_user()  
+                    on_press: root.validate_userwelcome()  
                     pos:537, 204
                     size: 79, 28
                     bold:True
@@ -705,7 +735,8 @@ ScreenManager:
                     font_size: 15                         
                         
                 FlatButton:
-                    on_release : app.root.current = "register"
+                    on_release: app.root.current = "register"
+                    on_press: root.loginreset()
                     text: 'Sign Up here'
                     color: utils.get_color_from_hex('#ff0004')  
                     bold: True
@@ -747,9 +778,10 @@ ScreenManager:
                     size_hint_x: .1
                 Label:
                     id: waktu
+                    text: root.dataWaktu
                 FlatButton:
                     id: loggedin_user
-                    text: 'Uswa'
+                    text: root.labelText
                     color: utils.get_color_from_hex('#000000')
                 Button:
                     background_color: utils.get_color_from_hex('#81CCFE')  
@@ -838,9 +870,13 @@ ScreenManager:
                     TextInput:
                         id: list_item
                         readonly: True
+                        valign: 'center'
+                        halign:'center'
                         hint_text:'Enter text'
+                        text:''#mengclear text input melalui class lain
                         pos_hint: {'center_x': 0.5, 'center_y': -1.5} 
                         size_hint: 1, 4
+                       
                     
                 BoxLayout:
                     orientation:"horizontal"
@@ -889,6 +925,7 @@ ScreenManager:
                             background_color: 0,0,0,0  
                             foreground_color: utils.get_color_from_hex('#000000')
                         TextInput:
+
                             text: "0"
                             halign:'right'
                             color:utils.get_color_from_hex('#000000')
@@ -896,7 +933,7 @@ ScreenManager:
                             text_size: self.size
                             size_hint_x:.2
                             readonly: True
-                            id: qty_inp
+                            id: totalharga
                             background_color: 0,0,0,0  
                             foreground_color: utils.get_color_from_hex('#000000')
                         
@@ -2485,7 +2522,8 @@ ScreenManager:
                     background_normal:'' 
                     text:'YES'
                     on_press: root.FadePopup()
-                    on_release : app.root.current = "login"
+                    #on_press: root.reset()
+                    on_press: app.root.current = "login"
                     pos:self.pos
                     color:utils.get_color_from_hex('#ffffff') 
             BoxLayout:
@@ -2493,19 +2531,3 @@ ScreenManager:
         BoxLayout:
 
             size_hint_y:.3
-
-            
-
-        
-    
-
-
-    
-           
-
-
-    
-
-
-    
-           
