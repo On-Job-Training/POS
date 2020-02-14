@@ -22,15 +22,16 @@ cols=0
 gender=''
 reset=''
 JumlahUser=1
+nu_text=''
 screen_manager = ScreenManager()
 waktu=datetime.datetime.now()
-simpanwaktu= waktu.strftime("%d-%m-%Y %H:%M:%S")
+simpanwaktu= waktu.strftime("%d-%m-%Y")
 class setNamePopup(Popup):
     def FadePopup(self):
         global reset
         #self.manager.current='login'#program untuk pindah ke layout yang lain berdasarkan name window
         self.dismiss()
-        reset=''
+        reset='abab'
         print('keluar')
 class WelcomeBack(Screen):
     def __init__(self, **kwargs):
@@ -72,13 +73,20 @@ class WelcomeBack(Screen):
         xparamUangKembalian=re.findall("[a-zA-Z]",UangKembalian)
         xparamUangKembalian2=1
         panjangChange=len(UangKembalian)
+        l2=[ord(c) for c in UangKembalian]
+        print(l2)
         if UangKembalian < '0' :
             xparamUangKembalian2=0
         elif panjangChange>1:
             if UangKembalian.startswith('0'):
                 xparamUangKembalian2=0
             else:
-                xparamUangKembalian2=1
+                for i,c in enumerate(l2):
+                    if c >= 33 and c < 48 or c>=58 and c< 65 or c >=91 and c < 97 or c == 126:
+                        xparamUangKembalian2=0
+                        break
+                    else:
+                        xparamUangKembalian2=1
         #xparamUangKembaliancond3= UangKembalian.startswith('[0][0-9]')
         if uname== '' or passw=='' or UangKembalian=='' :
             info.text='[color=#FF0000]Username ,Password,and Change  required[/color]'
@@ -112,10 +120,11 @@ class WelcomeBack(Screen):
                 self.ids.money_field.text=''
         self.username=[]
         self.password=[]
+        self.namauser=[]
 class HomeWindow(Screen):
-    global reset
+   
     labelText = StringProperty('')
-    listbarang=StringProperty(reset)
+    dataWaktu=StringProperty('')
     #datanama = StringProperty(0)
     def setName(self,*args):
         setNamePopup().open()
@@ -304,6 +313,8 @@ class LoginWindow(Screen):
                     self.ids.info.text=''
                     NamaUser=self.namauser[UserData]
                     self.manager.get_screen('Home_Win').labelText = NamaUser
+                    self.manager.get_screen('Home_Win').dataWaktu = simpanwaktu
+                    reset=' '
                 
                 else:
                     info.text='[color=#1764ff]Invalid Username or Password!!![/color]'
@@ -317,6 +328,7 @@ class LoginWindow(Screen):
                 self.ids.money_field.text=''
         self.username=[]
         self.password=[]
+        self.namauser=[]
 #Register
    
 class RegistWindow(Screen):
