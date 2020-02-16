@@ -20,7 +20,7 @@ rows=1
 NamaUser=''
 cols=0
 gender=''
-reset=''
+resetText=0
 JumlahUser=1
 nu_text=''
 screen_manager = ScreenManager()
@@ -28,10 +28,13 @@ waktu=datetime.datetime.now()
 simpanwaktu= waktu.strftime("%d-%m-%Y")
 class setNamePopup(Popup):
     def FadePopup(self):
-        global reset
         #self.manager.current='login'#program untuk pindah ke layout yang lain berdasarkan name window
         self.dismiss()
-        reset='abab'
+        print('gajadiKeluar')
+    def FadePopupYes(self):
+        global resetText
+        resetText=1
+        self.dismiss()
         print('keluar')
 class WelcomeBack(Screen):
     def __init__(self, **kwargs):
@@ -122,12 +125,17 @@ class WelcomeBack(Screen):
         self.password=[]
         self.namauser=[]
 class HomeWindow(Screen):
-   
+    global resetText
     labelText = StringProperty('')
     dataWaktu=StringProperty('')
     #datanama = StringProperty(0)
     def setName(self,*args):
         setNamePopup().open()
+        self.ids.list_item.text=''
+        self.JumlahProduct=[]
+        self.codeItem=[]
+        self.NamaProduct=[]
+        self.HargaBarang=[]
     def __init__(self, **kwargs):
         global d1
         super().__init__(**kwargs)
