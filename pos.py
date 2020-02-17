@@ -124,6 +124,11 @@ class WelcomeBack(Screen):
         self.username=[]
         self.password=[]
         self.namauser=[]
+class ProfileWindow(Popup):
+    def FadePopup(self):
+        #self.manager.current='login'#program untuk pindah ke layout yang lain berdasarkan name window
+        self.dismiss()
+
 class HomeWindow(Screen):
     global resetText
     labelText = StringProperty('')
@@ -164,6 +169,8 @@ class HomeWindow(Screen):
         global scandata
         scandata=2345
         self.list_data()
+    def logout(self,*args):
+        ProfileWindow().open()
     def list_data(self):
         global data
         global scandata
