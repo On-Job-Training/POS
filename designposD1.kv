@@ -745,7 +745,7 @@ ScreenManager:
 
 <HomeWindow>:
     #waktu:waktu
-    #id: main_win
+    id: main_win
     name: 'Home_Win'
     orientation: 'vertical'
     canvas.before:
@@ -885,18 +885,19 @@ ScreenManager:
                             bold:True
                             text: 'Subtotal'
                             size_hint_x: .2
-                    
-                    TextInput:
-                        id: list_item
-                        readonly: True
-                        valign: 'center'
-                        halign:'center'
-                        hint_text:'Enter text'
-                        text:''#mengclear text input melalui class lain
-                        pos_hint: {'center_x': 0.5, 'center_y': -1.5} 
-                        size_hint: 1, 4
-                       
-                    
+                    BoxLayout:
+                        spacing: 10
+                        size_hint_y: None
+                        height: 280
+                        TextInput:
+                            id: list_item
+                            readonly: True
+                            valign: 'center'
+                            halign:'center'
+                            hint_text:'Enter text'
+                            text:''#mengclear text input melalui class lain
+                            pos_hint: {'center_x': 0.5, 'center_y': -1.5} 
+                            size_hint: 1, 4
                 BoxLayout:
                     orientation:"horizontal"
                     size_hint_y: .1
@@ -906,6 +907,8 @@ ScreenManager:
                         Rectangle:
                             size: self.size
                             pos: self.pos
+                        
+                
                     BoxLayout:
                         orientation:'horizontal'
                         TextInput:
