@@ -759,78 +759,79 @@ ScreenManager:
         Rectangle:
             size: self.size
             pos: self.pos
-    
-    GridLayout:
-        cols:3
-        id: header
-        size_hint_y: None
-        height: 60
-        canvas.before:
-            Color:
-                rgba: utils.get_color_from_hex('#81CCFE')
-            Rectangle:
-                size: self.size
-                pos: self.pos 
-        BoxLayout:
-            orientation:'horizontal'
+    BoxLayout:
+        orientation:'vertical'
+        GridLayout:
+            cols:3
+            id: header
+            size_hint_y: None
+            height: 60
+            canvas.before:
+                Color:
+                    rgba: utils.get_color_from_hex('#81CCFE')
+                Rectangle:
+                    size: self.size
+                    pos: self.pos 
             BoxLayout:
-                size_hint_x: .1
+                orientation:'horizontal'
+                BoxLayout:
+                    size_hint_x: .1
+                    Button:
+                        background_color: utils.get_color_from_hex('#81CCFE')
+                        background_normal:''
+                        
+                        #on_press:root.setName(*args)
+                        #on_press: root.list_data() 
+                        Image:
+                            source: 'sisi.png'
+                            center_x: self.parent.center_x
+                            center_y: self.parent.center_y
+                            size:90,90
+                            allow_stretch: True
+                BoxLayout:
+                    size_hint_x:.2
+                    Label:
+                        text:'17/02/2020'
+                        color:utils.get_color_from_hex('#ffffff')
+                        bold:True
+            BoxLayout:
+                size_hint_x: .4
+                Button:
+                    background_color: 0,0,0,0
+                    background_normal:''
+                        
+                        #on_press:root.setName(*args)
+                        #on_press: root.list_data() 
+                    Image:
+                        source: 'logo_putih.png'
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
+                        size:180,180
+                        allow_stretch: True       
+            BoxLayout:
+                #spacing:5
+                BoxLayout:
+                    size_hint_x:.4
+                BoxLayout:
+                    size_hint_x:.3
+                    Label:
+                        text:'Hi Uswatun'
+                        color:utils.get_color_from_hex('#ffffff')
+                        bold: True
                 Button:
                     background_color: utils.get_color_from_hex('#81CCFE')
                     background_normal:''
-                    
-                    #on_press:root.setName(*args)
+                    size_hint_x: .2
+                    on_press:root.logout(*args)
                     #on_press: root.list_data() 
                     Image:
-                        source: 'sisi.png'
+                        source: 'woman.png'
                         center_x: self.parent.center_x
                         center_y: self.parent.center_y
-                        size:90,90
+                        size: 60,60
                         allow_stretch: True
-            BoxLayout:
-                size_hint_x:.2
-                Label:
-                    text:'17/02/2020'
-                    color:utils.get_color_from_hex('#ffffff')
-                    bold:True
+        
         BoxLayout:
-            size_hint_x: .4
-            Button:
-                background_color: 0,0,0,0
-                background_normal:''
-                    
-                    #on_press:root.setName(*args)
-                    #on_press: root.list_data() 
-                Image:
-                    source: 'logo_putih.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
-                    size:180,180
-                    allow_stretch: True       
-        BoxLayout:
-            #spacing:5
-            BoxLayout:
-                size_hint_x:.4
-            BoxLayout:
-                size_hint_x:.3
-                Label:
-                    text:'Hi Uswatun'
-                    color:utils.get_color_from_hex('#ffffff')
-                    bold: True
-            Button:
-                background_color: utils.get_color_from_hex('#81CCFE')
-                background_normal:''
-                size_hint_x: .2
-                on_press:root.logout(*args)
-                #on_press: root.list_data() 
-                Image:
-                    source: 'woman.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
-                    size: 60,60
-                    allow_stretch: True
-    
-    BoxLayout:
         #padding:5
         BoxLayout:
             id: product_details
