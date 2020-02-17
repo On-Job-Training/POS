@@ -744,8 +744,8 @@ ScreenManager:
                     font_size: 15   
 
 <HomeWindow>:
-    waktu:waktu
-    id: main_win
+    #waktu:waktu
+    #id: main_win
     name: 'Home_Win'
     orientation: 'vertical'
     canvas.before:
@@ -756,53 +756,66 @@ ScreenManager:
             pos: self.pos
     BoxLayout:
         orientation:'vertical'
-        BoxLayout:
+        GridLayout:
+            cols:3
             id: header
             size_hint_y: None
-            height: 40
+            height: 60
             canvas.before:
                 Color:
                     rgba: utils.get_color_from_hex('#81CCFE')
                 Rectangle:
                     size: self.size
-                    pos: self.pos
-            Image:
-                pos:self.pos
-                source:'forca.png'
-                size:60,60
-                size_hint_x:.2       
+                    pos: self.pos 
             BoxLayout:
-                Label:
-                    id: waktu
-                    text: root.dataWaktu
-                FlatButton:
-                    id: loggedin_user
-                    text: root.labelText
-                    color: utils.get_color_from_hex('#000000')
+                orientation:'horizontal'
+                BoxLayout:
+                    size_hint_x: .1
+                    Button:
+                        background_color: utils.get_color_from_hex('#81CCFE')
+                        background_normal:''
+                        
+                        #on_press:root.setName(*args)
+                        #on_press: root.list_data() 
+                        Image:
+                            source: 'sisi.png'
+                            center_x: self.parent.center_x
+                            center_y: self.parent.center_y
+                            size:90,90
+                            allow_stretch: True
+                BoxLayout:
+                    size_hint_x:.2
+            BoxLayout:
+                size_hint_x: .4
                 Button:
-                    background_color: utils.get_color_from_hex('#81CCFE')  
+                    background_color: 0,0,0,0
                     background_normal:''
-                    size_hint_x: .2
-                    #on_press: root.list_data() 
+                        
+                        #on_press:root.setName(*args)
+                        #on_press: root.list_data() 
                     Image:
-                        source: 'transaction.png'
+                        source: 'logo_putih.png'
                         center_x: self.parent.center_x
                         center_y: self.parent.center_y
-                        size: 30, 30
-                        allow_stretch: True
-                    
+                        size:180,180
+                        allow_stretch: True       
+            BoxLayout:
+                #spacing:5
+                BoxLayout:
+                    size_hint_x:.6
                 Button:
-                    background_color: utils.get_color_from_hex('#81CCFE')  
+                    background_color: utils.get_color_from_hex('#81CCFE')
                     background_normal:''
                     size_hint_x: .2
-                    on_press:root.setName(*args)
+                    on_press:root.logout(*args)
                     #on_press: root.list_data() 
                     Image:
-                        source: 'logout.png'
+                        source: 'woman.png'
                         center_x: self.parent.center_x
                         center_y: self.parent.center_y
-                        size: 30, 30
+                        size: 60,60
                         allow_stretch: True
+    
                     
         BoxLayout:
             padding:5
@@ -2527,3 +2540,133 @@ ScreenManager:
         BoxLayout:
 
             size_hint_y:.3
+<ProfileWindow>: 
+    title:'Profile'
+    size_hint:.5,.8
+    auto_dismiss: False
+    BoxLayout: 
+        orientation:'vertical'
+        #spacing:10
+        canvas.before:
+            Color:
+                rgba: utils.get_color_from_hex('#ffffff')  
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+                radius:5,5,5,5
+        BoxLayout:
+            orientation:'horizontal'
+            size_hint_y:.1
+            padding:5
+            spacing:10
+            BoxLayout:
+                size_hint_x:.9
+            BoxLayout:
+                size_hint_x:.1
+                Button:
+                    #pos:self.pos
+                    background_color:0,0,0,0
+                    background_normal:'' 
+                    on_press: root.FadePopup() 
+                    Image:
+                        size_hint_x:.4
+                        source: 'remove.png'
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
+                        size: 25,25
+                        allow_stretch: True
+        BoxLayout:
+            size_hint_y:.3
+            background_color: utils.get_color_from_hex('#81CCFE')
+                #on_press:root.setName(*args)
+                #on_press: root.list_data() 
+            Image:
+                valign:'top'
+                source: 'woman_logout.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size:100,100
+                keep_ratio: True
+                allow_stretch: True
+            #pos:self.pos
+        BoxLayout:
+            size_hint_y:.2
+            Label:
+                font_size:25
+                bold:True
+                text:'Uswatun Hasanah'
+                color: utils.get_color_from_hex('#000000')
+        BoxLayout:
+            #pos:self.pos
+            size_hint_y:.2
+            GridLayout:
+                cols:4
+                BoxLayout:
+                    size_hint_x:.2
+                BoxLayout:
+                    size_hint_x:.2
+                    Button:
+                        #pos:self.pos
+                        background_color:0,0,0,0
+                        background_normal:'' 
+                            #on_press:root.setName(*args)
+                            #on_press: root.list_data() 
+                        Image:
+                            size_hint_x:.4
+                            source: 'koin.png'
+                            center_x: self.parent.center_x
+                            center_y: self.parent.center_y
+                            size: 40,40
+                            allow_stretch: True
+                BoxLayout:
+                    size_hint_x:.5
+                    orientation:'vertical'
+                    TextInput:
+                        background_color: 0,0,0,0
+                        foreground_color: utils.get_color_from_hex('#000000')
+                        text:'100 penjualan'
+                        color: utils.get_color_from_hex('#000000')
+                        halign: 'left'
+                        readonly: True
+                        multiline:False
+                    TextInput:
+                        background_color: 0,0,0,0
+                        foreground_color: utils.get_color_from_hex('#000000')
+                        readonly: True
+                        halign: 'left'
+                        text:'Rp 5.000.000,00'
+                        color: utils.get_color_from_hex('#000000')
+                        multiline:False
+                BoxLayout:
+
+                    size_hint_x:.1
+        GridLayout:
+            #pos:self.pos
+            size_hint_y:.5
+            cols:3
+            BoxLayout:
+                size_hint_x:.1
+            BoxLayout:
+                padding:60
+                size_hint_x:.3
+                BoxLayout:
+                    canvas:
+                        Color:
+                            rgba: utils.get_color_from_hex('#F60A0A') 
+                        RoundedRectangle:
+                            pos: self.pos
+                            size:  self.size
+                            radius: [20, 20, 20, 20]
+                    Button:   
+                        bold:True
+                        font_size:15
+                        background_color:0,0,0,0 
+                        background_normal:'' 
+                        text:'Logout'
+                        pos:self.pos
+                        color:utils.get_color_from_hex('#ffffff')
+                        border: (5,5,5,5)
+                        
+            BoxLayout:
+                size_hint_x:.1
+                
