@@ -743,8 +743,13 @@ ScreenManager:
                     color: 		    
                     font_size: 15   
 
+#:import utils kivy.utils
+<FlatButton@ButtonBehavior+Label>:
+    font_size: 14
+
 <HomeWindow>:
     #waktu:waktu
+    #jam:jam
     id: main_win
     name: 'Home_Win'
     orientation: 'vertical'
@@ -754,1717 +759,1707 @@ ScreenManager:
         Rectangle:
             size: self.size
             pos: self.pos
-    BoxLayout:
-        orientation:'vertical'
-        GridLayout:
-            cols:3
-            id: header
-            size_hint_y: None
-            height: 60
-            canvas.before:
-                Color:
-                    rgba: utils.get_color_from_hex('#81CCFE')
-                Rectangle:
-                    size: self.size
-                    pos: self.pos 
+    
+    GridLayout:
+        cols:3
+        id: header
+        size_hint_y: None
+        height: 60
+        canvas.before:
+            Color:
+                rgba: utils.get_color_from_hex('#81CCFE')
+            Rectangle:
+                size: self.size
+                pos: self.pos 
+        BoxLayout:
+            orientation:'horizontal'
             BoxLayout:
-                orientation:'horizontal'
-                BoxLayout:
-                    size_hint_x: .1
-                    Button:
-                        background_color: utils.get_color_from_hex('#81CCFE')
-                        background_normal:''
-                        
-                        #on_press:root.setName(*args)
-                        #on_press: root.list_data() 
-                        Image:
-                            source: 'sisi.png'
-                            center_x: self.parent.center_x
-                            center_y: self.parent.center_y
-                            size:90,90
-                            allow_stretch: True
-                BoxLayout:
-                    size_hint_x:.2
-                    Label:
-                        text:'17/02/2020'
-                        color:utils.get_color_from_hex('#ffffff')
-                        bold:True
-            BoxLayout:
-                size_hint_x: .4
-                Button:
-                    background_color: 0,0,0,0
-                    background_normal:''
-                        
-                        #on_press:root.setName(*args)
-                        #on_press: root.list_data() 
-                    Image:
-                        source: 'logo_putih.png'
-                        center_x: self.parent.center_x
-                        center_y: self.parent.center_y
-                        size:180,180
-                        allow_stretch: True       
-            BoxLayout:
-                #spacing:5
-                BoxLayout:
-                    size_hint_x:.4
-                BoxLayout:
-                    size_hint_x:.3
-                    Label:
-                        text:'Hi Uswatun'
-                        color:utils.get_color_from_hex('#ffffff')
-                        bold: True
+                size_hint_x: .1
                 Button:
                     background_color: utils.get_color_from_hex('#81CCFE')
                     background_normal:''
-                    size_hint_x: .2
-                    on_press:root.logout(*args)
+                    
+                    #on_press:root.setName(*args)
                     #on_press: root.list_data() 
                     Image:
-                        source: 'woman.png'
+                        source: 'sisi.png'
                         center_x: self.parent.center_x
                         center_y: self.parent.center_y
-                        size: 60,60
+                        size:90,90
                         allow_stretch: True
-    
-                    
-        BoxLayout:
-            padding:5
             BoxLayout:
-                id: product_details
-                orientation: "vertical"
-                size_hint_x: .3
-                
-                BoxLayout:
-                    orientation:"horizontal"
-                    size_hint_y: .1
-                    TextInput:
-                        hint_text: "Name/ Product Code"
-                        id: qty_inp_scan
-                        size_hint_x: .7
-                        foreground_color:utils.get_color_from_hex('#000000')  
-                        background_color:0,0,0,0
-                        multiline: False
-                        on_text_validate: root.list_data() 
-                    Button:
-                        background_color: utils.get_color_from_hex('#EBE7E7')  
-                        background_normal:''
+                size_hint_x:.2
+                Label:
+                    text:'17/02/2020'
+                    color:utils.get_color_from_hex('#ffffff')
+                    bold:True
+        BoxLayout:
+            size_hint_x: .4
+            Button:
+                background_color: 0,0,0,0
+                background_normal:''
+                    
+                    #on_press:root.setName(*args)
+                    #on_press: root.list_data() 
+                Image:
+                    source: 'logo_putih.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size:180,180
+                    allow_stretch: True       
+        BoxLayout:
+            #spacing:5
+            BoxLayout:
+                size_hint_x:.4
+            BoxLayout:
+                size_hint_x:.3
+                Label:
+                    text:'Hi Uswatun'
+                    color:utils.get_color_from_hex('#ffffff')
+                    bold: True
+            Button:
+                background_color: utils.get_color_from_hex('#81CCFE')
+                background_normal:''
+                size_hint_x: .2
+                on_press:root.logout(*args)
+                #on_press: root.list_data() 
+                Image:
+                    source: 'woman.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size: 60,60
+                    allow_stretch: True
+    
+    BoxLayout:
+        #padding:5
+        BoxLayout:
+            id: product_details
+            orientation: "vertical"
+            size_hint_x: .3
+            BoxLayout:
+                orientation:"horizontal"
+                size_hint_y: .1
+                TextInput:
+                    #font_name: 'Arial'
+                    hint_text: "Name/ Product Code"
+                    id: qty_inp_scan
+                    size_hint_x: .7
+                    foreground_color:utils.get_color_from_hex('#000000')  
+                    background_color:0,0,0,0
+                    multiline: False
+                    on_text_validate: root.list_data() 
+                Button:
+                    background_color: utils.get_color_from_hex('#EBE7E7')  
+                    background_normal:''
+                    size_hint_x: .1
+                    #on_press: root.list_data() 
+                    on_press: root.add_user_fields()
+                    Image:
+                        source: 'search.png'
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
+                        size: 20, 20
+                        allow_stretch: True
+            BoxLayout:
+                id: add_to_cart
+                orientation: 'vertical'
+                size_hint_y: .8
+                BoxLayout:    
+                    size_hint_y: None
+                    height: 50
+                    canvas.before:
+                        Color:
+                            rgb: utils.get_color_from_hex('#0099FF')
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+                    Label:
+                        bold:True
+                        text: 'Product'
+                        size_hint_x: .3
+                    Label:
+                        bold:True
+                        text: 'Price'
+                        size_hint_x: .2
+                    Label:
+                        bold:True
+                        text: 'Qty'
                         size_hint_x: .1
-                        #on_press: root.list_data() 
-                        Image:
-                            source: 'add.png'
-                            center_x: self.parent.center_x
-                            center_y: self.parent.center_y
-                            size: 20, 20
-                            allow_stretch: True
+                    Label:
+                        bold:True
+                        text: 'Subtotal'
+                        size_hint_x: .2
                 BoxLayout:
-                    id: add_to_cart
-                    orientation: 'vertical'
-                    size_hint_y: .8
-                    BoxLayout:    
-                        size_hint_y: None
-                        height: 30
-                        canvas.before:
-                            Color:
-                                rgb: utils.get_color_from_hex('#0099FF')
-                            Rectangle:
-                                size: self.size
-                                pos: self.pos
-                        Label:
-                            bold:True
-                            text: 'Product'
-                            size_hint_x: .3
-                        Label:
-                            bold:True
-                            text: 'Price'
-                            size_hint_x: .2
-                        Label:
-                            bold:True
-                            text: 'Qty'
-                            size_hint_x: .1
-                        Label:
-                            bold:True
-                            text: 'Subtotal'
-                            size_hint_x: .2
-                    BoxLayout:
-                        spacing: 10
-                        size_hint_y: None
-                        height: 280
-                        TextInput:
-                            id: list_item
-                            readonly: True
-                            valign: 'center'
-                            halign:'center'
-                            hint_text:'Enter text'
-                            text:''#mengclear text input melalui class lain
-                            pos_hint: {'center_x': 0.5, 'center_y': -1.5} 
-                            size_hint: 1, 4
+                    id: ops_fields
+                    spacing: 10
+                    size_hint_y: None
+                    height: 280
+            BoxLayout:
+                orientation:"horizontal"
+                size_hint_y: .1
+                canvas.before:
+                    Color:
+                        rgb: utils.get_color_from_hex('#F57F0A')
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
                 BoxLayout:
-                    orientation:"vertical"
-                    size_hint_y: .1
-                    canvas.before:
-                        Color:
-                            rgb: utils.get_color_from_hex('#F57F0A')
-                        Rectangle:
-                            size: self.size
-                            pos: self.pos
-                        
-                
-                    BoxLayout:
-                        orientation:'horizontal'
-                        TextInput:
-                            text: "Items"
-                            color:utils.get_color_from_hex('#000000')
-                            font_size: 14
-                            text_size: self.size
-                            #size_hint_x:.3
-                            readonly: True
-                            id: qty_inp
-                            background_color: 0,0,0,0  
-                            foreground_color: utils.get_color_from_hex('#000000')
-                        TextInput:
-                            text: "0"
-                            halign:'right'
-                            color:utils.get_color_from_hex('#000000')
-                            font_size: 14
-                            text_size: self.size
-                            size_hint_x:.2
-                            readonly: True
-                            id: qty_inp
-                            background_color: 0,0,0,0  
-                            foreground_color: utils.get_color_from_hex('#000000')
-                        
-                                
-                    BoxLayout:
-                        orientation:'horizontal'
-                        TextInput:
-                            text: "Total"
-                            color:utils.get_color_from_hex('#000000')
-                            font_size: 14
-                            text_size: self.size
-                            #size_hint_x:.3
-                            readonly: True
-                            id: qty_inp
-                            background_color: 0,0,0,0  
-                            foreground_color: utils.get_color_from_hex('#000000')
-                        TextInput:
-                            text: "0"
-                            halign:'right'
-                            color:utils.get_color_from_hex('#000000')
-                            font_size: 14
-                            text_size: self.size
-                            size_hint_x:.2
-                            readonly: True
-                            id: qty_inp
-                            background_color: 0,0,0,0  
-                            foreground_color: utils.get_color_from_hex('#000000')
-                        
-                                
-                BoxLayout:
-                    orientation:"vertical"
-                    size_hint_y: .2
-                    canvas.before:
-                        Color:
-                            rgb: utils.get_color_from_hex('#D2E1F8')
-                        Rectangle:
-                            size: self.size
-                            pos: self.pos
-                    BoxLayout:
-                        orientation:'horizontal'
-                        TextInput:
-                            text: "Total Payable"
-                            color:utils.get_color_from_hex('#000000')
-                            font_size: 14
-                            text_size: self.size
-                            readonly: True
-                            id: qty_inp
-                            background_color: 0,0,0,0  
-                            foreground_color: utils.get_color_from_hex('#000000')
-                        TextInput:
-                            text: "0.0"
-                            halign:'right'
-                            color:utils.get_color_from_hex('#000000')
-                            font_size: 14
-                            text_size: self.size
-                            size_hint_x:.2
-                            readonly: True
-                            id: qty_inp
-                            background_color: 0,0,0,0  
-                            foreground_color: utils.get_color_from_hex('#000000')
-                    BoxLayout:
-                        orientation:'horizontal'
-                        TextInput:
-                            text: "Cash"
-                            color:utils.get_color_from_hex('#000000')
-                            font_size: 14
-                            text_size: self.size
-                            size_hint_x:.5
-                            readonly: True
-                            multiline:False
-                            id: qty_inp
-                            background_color: 0,0,0,0  
-                            foreground_color: utils.get_color_from_hex('#000000')
-                        TextInput:
-                        
-                            hint_text: "0.0"
-                            font_size: 14
-                            text_size: self.size
-                            halign:'right'
-                            multiline:False
-                            background_color: 0,0,0,0  
-                            foreground_color: utils.get_color_from_hex('#000000')
-                    BoxLayout:
-                        orientation:'horizontal'
-                        TextInput:
-                            text: "Change"
-                            color:utils.get_color_from_hex('#000000')
-                            font_size: 14
-                            text_size: self.size
-                            size_hint_x:.5
-                            readonly: True
-                            id: qty_inp
-                            background_color: 0,0,0,0  
-                            foreground_color: utils.get_color_from_hex('#000000')
-                        TextInput:
-                        
-                            hint_text: "0.0"
-                            font_size: 14
-                            text_size: self.size
-                            halign:'right'
-                            background_color: 0,0,0,0  
-                            foreground_color: utils.get_color_from_hex('#000000')
-                        
-                                
-                    GridLayout:
-                        cols:2
-                        orientation:"horizontal"
-                        size_hint_y: .1
-                        spacing:5
-                        padding:5
-                        BoxLayout:    
-                            size_hint_x:.1  
-                            Button:   
-                                bold:True
-                                font_size:15
-                                background_color:utils.get_color_from_hex('#F60A0A')
-                                background_normal:'' 
-                                text:'CANCEL'
-                                pos:self.pos
-                                color:utils.get_color_from_hex('#ffffff') 
-                        BoxLayout:
-                            size_hint_x:.2
-                            Button:   
-                                bold:True
-                                font_size:15
-                                background_color:utils.get_color_from_hex('#0096FB') 
-                                background_normal:'' 
-                                text:'SAVE'
-                                pos:self.pos
-                                color:utils.get_color_from_hex('#ffffff')
-                                border: (5,5,5,5) 
-                BoxLayout:
-                orientation: "vertical"
-                size_hint_x:.4 
-                Accordion:
-                    orientation:'vertical'
-                    size_hint_y:.2
-                    AccordionItem: 
-                        title: 'Produk Makanan'
-                        size_hint_y:.1
-                        ScrollView:
-                            pos_hint: {"top": 1, "left": 1}
-                            size_hint: 1, .95
-                            GridLayout:
-                                # Banner grid
-                                id: friend_banner_grid
-                                cols: 3
-                                spacing: 10,10
-                                size_hint_y: None
-                                height: self.minimum_height
-                                row_default_height: '100dp'                 
-                                spacing:5
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'BENG-BENG'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'beng_beng.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:100,100
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 2500'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                        
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'NEXTAR'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'nextar.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:100,80
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 2500'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                        
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'OREO'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'oreo.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:100,100
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 2500'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'TARO'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'taro.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:100,70
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 2500'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'LAYS'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'lays.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:100,70
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 2500'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'SLAY OLAI'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'slay.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:100,90
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 2500'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'POTA BEE'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'pota_bee.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:100,60
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 2500'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'CHITATO'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'chitato.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:100,80
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 2500'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'ROMA KELAPA'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'roma.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:100,60
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 2500'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'SARI GANDUM'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'sari_gandum.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:100,95
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 2500'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'RIN BEE'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'rinbee.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:100,70
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 2500'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'SPONGE'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'sponge.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:100,60
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 2500'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'TANGO'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'tango.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:100,90
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 2500'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'SIIP'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'siip.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:100,60
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 2500'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'GERY SALUT'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'gery_salut.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:100,80
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 2500'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'CRISPY CRACKERS'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'crispy.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:100,80
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 2500'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                    AccordionItem: 
-                        title: 'Produk Minuman'
-                        size_hint_y:.1
-                        ScrollView:
-                            pos_hint: {"top": 1, "left": 1}
-                            size_hint: 1, .91
-                            GridLayout:
-                                # Banner grid
-                                id: friend_banner_grid
-                                cols: 3
-                                spacing: 10,10
-                                size_hint_y: None
-                                height: self.minimum_height
-                                row_default_height: '100dp'
-                                
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'FRESTEA'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos
-                                                
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'frestea.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:100,150
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 6000'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')  
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'GOOD DAY'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'goodday.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:70,70
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 6000'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'ICHI OCHA'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'ichi.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:70,70
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 6000'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'LE MINERALE'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'leminerale.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:70,70
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 6000'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'MINUTE MAID'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'minute_maid.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:100,100
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 6000'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'TEH PUCUK'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'teh_pucuk.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:70,70
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 6000'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'TEH KOTAK'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'teh_kotak.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:70,70
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 6000'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'ULTRAMILK'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'ultramilk.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:70,70
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 6000'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
-                                    canvas.before:
-                                        Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
-                                            size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'FRUIT TEA'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
-                                        valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'fruit_tea.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:70,70
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 6000'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
+                    orientation:'horizontal'
+                    TextInput:
+                        text: "Items"
+                        color:utils.get_color_from_hex('#000000')
+                        font_size: 14
+                        text_size: self.size
+                        #size_hint_x:.3
+                        readonly: True
+                        id: qty_inp
+                        background_color: 0,0,0,0  
+                        foreground_color: utils.get_color_from_hex('#000000')
+                    TextInput:
+                        text: "0"
+                        halign:'right'
+                        color:utils.get_color_from_hex('#000000')
+                        font_size: 14
+                        text_size: self.size
+                        size_hint_x:.2
+                        readonly: True
+                        id: qty_inp
+                        background_color: 0,0,0,0  
+                        foreground_color: utils.get_color_from_hex('#000000')
+                       
                             
-                                BoxLayout:                         
-                                    orientation:'vertical'
+                BoxLayout:
+                    orientation:'horizontal'
+                    TextInput:
+                        text: "Total"
+                        color:utils.get_color_from_hex('#000000')
+                        font_size: 14
+                        text_size: self.size
+                        #size_hint_x:.3
+                        readonly: True
+                        id: qty_inp
+                        background_color: 0,0,0,0  
+                        foreground_color: utils.get_color_from_hex('#000000')
+                    TextInput:
+                        text: "0"
+                        halign:'right'
+                        color:utils.get_color_from_hex('#000000')
+                        font_size: 14
+                        text_size: self.size
+                        size_hint_x:.2
+                        readonly: True
+                        id: qty_inp
+                        background_color: 0,0,0,0  
+                        foreground_color: utils.get_color_from_hex('#000000')
+                       
+                            
+            BoxLayout:
+                orientation:"vertical"
+                size_hint_y: .2
+                canvas.before:
+                    Color:
+                        rgb: utils.get_color_from_hex('#D2E1F8')
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                BoxLayout:
+                    orientation:'horizontal'
+                    TextInput:
+                        text: "Total Payable"
+                        color:utils.get_color_from_hex('#000000')
+                        font_size: 14
+                        text_size: self.size
+                        readonly: True
+                        id: qty_inp
+                        background_color: 0,0,0,0  
+                        foreground_color: utils.get_color_from_hex('#000000')
+                    TextInput:
+                        text: "0.0"
+                        halign:'right'
+                        color:utils.get_color_from_hex('#000000')
+                        font_size: 14
+                        text_size: self.size
+                        size_hint_x:.2
+                        readonly: True
+                        id: qty_inp
+                        background_color: 0,0,0,0  
+                        foreground_color: utils.get_color_from_hex('#000000')
+                BoxLayout:
+                    orientation:'horizontal'
+                    TextInput:
+                        text: "Cash"
+                        color:utils.get_color_from_hex('#000000')
+                        font_size: 14
+                        text_size: self.size
+                        size_hint_x:.5
+                        readonly: True
+                        multiline:False
+                        id: qty_inp
+                        background_color: 0,0,0,0  
+                        foreground_color: utils.get_color_from_hex('#000000')
+                    TextInput:
+                      
+                        hint_text: "0.0"
+                        font_size: 14
+                        text_size: self.size
+                        halign:'right'
+                        multiline:False
+                        background_color: 0,0,0,0  
+                        foreground_color: utils.get_color_from_hex('#000000')
+                BoxLayout:
+                    orientation:'horizontal'
+                    TextInput:
+                        text: "Change"
+                        color:utils.get_color_from_hex('#000000')
+                        font_size: 14
+                        text_size: self.size
+                        size_hint_x:.5
+                        readonly: True
+                        id: qty_inp
+                        background_color: 0,0,0,0  
+                        foreground_color: utils.get_color_from_hex('#000000')
+                    TextInput:
+                      
+                        hint_text: "0.0"
+                        font_size: 14
+                        text_size: self.size
+                        halign:'right'
+                        background_color: 0,0,0,0  
+                        foreground_color: utils.get_color_from_hex('#000000')
+                       
+                            
+            GridLayout:
+                cols:2
+                orientation:"horizontal"
+                size_hint_y: .1
+                spacing:5
+                padding:5
+                BoxLayout:    
+                    size_hint_x:.1  
+                    Button:   
+                        bold:True
+                        font_size:15
+                        background_color:utils.get_color_from_hex('#F60A0A')
+                        background_normal:'' 
+                        text:'CANCEL'
+                        pos:self.pos
+                        color:utils.get_color_from_hex('#ffffff') 
+                BoxLayout:
+                    size_hint_x:.2
+                    Button:   
+                        bold:True
+                        font_size:15
+                        background_color:utils.get_color_from_hex('#0096FB') 
+                        background_normal:'' 
+                        text:'SAVE'
+                        pos:self.pos
+                        color:utils.get_color_from_hex('#ffffff')
+                        border: (5,5,5,5) 
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_x:.4 
+            Accordion:
+                orientation:'vertical'
+                size_hint_y:.2
+                AccordionItem: 
+                    title: 'Produk Makanan'
+                    size_hint_y:.1
+                    ScrollView:
+                        pos_hint: {"top": 1, "left": 1}
+                        size_hint: 1, .95
+                        GridLayout:
+                            # Banner grid
+                            id: friend_banner_grid
+                            cols: 3
+                            spacing: 10,10
+                            size_hint_y: None
+                            height: self.minimum_height
+                            row_default_height: '100dp'                 
+                            spacing:5
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'BENG-BENG'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
                                     canvas.before:
                                         Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
                                             size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'FRUIT TEA'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
                                         valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'fruittea.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:70,70
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 6000'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
+                                        source: 'beng_beng.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:100,100
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 2500'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                                    
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'NEXTAR'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
                                     canvas.before:
                                         Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
                                             size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'AQUA'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
                                         valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'aqua.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:70,70
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 6000'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
+                                        source: 'nextar.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:100,80
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 2500'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                                    
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'OREO'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
                                     canvas.before:
                                         Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
                                             size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'CLEO'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
                                         valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'cleo.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:70,70
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 6000'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
+                                        source: 'oreo.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:100,100
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 2500'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'TARO'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
                                     canvas.before:
                                         Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
                                             size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'TEH GELAS'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
                                         valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'teh_gelas.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:70,70
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 6000'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
+                                        source: 'taro.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:100,70
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 2500'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'LAYS'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
                                     canvas.before:
                                         Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
                                             size: self.size
-                                            pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'HYDRO COCO'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
                                         valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'hydro.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:70,70
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 6000'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
-                                BoxLayout:                         
-                                    orientation:'vertical'
+                                        source: 'lays.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:100,70
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 2500'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'SLAY OLAI'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
                                     canvas.before:
                                         Color:
-                                            rgba: utils.get_color_from_hex('#f0f1f2')
-                                        RoundedRectangle:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'slay.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:100,90
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 2500'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'POTA BEE'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'pota_bee.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:100,60
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 2500'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'CHITATO'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'chitato.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:100,80
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 2500'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'ROMA KELAPA'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'roma.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:100,60
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 2500'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'SARI GANDUM'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'sari_gandum.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:100,95
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 2500'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'RIN BEE'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'rinbee.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:100,70
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 2500'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'SPONGE'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'sponge.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:100,60
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 2500'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'TANGO'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'tango.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:100,90
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 2500'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'SIIP'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'siip.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:100,60
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 2500'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'GERY SALUT'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'gery_salut.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:100,80
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 2500'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'CRISPY CRACKERS'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'crispy.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:100,80
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 2500'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                AccordionItem: 
+                    title: 'Produk Minuman'
+                    size_hint_y:.1
+                    ScrollView:
+                        pos_hint: {"top": 1, "left": 1}
+                        size_hint: 1, .91
+                        GridLayout:
+                            # Banner grid
+                            id: friend_banner_grid
+                            cols: 3
+                            spacing: 10,10
+                            size_hint_y: None
+                            height: self.minimum_height
+                            row_default_height: '100dp'
+                            
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'FRESTEA'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
                                             size: self.size
                                             pos: self.pos
-                                            radius:0,0,30,0
-                                    Label:
-                                        text:'TEH BOTOL'
-                                        font_size:14
-                                        halign:'center'
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#454444')
-                                        canvas.before:
-                                            Color:
-                                                rgba: utils.get_color_from_hex('#d4d4d4')
-                                            Rectangle:
-                                                size: self.size
-                                                pos: self.pos    
-                                    Button:
-                                        size_hint_y:.3
-                                        font_size: 14
-                                        text_size: self.size     
-                                        halign: 'center'
+                                            
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    #on_press:root.frestea(*args)
+                                    Image:
                                         valign:'top'
-                                        padding_y:3
-                                        background_color: utils.get_color_from_hex('#f0f1f2')
-                                        background_normal:''
-                                        font_size:12
-                                        Image:
-                                            valign:'top'
-                                            source: 'teh_botol.png'
-                                            center_x: self.parent.center_x
-                                            center_y: self.parent.center_y
-                                            size:70,70
-                                            keep_ratio: True
-                                            allow_stretch: True
-                                    Label:
-                                        text:'Rp 6000'
-                                        font_size:12
-                                        size_hint_y:.1
-                                        color:utils.get_color_from_hex('#042f59')
+                                        source: 'frestea.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:100,150
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 6000'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')  
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'GOOD DAY'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'goodday.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:70,70
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 6000'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'ICHI OCHA'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'ichi.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:70,70
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 6000'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'LE MINERALE'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'leminerale.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:70,70
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 6000'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'MINUTE MAID'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'minute_maid.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:100,100
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 6000'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'TEH PUCUK'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'teh_pucuk.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:70,70
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 6000'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'TEH KOTAK'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'teh_kotak.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:70,70
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 6000'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'ULTRAMILK'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'ultramilk.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:70,70
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 6000'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'FRUIT TEA'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'fruit_tea.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:70,70
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 6000'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                        
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'FRUIT TEA'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'fruittea.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:70,70
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 6000'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'AQUA'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'aqua.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:70,70
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 6000'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'CLEO'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'cleo.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:70,70
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 6000'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'TEH GELAS'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'teh_gelas.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:70,70
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 6000'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'HYDRO COCO'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'hydro.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:70,70
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 6000'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
+                            BoxLayout:                         
+                                orientation:'vertical'
+                                canvas.before:
+                                    Color:
+                                        rgba: utils.get_color_from_hex('#f0f1f2')
+                                    RoundedRectangle:
+                                        size: self.size
+                                        pos: self.pos
+                                        radius:0,0,30,0
+                                Label:
+                                    text:'TEH BOTOL'
+                                    font_size:14
+                                    halign:'center'
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#454444')
+                                    canvas.before:
+                                        Color:
+                                            rgba: utils.get_color_from_hex('#d4d4d4')
+                                        Rectangle:
+                                            size: self.size
+                                            pos: self.pos    
+                                Button:
+                                    size_hint_y:.3
+                                    font_size: 14
+                                    text_size: self.size     
+                                    halign: 'center'
+                                    valign:'top'
+                                    padding_y:3
+                                    background_color: utils.get_color_from_hex('#f0f1f2')
+                                    background_normal:''
+                                    font_size:12
+                                    Image:
+                                        valign:'top'
+                                        source: 'teh_botol.png'
+                                        center_x: self.parent.center_x
+                                        center_y: self.parent.center_y
+                                        size:70,70
+                                        keep_ratio: True
+                                        allow_stretch: True
+                                Label:
+                                    text:'Rp 6000'
+                                    font_size:12
+                                    size_hint_y:.1
+                                    color:utils.get_color_from_hex('#042f59')
 <SetNamePopup>: 
     title:'Logout'
     size_hint:.5,.5
@@ -2509,9 +2504,8 @@ ScreenManager:
                     background_normal:'' 
                     text:'NO'
                     pos:self.pos
-                    on_press: root.FadePopup()
                     color:utils.get_color_from_hex('#ffffff')
-                    #on_release : app.root.current = "register"
+                    on_release : app.root.current = "register"
             BoxLayout:   
                 size_hint_x:.2
                 padding:10
@@ -2528,9 +2522,6 @@ ScreenManager:
                     background_color:0,0,0,0
                     background_normal:'' 
                     text:'YES'
-                    on_press: root.FadePopup()
-                    #on_press: root.reset()
-                    on_press: app.root.current = "login"
                     pos:self.pos
                     color:utils.get_color_from_hex('#ffffff') 
             BoxLayout:
@@ -2538,6 +2529,7 @@ ScreenManager:
         BoxLayout:
 
             size_hint_y:.3
+
 <ProfileWindow>: 
     title:'Profile'
     size_hint:.5,.8
@@ -2668,3 +2660,4 @@ ScreenManager:
             BoxLayout:
                 size_hint_x:.1
                 
+
