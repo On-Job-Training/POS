@@ -26,6 +26,10 @@ nu_text=''
 screen_manager = ScreenManager()
 waktu=datetime.datetime.now()
 simpanwaktu= waktu.strftime("%d-%m-%Y")
+class ProfileWindow(Popup):
+    def FadePopup(self):
+        #self.manager.current='login'#program untuk pindah ke layout yang lain berdasarkan name window
+        self.dismiss()
 class setNamePopup(Popup):
     def FadePopup(self):
         #self.manager.current='login'#program untuk pindah ke layout yang lain berdasarkan name window
@@ -42,6 +46,7 @@ class WelcomeBack(Screen):
         self.username=[]
         self.password=[]
         self.namauser=[]
+    
     def loginreset(self):
         self.ids.username_field.text=''
         self.ids.pwd_field.text=''
@@ -129,6 +134,8 @@ class HomeWindow(Screen):
     labelText = StringProperty('')
     dataWaktu=StringProperty('')
     #datanama = StringProperty(0)
+    def logout(self,*args):
+        ProfileWindow().open()
     def setName(self,*args):
         setNamePopup().open()
         self.ids.list_item.text=''
