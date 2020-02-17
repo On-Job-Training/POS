@@ -785,6 +785,10 @@ ScreenManager:
                             allow_stretch: True
                 BoxLayout:
                     size_hint_x:.2
+                    Label:
+                        text:'17/02/2020'
+                        color:utils.get_color_from_hex('#ffffff')
+                        bold:True
             BoxLayout:
                 size_hint_x: .4
                 Button:
@@ -802,7 +806,13 @@ ScreenManager:
             BoxLayout:
                 #spacing:5
                 BoxLayout:
-                    size_hint_x:.6
+                    size_hint_x:.4
+                BoxLayout:
+                    size_hint_x:.3
+                    Label:
+                        text:'Hi Uswatun'
+                        color:utils.get_color_from_hex('#ffffff')
+                        bold: True
                 Button:
                     background_color: utils.get_color_from_hex('#81CCFE')
                     background_normal:''
@@ -922,147 +932,132 @@ ScreenManager:
                         
                                 
                     BoxLayout:
-                        orientation:'horizontal'
-                        TextInput:
-                            text: "Total"
-                            color:utils.get_color_from_hex('#000000')
-                            font_size: 14
-                            text_size: self.size
-                            #size_hint_x:.3
-                            readonly: True
-                            id: qty_inp
-                            background_color: 0,0,0,0  
-                            foreground_color: utils.get_color_from_hex('#000000')
-                        TextInput:
-
-                            text: "0"
-                            halign:'right'
-                            color:utils.get_color_from_hex('#000000')
-                            font_size: 14
-                            text_size: self.size
-                            size_hint_x:.2
-                            readonly: True
-                            id: totalharga
-                            background_color: 0,0,0,0  
-                            foreground_color: utils.get_color_from_hex('#000000')
-                        
-                                
+                    orientation:'horizontal'
+                    TextInput:
+                        text: "Total"
+                        color:utils.get_color_from_hex('#000000')
+                        font_size: 14
+                        text_size: self.size
+                        #size_hint_x:.3
+                        readonly: True
+                        id: qty_inp
+                        background_color: 0,0,0,0  
+                        foreground_color: utils.get_color_from_hex('#000000')
+                    TextInput:
+                        text: "0"
+                        halign:'right'
+                        color:utils.get_color_from_hex('#000000')
+                        font_size: 14
+                        text_size: self.size
+                        size_hint_x:.2
+                        readonly: True
+                        id: qty_inp
+                        background_color: 0,0,0,0  
+                        foreground_color: utils.get_color_from_hex('#000000')
+                       
+                            
+            BoxLayout:
+                orientation:"vertical"
+                size_hint_y: .2
+                canvas.before:
+                    Color:
+                        rgb: utils.get_color_from_hex('#D2E1F8')
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
                 BoxLayout:
-                    orientation:"vertical"
-                    size_hint_y: .2
-                    canvas.before:
-                        Color:
-                            rgb: utils.get_color_from_hex('#D2E1F8')
-                        Rectangle:
-                            size: self.size
-                            pos: self.pos
-                    BoxLayout:
-                        orientation:'horizontal'
-                        TextInput:
-                            text: "Total Payable"
-                            color:utils.get_color_from_hex('#000000')
-                            font_size: 14
-                            text_size: self.size
-                            readonly: True
-                            id: qty_inp
-                            background_color: 0,0,0,0  
-                            foreground_color: utils.get_color_from_hex('#000000')
-                        TextInput:
-                            text: "0.0"
-                            halign:'right'
-                            color:utils.get_color_from_hex('#000000')
-                            font_size: 14
-                            text_size: self.size
-                            size_hint_x:.2
-                            readonly: True
-                            id: qty_inp
-                            background_color: 0,0,0,0  
-                            foreground_color: utils.get_color_from_hex('#000000')
-                    BoxLayout:
-                        orientation:'horizontal'
-                        TextInput:
-                            text: "Cash"
-                            color:utils.get_color_from_hex('#000000')
-                            font_size: 14
-                            text_size: self.size
-                            size_hint_x:.5
-                            readonly: True
-                            multiline:False
-                            id: qty_inp
-                            background_color: 0,0,0,0  
-                            foreground_color: utils.get_color_from_hex('#000000')
-                        TextInput:
-                        
-                            hint_text: "0.0"
-                            font_size: 14
-                            text_size: self.size
-                            halign:'right'
-                            multiline:False
-                            background_color: 0,0,0,0  
-                            foreground_color: utils.get_color_from_hex('#000000')
-                    BoxLayout:
-                        orientation:'horizontal'
-                        TextInput:
-                            text: "Change"
-                            color:utils.get_color_from_hex('#000000')
-                            font_size: 14
-                            text_size: self.size
-                            size_hint_x:.5
-                            readonly: True
-                            id: qty_inp
-                            background_color: 0,0,0,0  
-                            foreground_color: utils.get_color_from_hex('#000000')
-                        TextInput:
-                        
-                            hint_text: "0.0"
-                            font_size: 14
-                            text_size: self.size
-                            halign:'right'
-                            background_color: 0,0,0,0  
-                            foreground_color: utils.get_color_from_hex('#000000')
-                        
-                                
+                    orientation:'horizontal'
+                    TextInput:
+                        text: "Total Payable"
+                        color:utils.get_color_from_hex('#000000')
+                        font_size: 14
+                        text_size: self.size
+                        readonly: True
+                        id: qty_inp
+                        background_color: 0,0,0,0  
+                        foreground_color: utils.get_color_from_hex('#000000')
+                    TextInput:
+                        text: "0.0"
+                        halign:'right'
+                        color:utils.get_color_from_hex('#000000')
+                        font_size: 14
+                        text_size: self.size
+                        size_hint_x:.2
+                        readonly: True
+                        id: qty_inp
+                        background_color: 0,0,0,0  
+                        foreground_color: utils.get_color_from_hex('#000000')
                 BoxLayout:
-                    orientation:"horizontal"
-                    size_hint_y: .1
-                    spacing:5
-                    padding:5
-                    BoxLayout:   
-                    BoxLayout: 
-                    BoxLayout:    
-                        size_hint_x:.8   
-                        canvas:
-                            Color:
-                                rgba: utils.get_color_from_hex('#F60A0A') 
-                            RoundedRectangle:
-                                pos: self.pos
-                                size:self.size
-                                radius: [15, 15, 15, 15]
-                        Button:   
-                            bold:True
-                            font_size:15
-                            background_color:0,0,0,0
-                            background_normal:'' 
-                            text:'Cancel'
-                            pos:self.pos
-                            color:utils.get_color_from_hex('#ffffff') 
-                    BoxLayout:
-                        size_hint_x:.8 
-                        canvas:
-                            Color:
-                                rgba: utils.get_color_from_hex('#0096FB') 
-                            RoundedRectangle:
-                                pos: self.pos
-                                size:self.size
-                                radius: [15, 15, 15, 15]
-                        Button:   
-                            bold:True
-                            font_size:15
-                            background_color:0,0,0,0
-                            background_normal:'' 
-                            text:'OK'
-                            pos:self.pos
-                            color:utils.get_color_from_hex('#ffffff') 
+                    orientation:'horizontal'
+                    TextInput:
+                        text: "Cash"
+                        color:utils.get_color_from_hex('#000000')
+                        font_size: 14
+                        text_size: self.size
+                        size_hint_x:.5
+                        readonly: True
+                        multiline:False
+                        id: qty_inp
+                        background_color: 0,0,0,0  
+                        foreground_color: utils.get_color_from_hex('#000000')
+                    TextInput:
+                      
+                        hint_text: "0.0"
+                        font_size: 14
+                        text_size: self.size
+                        halign:'right'
+                        multiline:False
+                        background_color: 0,0,0,0  
+                        foreground_color: utils.get_color_from_hex('#000000')
+                BoxLayout:
+                    orientation:'horizontal'
+                    TextInput:
+                        text: "Change"
+                        color:utils.get_color_from_hex('#000000')
+                        font_size: 14
+                        text_size: self.size
+                        size_hint_x:.5
+                        readonly: True
+                        id: qty_inp
+                        background_color: 0,0,0,0  
+                        foreground_color: utils.get_color_from_hex('#000000')
+                    TextInput:
+                      
+                        hint_text: "0.0"
+                        font_size: 14
+                        text_size: self.size
+                        halign:'right'
+                        background_color: 0,0,0,0  
+                        foreground_color: utils.get_color_from_hex('#000000')
+                       
+                            
+            GridLayout:
+                cols:2
+                orientation:"horizontal"
+                size_hint_y: .1
+                spacing:5
+                padding:5
+                BoxLayout:    
+                    size_hint_x:.1  
+                    Button:   
+                        bold:True
+                        font_size:15
+                        background_color:utils.get_color_from_hex('#F60A0A')
+                        background_normal:'' 
+                        text:'CANCEL'
+                        pos:self.pos
+                        color:utils.get_color_from_hex('#ffffff') 
+                BoxLayout:
+                    size_hint_x:.2
+                    Button:   
+                        bold:True
+                        font_size:15
+                        background_color:utils.get_color_from_hex('#0096FB') 
+                        background_normal:'' 
+                        text:'SAVE'
+                        pos:self.pos
+                        color:utils.get_color_from_hex('#ffffff')
+                        border: (5,5,5,5) 
             BoxLayout:
                 orientation: "vertical"
                 size_hint_x:.4 
