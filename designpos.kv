@@ -743,9 +743,20 @@ ScreenManager:
                     color: 		    
                     font_size: 15   
 
+
+
+
+
+
+
+
+#:import utils kivy.utils
+<FlatButton@ButtonBehavior+Label>:
+    font_size: 14
+
 <HomeWindow>:
-    waktu:waktu
-    jam:jam
+    #waktu:waktu
+    #jam:jam
     id: main_win
     name: 'Home_Win'
     orientation: 'vertical'
@@ -757,68 +768,87 @@ ScreenManager:
             pos: self.pos
     BoxLayout:
         orientation:'vertical'
-        BoxLayout:
+        GridLayout:
+            cols:3
             id: header
             size_hint_y: None
-            height: 40
+            height: 60
             canvas.before:
                 Color:
                     rgba: utils.get_color_from_hex('#81CCFE')
                 Rectangle:
                     size: self.size
-                    pos: self.pos
-            Image:
-                pos:self.pos
-                source:'forca.png'
-                size:60,60
-                size_hint_x:.2       
+                    pos: self.pos 
             BoxLayout:
-                Label:
-                    id: jam
+                orientation:'horizontal'
+                BoxLayout:
                     size_hint_x: .1
-                Label:
-                    id: waktu
-                    text: root.dataWaktu
-                FlatButton:
-                    id: loggedin_user
-                    text: root.labelText
-                    color: utils.get_color_from_hex('#000000')
+                    Button:
+                        background_color: utils.get_color_from_hex('#81CCFE')
+                        background_normal:''
+                        
+                        #on_press:root.setName(*args)
+                        #on_press: root.list_data() 
+                        Image:
+                            source: 'sisi.png'
+                            center_x: self.parent.center_x
+                            center_y: self.parent.center_y
+                            size:90,90
+                            allow_stretch: True
+                BoxLayout:
+                    size_hint_x:.2
+                    Label:
+                        text:'17/02/2020'
+                        color:utils.get_color_from_hex('#ffffff')
+                        bold:True
+            BoxLayout:
+                size_hint_x: .4
                 Button:
-                    background_color: utils.get_color_from_hex('#81CCFE')  
+                    background_color: 0,0,0,0
                     background_normal:''
-                    size_hint_x: .2
-                    #on_press: root.list_data() 
+                        
+                        #on_press:root.setName(*args)
+                        #on_press: root.list_data() 
                     Image:
-                        source: 'transaction.png'
+                        source: 'logo_putih.png'
                         center_x: self.parent.center_x
                         center_y: self.parent.center_y
-                        size: 30, 30
-                        allow_stretch: True
-                    
+                        size:180,180
+                        allow_stretch: True       
+            BoxLayout:
+                #spacing:5
+                BoxLayout:
+                    size_hint_x:.4
+                BoxLayout:
+                    size_hint_x:.3
+                    Label:
+                        text:'Hi........'
+                        color:utils.get_color_from_hex('#ffffff')
+                        bold: True
                 Button:
-                    background_color: utils.get_color_from_hex('#81CCFE')  
+                    background_color: utils.get_color_from_hex('#81CCFE')
                     background_normal:''
                     size_hint_x: .2
-                    on_press:root.setName(*args)
+                    on_press:root.logout(*args)
                     #on_press: root.list_data() 
                     Image:
-                        source: 'logout.png'
+                        source: 'woman.png'
                         center_x: self.parent.center_x
                         center_y: self.parent.center_y
-                        size: 30, 30
+                        size: 60,60
                         allow_stretch: True
-                    
+        
         BoxLayout:
-            padding:5
+            #padding:5
             BoxLayout:
                 id: product_details
                 orientation: "vertical"
                 size_hint_x: .3
-                
                 BoxLayout:
                     orientation:"horizontal"
                     size_hint_y: .1
                     TextInput:
+                        #font_name: 'Arial'
                         hint_text: "Name/ Product Code"
                         id: qty_inp_scan
                         size_hint_x: .7
@@ -831,8 +861,9 @@ ScreenManager:
                         background_normal:''
                         size_hint_x: .1
                         #on_press: root.list_data() 
+                        on_press: root.add_user_fields()
                         Image:
-                            source: 'add.png'
+                            source: 'search.png'
                             center_x: self.parent.center_x
                             center_y: self.parent.center_y
                             size: 20, 20
@@ -843,7 +874,7 @@ ScreenManager:
                     size_hint_y: .8
                     BoxLayout:    
                         size_hint_y: None
-                        height: 30
+                        height: 50
                         canvas.before:
                             Color:
                                 rgb: utils.get_color_from_hex('#0099FF')
@@ -866,18 +897,15 @@ ScreenManager:
                             bold:True
                             text: 'Subtotal'
                             size_hint_x: .2
-                    
                     TextInput:
                         id: list_item
                         readonly: True
-                        valign: 'center'
-                        halign:'center'
-                        hint_text:'Enter text'
+                        #valign: 'center'
+                        #halign:'center'
+                        #hint_text:'Enter text'
                         text:''#mengclear text input melalui class lain
                         pos_hint: {'center_x': 0.5, 'center_y': -1.5} 
                         size_hint: 1, 4
-                       
-                    
                 BoxLayout:
                     orientation:"horizontal"
                     size_hint_y: .1
@@ -925,7 +953,6 @@ ScreenManager:
                             background_color: 0,0,0,0  
                             foreground_color: utils.get_color_from_hex('#000000')
                         TextInput:
-
                             text: "0"
                             halign:'right'
                             color:utils.get_color_from_hex('#000000')
@@ -933,7 +960,7 @@ ScreenManager:
                             text_size: self.size
                             size_hint_x:.2
                             readonly: True
-                            id: totalharga
+                            id: qty_inp
                             background_color: 0,0,0,0  
                             foreground_color: utils.get_color_from_hex('#000000')
                         
@@ -1013,47 +1040,33 @@ ScreenManager:
                             foreground_color: utils.get_color_from_hex('#000000')
                         
                                 
-                BoxLayout:
+                GridLayout:
+                    cols:2
                     orientation:"horizontal"
                     size_hint_y: .1
                     spacing:5
                     padding:5
-                    BoxLayout:   
-                    BoxLayout: 
                     BoxLayout:    
-                        size_hint_x:.8   
-                        canvas:
-                            Color:
-                                rgba: utils.get_color_from_hex('#F60A0A') 
-                            RoundedRectangle:
-                                pos: self.pos
-                                size:self.size
-                                radius: [15, 15, 15, 15]
+                        size_hint_x:.1  
                         Button:   
                             bold:True
                             font_size:15
-                            background_color:0,0,0,0
+                            background_color:utils.get_color_from_hex('#F60A0A')
                             background_normal:'' 
-                            text:'Cancel'
+                            text:'CANCEL'
                             pos:self.pos
                             color:utils.get_color_from_hex('#ffffff') 
                     BoxLayout:
-                        size_hint_x:.8 
-                        canvas:
-                            Color:
-                                rgba: utils.get_color_from_hex('#0096FB') 
-                            RoundedRectangle:
-                                pos: self.pos
-                                size:self.size
-                                radius: [15, 15, 15, 15]
+                        size_hint_x:.2
                         Button:   
                             bold:True
                             font_size:15
-                            background_color:0,0,0,0
+                            background_color:utils.get_color_from_hex('#0096FB') 
                             background_normal:'' 
-                            text:'OK'
+                            text:'SAVE'
                             pos:self.pos
-                            color:utils.get_color_from_hex('#ffffff') 
+                            color:utils.get_color_from_hex('#ffffff')
+                            border: (5,5,5,5) 
             BoxLayout:
                 orientation: "vertical"
                 size_hint_x:.4 
@@ -1828,6 +1841,7 @@ ScreenManager:
                                         background_color: utils.get_color_from_hex('#f0f1f2')
                                         background_normal:''
                                         font_size:12
+                                        #on_press:root.frestea(*args)
                                         Image:
                                             valign:'top'
                                             source: 'frestea.png'
@@ -2458,11 +2472,15 @@ ScreenManager:
                                         font_size:12
                                         size_hint_y:.1
                                         color:utils.get_color_from_hex('#042f59')
-<SetNamePopup>: 
-    title:'Logout'
-    size_hint:.5,.5
+
+    
+<ProfileWindow>: 
+    title:'Profile'
+    size_hint:.5,.8
     auto_dismiss: False
-    BoxLayout:  
+    BoxLayout: 
+        orientation:'vertical'
+        #spacing:10
         canvas.before:
             Color:
                 rgba: utils.get_color_from_hex('#ffffff')  
@@ -2470,64 +2488,119 @@ ScreenManager:
                 size: self.size
                 pos: self.pos
                 radius:5,5,5,5
-        orientation:'vertical'
-        spacing:5
         BoxLayout:
-            
-            Label:
-                font_size:20
-                align:'center'
-                text:'Are you sure ?'
-                color: utils.get_color_from_hex('#000000') 
-        BoxLayout: 
             orientation:'horizontal'
-            size_hint_y:.2  
-            spacing:30
+            size_hint_y:.1
+            padding:5
+            spacing:10
             BoxLayout:
-                size_hint_x:.7
-            BoxLayout:   
-                size_hint_x:.2
-                padding:10
-                canvas:
-                    Color:
-                        rgba: utils.get_color_from_hex('#F60A0A') 
-                    RoundedRectangle:
-                        pos: self.pos
-                        size:self.size
-                        radius: [15, 15, 15, 15]
-                Button:   
-                    bold:True
-                    font_size:13
-                    background_color:0,0,0,0
-                    background_normal:'' 
-                    text:'NO'
-                    pos:self.pos
-                    on_press: root.FadePopup()
-                    color:utils.get_color_from_hex('#ffffff')
-                    #on_release : app.root.current = "register"
-            BoxLayout:   
-                size_hint_x:.2
-                padding:10
-                canvas:
-                    Color:
-                        rgba: utils.get_color_from_hex('#0096FB') 
-                    RoundedRectangle:
-                        pos: self.pos
-                        size:self.size
-                        radius: [15, 15, 15, 15]
-                Button:   
-                    bold:True
-                    font_size:13
-                    background_color:0,0,0,0
-                    background_normal:'' 
-                    text:'YES'
-                    on_press: root.FadePopup()
-                    #on_press: root.reset()
-                    on_press: app.root.current = "login"
-                    pos:self.pos
-                    color:utils.get_color_from_hex('#ffffff') 
+                size_hint_x:.9
             BoxLayout:
                 size_hint_x:.1
+                Button:
+                    #pos:self.pos
+                    background_color:0,0,0,0
+                    background_normal:'' 
+                    on_press: root.FadePopup() 
+                    Image:
+                        size_hint_x:.4
+                        source: 'remove.png'
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
+                        size: 25,25
+                        allow_stretch: True
         BoxLayout:
+            size_hint_y:.3 
+            Button:
+                background_color: 0,0,0,0
+                background_normal:''
+                size_hint_x: .2
+                Image:
+                    valign:'top'
+                    source: 'female_logout.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size:100,100
+                    keep_ratio: True
+                    allow_stretch: True
+        BoxLayout:
+            size_hint_y:.2
+            Label:
+                font_size:25
+                bold:True
+                text:'Fulanah'
+                color: utils.get_color_from_hex('#000000')
+        BoxLayout:
+            #pos:self.pos
+            size_hint_y:.2
+            GridLayout:
+                cols:4
+                BoxLayout:
+                    size_hint_x:.2
+                BoxLayout:
+                    size_hint_x:.2
+                    Button:
+                        #pos:self.pos
+                        background_color:0,0,0,0
+                        background_normal:'' 
+                            #on_press:root.setName(*args)
+                            #on_press: root.list_data() 
+                        Image:
+                            size_hint_x:.4
+                            source: 'koin.png'
+                            center_x: self.parent.center_x
+                            center_y: self.parent.center_y
+                            size: 40,40
+                            allow_stretch: True
+                BoxLayout:
+                    size_hint_x:.5
+                    orientation:'vertical'
+                    TextInput:
+                        background_color: 0,0,0,0
+                        foreground_color: utils.get_color_from_hex('#000000')
+                        text:'100 penjualan'
+                        color: utils.get_color_from_hex('#000000')
+                        halign: 'left'
+                        readonly: True
+                        multiline:False
+                    TextInput:
+                        background_color: 0,0,0,0
+                        foreground_color: utils.get_color_from_hex('#000000')
+                        readonly: True
+                        halign: 'left'
+                        text:'Rp 5.000.000,00'
+                        color: utils.get_color_from_hex('#000000')
+                        multiline:False
+                BoxLayout:
 
-            size_hint_y:.3
+                    size_hint_x:.1
+        GridLayout:
+            #pos:self.pos
+            size_hint_y:.5
+            cols:3
+            BoxLayout:
+                size_hint_x:.1
+            BoxLayout:
+                padding:60
+                size_hint_x:.3
+                BoxLayout:
+                    canvas:
+                        Color:
+                            rgba: utils.get_color_from_hex('#F60A0A') 
+                        RoundedRectangle:
+                            pos: self.pos
+                            size:  self.size
+                            radius: [20, 20, 20, 20]
+                    Button:   
+                        bold:True
+                        font_size:15
+                        background_color:0,0,0,0 
+                        background_normal:'' 
+                        text:'Logout'
+                        pos:self.pos
+                        color:utils.get_color_from_hex('#ffffff')
+                        border: (5,5,5,5)
+                        
+            BoxLayout:
+                size_hint_x:.1
+                
