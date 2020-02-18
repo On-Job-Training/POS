@@ -19,10 +19,12 @@ scandata=0
 rows=1
 NamaUser=''
 cols=0
+GenderAsli=''
 gender=''
 resetText=0
 JumlahUser=1
 nu_text=''
+kondImage=''
 screen_manager = ScreenManager()
 waktu=datetime.datetime.now()
 simpanwaktu= waktu.strftime("%d-%m-%Y")
@@ -126,11 +128,13 @@ class WelcomeBack(Screen):
         self.namauser=[]
 class ProfileWindow(Popup):
     def FadePopup(self):
-        #self.manager.current='login'#program untuk pindah ke layout yang lain berdasarkan name window
+        print(kondImage)
         self.dismiss()
 
 class HomeWindow(Screen):
     global resetText
+    global GenderAsli
+    img_src=StringProperty('')
     labelText = StringProperty('')
     dataWaktu=StringProperty('')
     #datanama = StringProperty(0)
@@ -260,6 +264,7 @@ class LoginWindow(Screen):
         self.username=[]
         self.password=[]
         self.namauser=[]
+        self.gender=[]
     def loginreset(self):
         self.ids.username_field.text=''
         self.ids.pwd_field.text=''
@@ -268,6 +273,8 @@ class LoginWindow(Screen):
     def validate_user(self):
         global NamaUser
         global reset
+        global kondImage
+        global GenderAsli
         loc = ("data.xls")
         wb = xlrd.open_workbook(loc)
         sheet = wb.sheet_by_index(0)
@@ -275,12 +282,15 @@ class LoginWindow(Screen):
             print(sheet.cell_value(row,5))
             print(sheet.cell_value(row,6))
             print(sheet.cell_value(row,1))
+            print(sheet.cell_value(row,4))
             self.username.append(sheet.cell_value(row, 5))
             self.password.append(sheet.cell_value(row,6))
             self.namauser.append(sheet.cell_value(row,1))
+            self.gender.append(sheet.cell_value(row,4))
             print(self.username)
             print(self.password)
             print(self.namauser)
+            print(self.gender)
         #parameter untuk mengecheck nilai pada array
         UserData=-1
         user= self.ids.username_field
@@ -329,6 +339,10 @@ class LoginWindow(Screen):
                     NamaUser=self.namauser[UserData]
                     self.manager.get_screen('Home_Win').labelText = NamaUser
                     self.manager.get_screen('Home_Win').dataWaktu = simpanwaktu
+                    if self.gender[UserData]=='Male':
+                        self.manager.get_screen('Home_Win').img_src = 'man_home.png'
+                    else:
+                        self.manager.get_screen('Home_Win').img_src = 'woman.png'
                     reset=' '
                 
                 else:
@@ -344,6 +358,8 @@ class LoginWindow(Screen):
         self.username=[]
         self.password=[]
         self.namauser=[]
+        self.gender=[]
+        print(kondImage)
 #Register
    
 class RegistWindow(Screen):
@@ -483,7 +499,7 @@ class RegistWindow(Screen):
     def checkboxFemale(self,instance,value):
         global gender
         if value is True:
-            gender='female'
+            gender='Female'
         else:
             gender=''
     
