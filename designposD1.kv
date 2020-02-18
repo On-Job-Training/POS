@@ -791,7 +791,7 @@ ScreenManager:
                 BoxLayout:
                     size_hint_x:.2
                     Label:
-                        text:'17/02/2020'
+                        text:root.dataWaktu
                         color:utils.get_color_from_hex('#ffffff')
                         bold:True
             BoxLayout:
@@ -815,7 +815,7 @@ ScreenManager:
                 BoxLayout:
                     size_hint_x:.3
                     Label:
-                        text:'Hi........'
+                        text:root.labelText
                         color:utils.get_color_from_hex('#ffffff')
                         bold: True
                 Button:
@@ -825,7 +825,7 @@ ScreenManager:
                     on_press:root.logout(*args)
                     #on_press: root.list_data() 
                     Image:
-                        source: 'woman.png'
+                        source: root.img_src
                         center_x: self.parent.center_x
                         center_y: self.parent.center_y
                         size: 60,60
@@ -2537,6 +2537,7 @@ ScreenManager:
 
 <ProfileWindow>: 
     title:'Profile'
+    name:'Profile_Win'
     size_hint:.5,.8
     auto_dismiss: False
     BoxLayout: 
@@ -2577,7 +2578,7 @@ ScreenManager:
                 #on_press: root.list_data() 
             Image:
                 valign:'top'
-                source: 'female_logout.png'
+                source: 'woman.png'
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
                 size:100,100
@@ -2659,6 +2660,8 @@ ScreenManager:
                         background_normal:'' 
                         text:'Logout'
                         pos:self.pos
+                        on_press: app.root.current="login"
+                        on_release: root.FadePopup()
                         color:utils.get_color_from_hex('#ffffff')
                         border: (5,5,5,5)
                         
