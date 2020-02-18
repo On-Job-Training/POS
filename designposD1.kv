@@ -815,7 +815,7 @@ ScreenManager:
                 BoxLayout:
                     size_hint_x:.3
                     Label:
-                        text:'Hi Uswatun'
+                        text:'Hi........'
                         color:utils.get_color_from_hex('#ffffff')
                         bold: True
                 Button:
@@ -890,11 +890,15 @@ ScreenManager:
                             bold:True
                             text: 'Subtotal'
                             size_hint_x: .2
-                    BoxLayout:
-                        id: ops_fields
-                        spacing: 10
-                        size_hint_y: None
-                        height: 280
+                    TextInput:
+                        id: list_item
+                        readonly: True
+                        #valign: 'center'
+                        #halign:'center'
+                        #hint_text:'Enter text'
+                        text:''#mengclear text input melalui class lain
+                        pos_hint: {'center_x': 0.5, 'center_y': -1.5} 
+                        size_hint: 1, 4
                 BoxLayout:
                     orientation:"horizontal"
                     size_hint_y: .1
@@ -2573,7 +2577,7 @@ ScreenManager:
                 #on_press: root.list_data() 
             Image:
                 valign:'top'
-                source: 'woman_logout.png'
+                source: 'female_logout.png'
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
                 size:100,100
@@ -2585,7 +2589,7 @@ ScreenManager:
             Label:
                 font_size:25
                 bold:True
-                text:'Uswatun Hasanah'
+                text:'Fulanah'
                 color: utils.get_color_from_hex('#000000')
         BoxLayout:
             #pos:self.pos
@@ -2661,4 +2665,3 @@ ScreenManager:
             BoxLayout:
                 size_hint_x:.1
                 
-
