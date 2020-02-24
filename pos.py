@@ -1,3 +1,5 @@
+
+import os
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
@@ -12,6 +14,11 @@ from xlutils.copy import copy
 from kivy.properties import StringProperty
 from kivy.uix.screenmanager import ScreenManager, Screen 
 from kivy.config import Config
+from kivymd.list import BaseListItem
+from kivymd.material_resources import DEVICE_TYPE
+from kivymd.navigationdrawer import MDNavigationDrawer, NavigationDrawerHeaderBase
+from kivymd.theming import ThemeManager
+
 Config.set('graphics', 'width', '800')
 Config.set('graphics', 'height', '600')
 data=0
@@ -131,6 +138,19 @@ class ProfileWindow(Popup):
         print(kondImage)
         self.dismiss()
 
+class HackedDemoNavDrawer(MDNavigationDrawer):
+    # DO NOT USE
+    def add_widget(self, widget, index=0):
+        if issubclass(widget.__class__, BaseListItem):
+            self._list.add_widget(widget, index)
+            if len(self._list.children) == 1:
+                widget._active = True
+                self.active_item = widget
+            # widget.bind(on_release=lambda x: self.panel.toggle_state())
+            widget.bind(on_release=lambda x: x._set_active(True, list=self))
+        elif issubclass(widget.__class__, NavigationDrawerHeaderBase):
+            self._header_container.add_widget(widget)
+    
 class HomeWindow(Screen):
     global resetText
     global GenderAsli
@@ -503,9 +523,25 @@ class RegistWindow(Screen):
         else:
             gender=''
     
-presentation=Builder.load_file("designpos.kv")
+
 class ForcaPOSApp(App):
+    theme_cls = ThemeManager()
     def build(self):
-        return presentation
+
+        main_widget = Builder.load_file(
+            os.path.join(os.path.dirname(__file__), "./designpos.kv")
+        )
+        
+        self.bottom_navigation_remove_mobile(main_widget)
+        return main_widget
+
+    def bottom_navigation_remove_mobile(self, widget):
+        # Removes some items from bottom-navigation demo when on mobile
+        if DEVICE_TYPE == 'mobile':
+            widget.ids.bottom_navigation_demo.remove_widget(widget.ids.bottom_navigation_desktop_2)
+        if DEVICE_TYPE == 'mobile' or DEVICE_TYPE == 'tablet':
+            widget.ids.bottom_navigation_demo.remove_widget(widget.ids.bottom_navigation_desktop_1)
+
+ 
 if __name__ == "__main__":
     ForcaPOSApp().run()
