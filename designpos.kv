@@ -163,6 +163,7 @@ ScreenManager:
                     font_size: 13
                     size:330, 28
                     size_hint: None, None
+                    on_text_validate: root.validate_user() 
                     color:utils.get_color_from_hex('#B5B8BC')
                     background_normal:''
                     input_type:'number'
@@ -743,13 +744,6 @@ ScreenManager:
                     color: 		    
                     font_size: 15   
 
-
-
-
-
-
-
-
 #:import utils kivy.utils
 <FlatButton@ButtonBehavior+Label>:
     font_size: 14
@@ -798,7 +792,7 @@ ScreenManager:
                 BoxLayout:
                     size_hint_x:.2
                     Label:
-                        text:'17/02/2020'
+                        text:root.dataWaktu
                         color:utils.get_color_from_hex('#ffffff')
                         bold:True
             BoxLayout:
@@ -822,7 +816,7 @@ ScreenManager:
                 BoxLayout:
                     size_hint_x:.3
                     Label:
-                        text:'Hi........'
+                        text:root.labelText
                         color:utils.get_color_from_hex('#ffffff')
                         bold: True
                 Button:
@@ -832,7 +826,7 @@ ScreenManager:
                     on_press:root.logout(*args)
                     #on_press: root.list_data() 
                     Image:
-                        source: 'woman.png'
+                        source: root.img_src
                         center_x: self.parent.center_x
                         center_y: self.parent.center_y
                         size: 60,60
@@ -900,8 +894,8 @@ ScreenManager:
                     TextInput:
                         id: list_item
                         readonly: True
-                        #valign: 'center'
-                        #halign:'center'
+                        #valign: 'right'
+                        halign:'right'
                         #hint_text:'Enter text'
                         text:''#mengclear text input melalui class lain
                         pos_hint: {'center_x': 0.5, 'center_y': -1.5} 
@@ -935,7 +929,7 @@ ScreenManager:
                             text_size: self.size
                             size_hint_x:.2
                             readonly: True
-                            id: qty_inp
+                            id: JumlahBarang
                             background_color: 0,0,0,0  
                             foreground_color: utils.get_color_from_hex('#000000')
                         
@@ -954,13 +948,13 @@ ScreenManager:
                             foreground_color: utils.get_color_from_hex('#000000')
                         TextInput:
                             text: "0"
-                            halign:'right'
+                            halign:'center'
                             color:utils.get_color_from_hex('#000000')
                             font_size: 14
                             text_size: self.size
-                            size_hint_x:.2
+                            size_hint_x:.5
                             readonly: True
-                            id: qty_inp
+                            id: total_harga
                             background_color: 0,0,0,0  
                             foreground_color: utils.get_color_from_hex('#000000')
                         
@@ -987,7 +981,8 @@ ScreenManager:
                             foreground_color: utils.get_color_from_hex('#000000')
                         TextInput:
                             text: "0.0"
-                            halign:'right'
+                            halign:'center'
+                            valign:'center'
                             color:utils.get_color_from_hex('#000000')
                             font_size: 14
                             text_size: self.size
@@ -1054,6 +1049,7 @@ ScreenManager:
                             background_color:utils.get_color_from_hex('#F60A0A')
                             background_normal:'' 
                             text:'CANCEL'
+                            on_press:root.reset()
                             pos:self.pos
                             color:utils.get_color_from_hex('#ffffff') 
                     BoxLayout:
@@ -2472,10 +2468,79 @@ ScreenManager:
                                         font_size:12
                                         size_hint_y:.1
                                         color:utils.get_color_from_hex('#042f59')
+<SetNamePopup>: 
+    title:'Logout'
+    size_hint:.5,.5
+    auto_dismiss: False
+    BoxLayout:  
+        canvas.before:
+            Color:
+                rgba: utils.get_color_from_hex('#ffffff')  
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+                radius:5,5,5,5
+        orientation:'vertical'
+        spacing:5
+        BoxLayout:
+            
+            Label:
+                font_size:20
+                align:'center'
+                text:'Are you sure ?'
+                color: utils.get_color_from_hex('#000000') 
+        BoxLayout: 
+            orientation:'horizontal'
+            size_hint_y:.2  
+            spacing:30
+            BoxLayout:
+                size_hint_x:.7
+            BoxLayout:   
+                size_hint_x:.2
+                padding:10
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#F60A0A') 
+                    RoundedRectangle:
+                        pos: self.pos
+                        size:self.size
+                        radius: [15, 15, 15, 15]
+                Button:   
+                    bold:True
+                    font_size:13
+                    background_color:0,0,0,0
+                    background_normal:'' 
+                    text:'NO'
+                    pos:self.pos
+                    color:utils.get_color_from_hex('#ffffff')
+                    on_release : app.root.current = "register"
+            BoxLayout:   
+                size_hint_x:.2
+                padding:10
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#0096FB') 
+                    RoundedRectangle:
+                        pos: self.pos
+                        size:self.size
+                        radius: [15, 15, 15, 15]
+                Button:   
+                    bold:True
+                    font_size:13
+                    background_color:0,0,0,0
+                    background_normal:'' 
+                    text:'YES'
+                    pos:self.pos
+                    color:utils.get_color_from_hex('#ffffff') 
+            BoxLayout:
+                size_hint_x:.1
+        BoxLayout:
 
-    
+            size_hint_y:.3
+
 <ProfileWindow>: 
     title:'Profile'
+    name:'Profile_Win'
     size_hint:.5,.8
     auto_dismiss: False
     BoxLayout: 
@@ -2510,19 +2575,19 @@ ScreenManager:
                         size: 25,25
                         allow_stretch: True
         BoxLayout:
-            size_hint_y:.3 
-            Button:
-                background_color: 0,0,0,0
-                background_normal:''
-                size_hint_x: .2
-                Image:
-                    valign:'top'
-                    source: 'female_logout.png'
-                    center_x: self.parent.center_x
-                    center_y: self.parent.center_y
-                    size:100,100
-                    keep_ratio: True
-                    allow_stretch: True
+            size_hint_y:.3
+            background_color: utils.get_color_from_hex('#81CCFE')
+                #on_press:root.setName(*args)
+                #on_press: root.list_data() 
+            Image:
+                valign:'top'
+                source: 'woman.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+                size:100,100
+                keep_ratio: True
+                allow_stretch: True
+            #pos:self.pos
         BoxLayout:
             size_hint_y:.2
             Label:
@@ -2598,6 +2663,8 @@ ScreenManager:
                         background_normal:'' 
                         text:'Logout'
                         pos:self.pos
+                        on_press: app.root.current="login"
+                        on_release: root.FadePopup()
                         color:utils.get_color_from_hex('#ffffff')
                         border: (5,5,5,5)
                         
