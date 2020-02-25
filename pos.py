@@ -256,13 +256,14 @@ class HomeWindow(Screen):
                 pqty= self.JumlahProduct[ptarget]+1
                 self.JumlahProduct[ptarget]=pqty
                 subtotal=self.HargaBarang[ptarget]+self.checkhargabarang[ParamProduct]
+                panjangSubtotal=len(str(subtotal))
                 self.HargaBarang[ptarget]=subtotal
                 hargaBarangTotal+=self.checkhargabarang[ParamProduct]
                 #regexPython berdasarkan rexpr
                 #\d+ = untuk mengganti suatu digit jika + maka 1 atau lebih digit dibelakangnya
                 expr ='%s\t\t\t%s\t\t\tx\d+\t\t\d+'%(pname,pprice)
                 #regex
-                rexpr = pname+'\t\t\t'+str(pprice)+'\t\t\tx'+str(pqty)+'\t\t'+str(subtotal)
+                rexpr =pname+'\t\t\t'+str(pprice)+'\t\t\tx'+str(pqty)+'\t\t'+str(subtotal)
                 nu_text = re.sub(expr,rexpr,prev_text)
                 #expr1 ='%s\t\t%s\t\tx\d\t\d'%(pname,pprice)
                 #New_text = re.sub(expr1,rexpr,nu_text)
