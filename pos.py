@@ -367,6 +367,7 @@ class LoginWindow(Screen):
                     NamaUser=self.namauser[UserData]
                     self.manager.get_screen('Home_Win').labelText = NamaUser
                     self.manager.get_screen('Home_Win').dataWaktu = simpanwaktu
+                    #untuk mengganti gambar profil cewek atau cowok
                     if self.gender[UserData]=='Male':
                         self.manager.get_screen('Home_Win').img_src = 'man_home.png'
                     else:
