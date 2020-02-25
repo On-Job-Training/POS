@@ -798,7 +798,7 @@ ScreenManager:
                                 size: self.size
                                 pos: self.pos
                         Image:
-                            source: 'man.png'
+                            source: root.img_src
                             center_x: self.parent.center_x
                             center_y: self.parent.center_y
                             size:80,80
@@ -812,7 +812,7 @@ ScreenManager:
                                 size: self.size
                                 pos: self.pos
                         Label:
-                            text:'Ahmad Fulan'
+                            text:root.labelText
                             color:utils.get_color_from_hex('#000000')
                             center_x: self.parent.center_x
                             center_y: self.parent.center_y
@@ -918,6 +918,7 @@ ScreenManager:
                                 source: 'exit.png'
                                 center_x: self.parent.center_x
                                 center_y: self.parent.center_y
+                                #on_release: app.root.current = "login"
                                 size:30,30
                                 allow_stretch: True
 
@@ -925,16 +926,17 @@ ScreenManager:
                             size_hint_x:.3
                             BoxLayout:
                                 orientation:'vertical'
-                                
                                 Button:
                                     background_color:0,0,0,0
                                     background_normal:''
-                                Button:
+                                FlatButton:
                                     text:'Logout'
                                     color:utils.get_color_from_hex('#000000')
                                     align:'left'
                                     background_color:utils.get_color_from_hex('#ffffff')
                                     background_normal:''
+                                    on_release: app.root.current = "login"
+                                    on_press: root.reset()
                             
                                 Button:
                                     background_color:0,0,0,0
@@ -974,7 +976,7 @@ ScreenManager:
                     BoxLayout:
                         size_hint_x:.3
                         Label:
-                            text:'18/02/2020'
+                            text:root.dataWaktu
                             color:utils.get_color_from_hex('#ffffff')
                             bold: True
                     
@@ -1039,9 +1041,8 @@ ScreenManager:
                                 size_hint_x: .2
                         TextInput:
                             id: list_item
+                            halign: 'right'
                             readonly: True
-                            #valign: 'center'
-                            #halign:'center'
                             #hint_text:'Enter text'
                             text:''#mengclear text input melalui class lain
                             pos_hint: {'center_x': 0.5, 'center_y': -1.5} 
@@ -1075,7 +1076,7 @@ ScreenManager:
                                 text_size: self.size
                                 size_hint_x:.2
                                 readonly: True
-                                id: qty_inp
+                                id: total_barang
                                 background_color: 0,0,0,0  
                                 foreground_color: utils.get_color_from_hex('#000000')
                             
@@ -1109,7 +1110,7 @@ ScreenManager:
                                 text_size: self.size
                                 size_hint_x:.2
                                 readonly: True
-                                id: qty_inp
+                                id: total_pay
                                 background_color: 0,0,0,0  
                                 foreground_color: utils.get_color_from_hex('#000000')
                         BoxLayout:
