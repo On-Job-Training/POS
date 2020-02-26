@@ -161,6 +161,7 @@ class HomeWindow(Screen):
     def setName(self,*args):
         setNamePopup().open()
         self.ids.list_item.text=''
+        self.ids.pembayaran.text=''
         self.JumlahProduct=[]
         self.codeItem=[]
         self.NamaProduct=[]
@@ -289,7 +290,18 @@ class HomeWindow(Screen):
         self.ids.qty_inp_scan.text=""
         #nilai scancode di nolkan kembali agar tidak mempegaruhi button sebelah scan
         scandata=0
-  
+    def pembayaran(self):
+        global hargaBarangTotal
+        Cash=self.ids.pembayaran.text
+        if int(Cash) < hargaBarangTotal:
+            print('Uang Pembayaran kurang')
+            self.ids.pembayaran.text=''
+            self.ids.Kembalian.text=''
+        else:
+            Kembalian=int(Cash)-hargaBarangTotal
+            self.ids.Kembalian.text=str(Kembalian)
+
+        
 class LoginWindow(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
