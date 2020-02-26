@@ -1161,7 +1161,7 @@ ScreenManager:
                                 background_color: 0,0,0,0  
                                 foreground_color: utils.get_color_from_hex('#000000')
                             TextInput:
-                            
+                                id:Kembalian
                                 hint_text: "0.0"
                                 font_size: 14
                                 text_size: self.size
@@ -1195,6 +1195,7 @@ ScreenManager:
                                 background_color:utils.get_color_from_hex('#0096FB') 
                                 background_normal:'' 
                                 text:'SAVE'
+                                on_press: root.pembayaran()
                                 pos:self.pos
                                 color:utils.get_color_from_hex('#ffffff')
                                 border: (5,5,5,5) 
