@@ -1,3 +1,4 @@
+
 import os
 from kivy.app import App
 from kivy.lang import Builder
@@ -17,6 +18,7 @@ from kivymd.list import BaseListItem
 from kivymd.material_resources import DEVICE_TYPE
 from kivymd.navigationdrawer import MDNavigationDrawer, NavigationDrawerHeaderBase
 from kivymd.theming import ThemeManager
+
 Config.set('graphics', 'width', '800')
 Config.set('graphics', 'height', '600')
 data=0
@@ -28,8 +30,6 @@ GenderAsli=''
 gender=''
 resetText=0
 JumlahUser=1
-totalBarang=0
-hargaBarangTotal=0
 nu_text=''
 kondImage=''
 screen_manager = ScreenManager()
@@ -180,9 +180,8 @@ class HomeWindow(Screen):
 
         #self.waktu.text = time.asctime()   
     def reset(self):
+        self.ids.loggedin_user.text=''
         self.ids.list_item.text=''
-        self.ids.total_barang.text='0'
-        self.ids.total_pay.text='0.0'
     def nameUser(self):
         global NamaUser
         self.datanama=NamaUser
@@ -199,8 +198,6 @@ class HomeWindow(Screen):
     def list_data(self):
         global data
         global scandata
-        global totalBarang
-        global hargaBarangTotal
         if scandata== 0:
             scanproduct = self.ids.qty_inp_scan.text
         else:
@@ -256,32 +253,26 @@ class HomeWindow(Screen):
                 pqty= self.JumlahProduct[ptarget]+1
                 self.JumlahProduct[ptarget]=pqty
                 subtotal=self.HargaBarang[ptarget]+self.checkhargabarang[ParamProduct]
-                panjangSubtotal=len(str(subtotal))
                 self.HargaBarang[ptarget]=subtotal
-                hargaBarangTotal+=self.checkhargabarang[ParamProduct]
+             
                 #regexPython berdasarkan rexpr
                 #\d+ = untuk mengganti suatu digit jika + maka 1 atau lebih digit dibelakangnya
-                expr ='%s\t\t\t%s\t\t\tx\d+\t\t\d+'%(pname,pprice)
+                expr ='%s\t\t\t\t%s\t\t\tx\d+\t\t\d+'%(pname,pprice)
                 #regex
-                rexpr =pname+'\t\t\t'+str(pprice)+'\t\t\tx'+str(pqty)+'\t\t'+str(subtotal)
+                rexpr = pname+'\t\t\t\t'+str(pprice)+'\t\t\tx'+str(pqty)+'\t\t'+str(subtotal)
                 nu_text = re.sub(expr,rexpr,prev_text)
                 #expr1 ='%s\t\t%s\t\tx\d\t\d'%(pname,pprice)
                 #New_text = re.sub(expr1,rexpr,nu_text)
                 #nu_text = re.sub('%s\t\t%s\t\tx\d\t\d+'%(pname,pprice), '', prev_text, 4)
                 preview.text = nu_text
-                totalBarang+=1
             else:
                 self.codeItem.append(scanproduct)
                 self.HargaBarang.append(subtotal)
                 self.JumlahProduct.append(1)
-                nu_preview = '\n'.join([prev_text,pname+'\t\t\t'+str(pprice)+'\t\t\tx'+pqty+'\t\t'+str(subtotal)+'\t`'])
+                nu_preview = '\n'.join([prev_text,pname+'\t\t\t\t'+str(pprice)+'\t\t\tx'+pqty+'\t\t'+str(subtotal)+'\t`'])
                 preview.text = nu_preview
-                hargaBarangTotal+=self.checkhargabarang[ParamProduct]
-                totalBarang+=1
         else :
             print('data tdk masuk')
-        self.ids.total_barang.text=str(totalBarang)
-        self.ids.total_pay.text=str(hargaBarangTotal)
         print(self.JumlahProduct)
         self.ids.qty_inp_scan.text=""
         #nilai scancode di nolkan kembali agar tidak mempegaruhi button sebelah scan
@@ -368,7 +359,6 @@ class LoginWindow(Screen):
                     NamaUser=self.namauser[UserData]
                     self.manager.get_screen('Home_Win').labelText = NamaUser
                     self.manager.get_screen('Home_Win').dataWaktu = simpanwaktu
-                    #untuk mengganti gambar profil cewek atau cowok
                     if self.gender[UserData]=='Male':
                         self.manager.get_screen('Home_Win').img_src = 'man_home.png'
                     else:
@@ -539,7 +529,7 @@ class ForcaPOSApp(App):
     def build(self):
 
         main_widget = Builder.load_file(
-            os.path.join(os.path.dirname(__file__), "./designpos.kv")
+            os.path.join(os.path.dirname(__file__), "./coba.kv")
         )
         
         self.bottom_navigation_remove_mobile(main_widget)
