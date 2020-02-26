@@ -60,6 +60,7 @@ ScreenManager:
         FlatButton:                 
             FlatButton:
                 text: 'Welcome to POSBERRY'
+                font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
                 bold: True
                 color: utils.get_color_from_hex('#000000')        
                 font_size: 30 
@@ -74,7 +75,6 @@ ScreenManager:
                 font_size:15
                 pos: 530,430
             Label:
-                
                 text:'Username'
                 bold:True
                 font_size:15
@@ -93,6 +93,7 @@ ScreenManager:
                     id: username_field
                     multiline: False
                     hint_text: "Username"
+                    #font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
                     background_color: 0,0,0,0  
                     foreground_color: utils.get_color_from_hex('#000000')
                     pos:425,408
@@ -186,6 +187,7 @@ ScreenManager:
                     background_color:0,0,0,0
                     background_normal:''
                     text:'login' 
+                    font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
             GridLayout:
                 pos: 500, 120
                 cols:2
@@ -193,7 +195,8 @@ ScreenManager:
                 orientation:'horizontal'
                 spacing:40
                 FlatButton:
-                    text: 'Do Not have account?'
+                    text: 'Do Not Have Account ? '
+                    font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
                     bold: True
                     color: utils.get_color_from_hex('#000000')        
                     font_size: 15                         
@@ -201,7 +204,8 @@ ScreenManager:
                 FlatButton:
                     on_release : app.root.current = "register"
                     on_press: root.loginreset()
-                    text: '\tSign Up here'
+                    text: '      Sign Up Here'
+                    font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
                     color: utils.get_color_from_hex('#ff0004')  
                     bold: True
                     color: 		    
@@ -534,7 +538,7 @@ ScreenManager:
                 orientation:'horizontal'
                 spacing:40
                 FlatButton:
-                    text: 'Already have account?'
+                    text: 'Already have account ?'
                     bold: True
                     color: utils.get_color_from_hex('#000000')        
                     font_size: 15                         
@@ -563,7 +567,7 @@ ScreenManager:
         Rectangle:
             size: self.size
             pos: self.pos
-            source: 'login_bg.png'
+            source: 'registrasi.png'
     GridLayout:
         cols:2
         FlatButton:
@@ -573,22 +577,22 @@ ScreenManager:
                 size: 120,40
                 allow_stretch: True
             Image:
-                source: 'logo_putih.png'
+                source: 'logo.png'
                 pos: 40,400
                 size: 280,90
                 allow_stretch: True
             Label:
-                text:'Boosting your Store Perfomance'
+                text:'Boosting your Business Perfomance'
                 pos: 130,330
                 bold: True
                 font_size: 17
             Label:
-                text:'Posberrry is a Raspberry Pi based Cashier Application'
+                text:'Forca Point Of Sales is an online inventory management'
                 pos: 130,300
                 bold: True
                 font_size: 12
             Label:
-                text:'to manage your store easily'
+                text:'application for cashier and manager store'
                 pos: 130,285
                 bold: True
                 font_size: 12
@@ -726,16 +730,16 @@ ScreenManager:
                     text:'login' 
             GridLayout:
                 pos: 500, 120
-                
+                cols:2
                 size: 200, 25
                 orientation:'horizontal'
-                #spacing:150
-                Label:
-                    text: 'Do Not have Account? '
+                spacing:50
+                FlatButton:
+                    text: 'Do Not have account ?'
                     bold: True
                     color: utils.get_color_from_hex('#000000')        
                     font_size: 15                         
-                 
+                        
                 FlatButton:
                     on_release: app.root.current = "register"
                     on_press: root.loginreset()
@@ -784,6 +788,7 @@ ScreenManager:
                             size: self.size
                             pos: self.pos 
                             source:'bg_profile.png'
+                    
                     BoxLayout:
                         #size_hint: (1, .5)
                         size_hint_y:.1
@@ -798,7 +803,7 @@ ScreenManager:
                                 size: self.size
                                 pos: self.pos
                         Image:
-                            source: root.img_src
+                            source: root.img_src#Mengganti gambar profil cewek atau cowok
                             center_x: self.parent.center_x
                             center_y: self.parent.center_y
                             size:80,80
@@ -813,6 +818,7 @@ ScreenManager:
                                 pos: self.pos
                         Label:
                             text:root.labelText
+                            font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
                             color:utils.get_color_from_hex('#000000')
                             center_x: self.parent.center_x
                             center_y: self.parent.center_y
@@ -853,6 +859,7 @@ ScreenManager:
                                             font_size:12
                                             readonly:True                          
                                             text:'Penjualan'
+                                            font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
                                             color:utils.get_color_from_hex('#000000')
                                             align:'left'
                                             bold:True
@@ -863,6 +870,7 @@ ScreenManager:
                                     font_size:12
                                     readonly:True                          
                                     text:'Rp 1.000.000'
+                                    font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
                                     color:utils.get_color_from_hex('#000000')
                                     align:'left'
                                     background_color:0,0,0,0
@@ -894,6 +902,7 @@ ScreenManager:
                                             font_size:12
                                             readonly:True                          
                                             text:'Transaksi'
+                                            font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
                                             color:utils.get_color_from_hex('#000000')
                                             align:'left'
                                             bold:True
@@ -904,7 +913,8 @@ ScreenManager:
                                 TextInput:
                                     font_size:12
                                     readonly:True                          
-                                    text:'100'
+                                    text:'0'
+                                    font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
                                     color:utils.get_color_from_hex('#000000')
                                     align:'left'
                                     background_color:0,0,0,0
@@ -918,6 +928,7 @@ ScreenManager:
                                 source: 'exit.png'
                                 center_x: self.parent.center_x
                                 center_y: self.parent.center_y
+                                #on_release: app.root.current = "login"
                                 size:30,30
                                 allow_stretch: True
 
@@ -925,16 +936,19 @@ ScreenManager:
                             size_hint_x:.3
                             BoxLayout:
                                 orientation:'vertical'
-                                
                                 Button:
                                     background_color:0,0,0,0
                                     background_normal:''
-                                Button:
+                                FlatButton:
                                     text:'Logout'
+                                    font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
                                     color:utils.get_color_from_hex('#000000')
                                     align:'left'
                                     background_color:utils.get_color_from_hex('#ffffff')
                                     background_normal:''
+                                    on_press: app.root.current = "login"
+                                    on_release: nav_layout.toggle_state()#untuk mengembalikan posisi navbar ke posisi awal 
+                                    on_press: root.reset()
                             
                                 Button:
                                     background_color:0,0,0,0
@@ -974,7 +988,7 @@ ScreenManager:
                     BoxLayout:
                         size_hint_x:.3
                         Label:
-                            text:'25/02/2020'
+                            text:root.dataWaktu
                             color:utils.get_color_from_hex('#ffffff')
                             bold: True
                     
@@ -1039,9 +1053,8 @@ ScreenManager:
                                 size_hint_x: .2
                         TextInput:
                             id: list_item
+                            halign: 'right'
                             readonly: True
-                            #valign: 'center'
-                            #halign:'center'
                             #hint_text:'Enter text'
                             text:''#mengclear text input melalui class lain
                             pos_hint: {'center_x': 0.5, 'center_y': -1.5} 
@@ -1075,7 +1088,7 @@ ScreenManager:
                                 text_size: self.size
                                 size_hint_x:.2
                                 readonly: True
-                                id: qty_inp
+                                id: total_barang
                                 background_color: 0,0,0,0  
                                 foreground_color: utils.get_color_from_hex('#000000')
                             
@@ -1109,7 +1122,7 @@ ScreenManager:
                                 text_size: self.size
                                 size_hint_x:.2
                                 readonly: True
-                                id: qty_inp
+                                id: total_pay
                                 background_color: 0,0,0,0  
                                 foreground_color: utils.get_color_from_hex('#000000')
                         BoxLayout:
@@ -1129,6 +1142,7 @@ ScreenManager:
                             
                                 hint_text: "0.0"
                                 font_size: 14
+                                id: pembayaran
                                 text_size: self.size
                                 halign:'right'
                                 multiline:False
@@ -1170,6 +1184,7 @@ ScreenManager:
                                 background_color:utils.get_color_from_hex('#F60A0A')
                                 background_normal:'' 
                                 text:'CANCEL'
+                                on_press: root.reset()
                                 pos:self.pos
                                 color:utils.get_color_from_hex('#ffffff') 
                         BoxLayout:
