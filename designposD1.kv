@@ -60,7 +60,6 @@ ScreenManager:
         FlatButton:                 
             FlatButton:
                 text: 'Welcome to POSBERRY'
-                font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
                 bold: True
                 color: utils.get_color_from_hex('#000000')        
                 font_size: 30 
@@ -75,6 +74,7 @@ ScreenManager:
                 font_size:15
                 pos: 530,430
             Label:
+                
                 text:'Username'
                 bold:True
                 font_size:15
@@ -93,7 +93,6 @@ ScreenManager:
                     id: username_field
                     multiline: False
                     hint_text: "Username"
-                    #font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
                     background_color: 0,0,0,0  
                     foreground_color: utils.get_color_from_hex('#000000')
                     pos:425,408
@@ -187,7 +186,6 @@ ScreenManager:
                     background_color:0,0,0,0
                     background_normal:''
                     text:'login' 
-                    font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
             GridLayout:
                 pos: 500, 120
                 cols:2
@@ -195,8 +193,7 @@ ScreenManager:
                 orientation:'horizontal'
                 spacing:40
                 FlatButton:
-                    text: 'Do Not Have Account ? '
-                    font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
+                    text: 'Do Not have account?'
                     bold: True
                     color: utils.get_color_from_hex('#000000')        
                     font_size: 15                         
@@ -204,8 +201,7 @@ ScreenManager:
                 FlatButton:
                     on_release : app.root.current = "register"
                     on_press: root.loginreset()
-                    text: '      Sign Up Here'
-                    font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
+                    text: '\tSign Up here'
                     color: utils.get_color_from_hex('#ff0004')  
                     bold: True
                     color: 		    
@@ -538,7 +534,7 @@ ScreenManager:
                 orientation:'horizontal'
                 spacing:40
                 FlatButton:
-                    text: 'Already have account ?'
+                    text: 'Already have account?'
                     bold: True
                     color: utils.get_color_from_hex('#000000')        
                     font_size: 15                         
@@ -567,7 +563,7 @@ ScreenManager:
         Rectangle:
             size: self.size
             pos: self.pos
-            source: 'registrasi.png'
+            source: 'login_bg.png'
     GridLayout:
         cols:2
         FlatButton:
@@ -577,22 +573,22 @@ ScreenManager:
                 size: 120,40
                 allow_stretch: True
             Image:
-                source: 'logo.png'
+                source: 'logo_putih.png'
                 pos: 40,400
                 size: 280,90
                 allow_stretch: True
             Label:
-                text:'Boosting your Business Perfomance'
+                text:'Boosting your Store Perfomance'
                 pos: 130,330
                 bold: True
                 font_size: 17
             Label:
-                text:'Forca Point Of Sales is an online inventory management'
+                text:'Posberrry is a Raspberry Pi based Cashier Application'
                 pos: 130,300
                 bold: True
                 font_size: 12
             Label:
-                text:'application for cashier and manager store'
+                text:'to manage your store easily'
                 pos: 130,285
                 bold: True
                 font_size: 12
@@ -730,16 +726,16 @@ ScreenManager:
                     text:'login' 
             GridLayout:
                 pos: 500, 120
-                cols:2
+                
                 size: 200, 25
                 orientation:'horizontal'
-                spacing:50
-                FlatButton:
-                    text: 'Do Not have account ?'
+                #spacing:150
+                Label:
+                    text: 'Do Not have Account? '
                     bold: True
                     color: utils.get_color_from_hex('#000000')        
                     font_size: 15                         
-                        
+                 
                 FlatButton:
                     on_release: app.root.current = "register"
                     on_press: root.loginreset()
@@ -787,7 +783,7 @@ ScreenManager:
                         Rectangle:
                             size: self.size
                             pos: self.pos 
-                    
+                            source:'bg_profile.png'
                     BoxLayout:
                         #size_hint: (1, .5)
                         size_hint_y:.1
@@ -797,12 +793,12 @@ ScreenManager:
                         size_hint_y:.4
                         canvas.before:
                             Color:
-                                rgba: utils.get_color_from_hex('#E9E7E7')
+                                rgba: 0,0,0,0
                             Rectangle:
                                 size: self.size
                                 pos: self.pos
                         Image:
-                            source: root.img_src#Mengganti gambar profil cewek atau cowok
+                            source: root.img_src
                             center_x: self.parent.center_x
                             center_y: self.parent.center_y
                             size:80,80
@@ -811,7 +807,7 @@ ScreenManager:
                         size_hint_y:.2
                         canvas.before:
                             Color:
-                                rgba: utils.get_color_from_hex('#E9E7E7')
+                                rgba: 0,0,0,0
                             Rectangle:
                                 size: self.size
                                 pos: self.pos
@@ -922,7 +918,6 @@ ScreenManager:
                                 source: 'exit.png'
                                 center_x: self.parent.center_x
                                 center_y: self.parent.center_y
-                                #on_release: app.root.current = "login"
                                 size:30,30
                                 allow_stretch: True
 
@@ -930,18 +925,16 @@ ScreenManager:
                             size_hint_x:.3
                             BoxLayout:
                                 orientation:'vertical'
+                                
                                 Button:
                                     background_color:0,0,0,0
                                     background_normal:''
-                                FlatButton:
+                                Button:
                                     text:'Logout'
                                     color:utils.get_color_from_hex('#000000')
                                     align:'left'
                                     background_color:utils.get_color_from_hex('#ffffff')
                                     background_normal:''
-                                    on_press: app.root.current = "login"
-                                    on_release: nav_layout.toggle_state()#untuk mengembalikan posisi navbar ke posisi awal 
-                                    on_press: root.reset()
                             
                                 Button:
                                     background_color:0,0,0,0
@@ -981,7 +974,7 @@ ScreenManager:
                     BoxLayout:
                         size_hint_x:.3
                         Label:
-                            text:root.dataWaktu
+                            text:'25/02/2020'
                             color:utils.get_color_from_hex('#ffffff')
                             bold: True
                     
@@ -1046,8 +1039,9 @@ ScreenManager:
                                 size_hint_x: .2
                         TextInput:
                             id: list_item
-                            halign: 'right'
                             readonly: True
+                            #valign: 'center'
+                            #halign:'center'
                             #hint_text:'Enter text'
                             text:''#mengclear text input melalui class lain
                             pos_hint: {'center_x': 0.5, 'center_y': -1.5} 
@@ -1081,7 +1075,7 @@ ScreenManager:
                                 text_size: self.size
                                 size_hint_x:.2
                                 readonly: True
-                                id: total_barang
+                                id: qty_inp
                                 background_color: 0,0,0,0  
                                 foreground_color: utils.get_color_from_hex('#000000')
                             
@@ -1115,7 +1109,7 @@ ScreenManager:
                                 text_size: self.size
                                 size_hint_x:.2
                                 readonly: True
-                                id: total_pay
+                                id: qty_inp
                                 background_color: 0,0,0,0  
                                 foreground_color: utils.get_color_from_hex('#000000')
                         BoxLayout:
@@ -1176,7 +1170,6 @@ ScreenManager:
                                 background_color:utils.get_color_from_hex('#F60A0A')
                                 background_normal:'' 
                                 text:'CANCEL'
-                                on_press: root.reset()
                                 pos:self.pos
                                 color:utils.get_color_from_hex('#ffffff') 
                         BoxLayout:
