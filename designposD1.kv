@@ -567,7 +567,7 @@ ScreenManager:
         Rectangle:
             size: self.size
             pos: self.pos
-            source: 'registrasi.png'
+            source: 'login_bg.png'
     GridLayout:
         cols:2
         FlatButton:
@@ -577,22 +577,22 @@ ScreenManager:
                 size: 120,40
                 allow_stretch: True
             Image:
-                source: 'logo.png'
+                source: 'logo_putih.png'
                 pos: 40,400
                 size: 280,90
                 allow_stretch: True
             Label:
-                text:'Boosting your Business Perfomance'
+                text:'Boosting your Store Perfomance'
                 pos: 130,330
                 bold: True
                 font_size: 17
             Label:
-                text:'Forca Point Of Sales is an online inventory management'
+                text:'Posberrry is a Raspberry Pi based Cashier Application'
                 pos: 130,300
                 bold: True
                 font_size: 12
             Label:
-                text:'application for cashier and manager store'
+                text:'to manage your store easily'
                 pos: 130,285
                 bold: True
                 font_size: 12
@@ -720,7 +720,7 @@ ScreenManager:
                         size:  84, 34
                         radius: [15, 15, 15, 15]
                 Button:
-                    on_press: root.validate_userwelcome()  
+                    on_press: root.validate_user()  
                     pos:537, 204
                     size: 79, 28
                     bold:True
