@@ -4,6 +4,7 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
 from kivy.config import Config
 from kivy.core.window import Window
+from kivy.uix.checkbox import CheckBox
 import xlwt
 import xlrd
 import re
@@ -28,7 +29,10 @@ GenderAsli=''
 gender=''
 resetText=0
 JumlahUser=1
+rowBarang=1
+JdataPenjualan=1
 totalBarang=0
+ParamBarangArray=0
 hargaBarangTotal=0
 nu_text=''
 kondImage=''
@@ -188,6 +192,7 @@ class HomeWindow(Screen):
         self.codeItem=[]
         self.NamaProduct=[]
         self.HargaBarang=[]
+        self.hargaperBarang=[]
         self.checkscanproduct=[]
         self.checknamaProduct=[]
         self.checkhargabarang=[]
@@ -199,6 +204,8 @@ class HomeWindow(Screen):
         self.ids.list_item.text=''
         self.ids.total_barang.text='0'
         self.ids.total_pay.text='0.0'
+        self.ids.pembayaran.text='0.0'
+        self.ids.Kembalian.text='0.0'
         self.JumlahProduct=[]
         self.codeItem=[]
         self.NamaProduct=[]
@@ -207,11 +214,11 @@ class HomeWindow(Screen):
         self.datanama=NamaUser
     def barang1(self):
         global scandata
-        scandata=1234
+        scandata=1
         self.list_data()
     def barang2(self):
         global scandata
-        scandata=2345
+        scandata=2
         self.list_data()
     def logout(self,*args):
         ProfileWindow().open()
@@ -220,6 +227,7 @@ class HomeWindow(Screen):
         global scandata
         global totalBarang
         global hargaBarangTotal
+        global ParamBarangArray
         if scandata== 0:
             scanproduct = self.ids.qty_inp_scan.text
         else:
@@ -292,22 +300,34 @@ class HomeWindow(Screen):
             else:
                 self.codeItem.append(scanproduct)
                 self.HargaBarang.append(subtotal)
+                self.hargaperBarang.append(subtotal)
                 self.JumlahProduct.append(1)
+                self.NamaProduct.append(pname)
                 nu_preview = '\n'.join([prev_text,pname+'\t\t\t'+str(pprice)+'\t\t\tx'+pqty+'\t\t'+str(subtotal)+'\t`'])
                 preview.text = nu_preview
                 hargaBarangTotal+=self.checkhargabarang[ParamProduct]
                 totalBarang+=1
+                ParamBarangArray+=1
+
         else :
             print('data tdk masuk')
         self.ids.total_barang.text=str(totalBarang)
         self.ids.total_pay.text=str(hargaBarangTotal)
         print(self.JumlahProduct)
         self.ids.qty_inp_scan.text=""
+        self.checkscanproduct=[]
+        self.checknamaProduct=[]
+        self.checkhargabarang=[]
         #nilai scancode di nolkan kembali agar tidak mempegaruhi button sebelah scan
         scandata=0
     def pembayaran(self):
         global hargaBarangTotal
+        global JdataPenjualan
+        global rowBarang
+        global ParamBarangArray
         Cash=self.ids.pembayaran.text
+        if Cash=='' or Cash=='0.0':
+            Cash=0
         if int(Cash) < hargaBarangTotal:
             print('Uang Pembayaran kurang')
             self.ids.pembayaran.text=''
@@ -315,8 +335,31 @@ class HomeWindow(Screen):
         else:
             Kembalian=int(Cash)-hargaBarangTotal
             self.ids.Kembalian.text=str(Kembalian)
+            rb = xlrd.open_workbook('Penjualan.xls')
+            wb = copy(rb)
+            sheet = rb.sheet_by_index(0)
+            for row in range(1,sheet.nrows):
+                JdataPenjualan+=1
+            w_sheet = wb.get_sheet(0)
+            rowBarang=JdataPenjualan
+            for i in range(0,ParamBarangArray):  
+                w_sheet.write(rowBarang,0,self.codeItem[i])
+                w_sheet.write(rowBarang,1,self.NamaProduct[i])
+                w_sheet.write(rowBarang,2,self.hargaperBarang[i])
+                w_sheet.write(rowBarang,3,self.JumlahProduct[i])
+                w_sheet.write(rowBarang,4,self.HargaBarang[i])
+                rowBarang+=1
+                wb.save('Penjualan.xls')
+            self.codeItem=[]
+            self.NamaProduct=[]
+            self.hargaperBarang=[]
+            self.JumlahProduct=[]
+            self.ids.list_item.text=''
+            hargaBarangTotal=0
+            JdataPenjualan=1
 
-        
+
+
 class LoginWindow(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -560,10 +603,10 @@ class RegistWindow(Screen):
             gender=''
     def checkboxFemale(self,instance,value):
         global gender
-        if value is True:
+        if value is True :
             gender='Female'
         else:
-            gender=''
+            gender=''  
     
 
 class ForcaPOSApp(App):
