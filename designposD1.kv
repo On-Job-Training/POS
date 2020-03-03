@@ -226,7 +226,7 @@ ScreenManager:
     confpasswr:confpass_field
     id: main_win
     orientation: "vertical"
-    
+    on_leave: root.reset_checkbox()
     canvas.before:
         Color:
             rgba: (1,1,1, 1)
@@ -235,6 +235,7 @@ ScreenManager:
             pos: self.pos
             source: 'login_bg.png'
     GridLayout:
+        id: grid
         cols:2
         FlatButton:
             Image:
@@ -265,6 +266,7 @@ ScreenManager:
         FlatButton:                 
             FlatButton:
                 text: 'Register New Member'
+                font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
                 bold: True
                 color: utils.get_color_from_hex('#000000')        
                 font_size: 30 
@@ -457,7 +459,6 @@ ScreenManager:
                 pos: 360, 155
                 group:'check'
                 color: utils.get_color_from_hex('#7D7A7A')
-            
             Label:
                 text:'Male'               
                 font_size:12
@@ -539,13 +540,15 @@ ScreenManager:
                 spacing:40
                 FlatButton:
                     text: 'Already have account ?'
+                    font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
                     bold: True
                     color: utils.get_color_from_hex('#000000')        
                     font_size: 15                         
                         
                 FlatButton:
                     on_release : app.root.current = "login"
-                    text: 'Sign In here'
+                    text: '      Sign In here'
+                    font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
                     on_press: root.reset()
                     color: utils.get_color_from_hex('#ff0004')  
                     bold: True
@@ -1120,7 +1123,7 @@ ScreenManager:
                                 color:utils.get_color_from_hex('#000000')
                                 font_size: 14
                                 text_size: self.size
-                                size_hint_x:.2
+                                size_hint_x:.5
                                 readonly: True
                                 id: total_pay
                                 background_color: 0,0,0,0  
@@ -1246,6 +1249,7 @@ ScreenManager:
                                             font_size: 14
                                             text_size: self.size     
                                             halign: 'center'
+                                            on_press: root.barang1()
                                             valign:'top'
                                             padding_y:3
                                             background_color: utils.get_color_from_hex('#f0f1f2')
@@ -1291,6 +1295,7 @@ ScreenManager:
                                             font_size: 14
                                             text_size: self.size     
                                             halign: 'center'
+                                            on_press:root.barang2()
                                             valign:'top'
                                             padding_y:3
                                             background_color: utils.get_color_from_hex('#f0f1f2')
