@@ -1,4 +1,5 @@
 import os
+import os.path
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
@@ -14,6 +15,7 @@ from xlutils.copy import copy
 from kivy.properties import StringProperty
 from kivy.uix.screenmanager import ScreenManager, Screen 
 from kivy.config import Config
+from xlwt import Workbook 
 from kivymd.list import BaseListItem
 from kivymd.material_resources import DEVICE_TYPE
 from kivymd.navigationdrawer import MDNavigationDrawer, NavigationDrawerHeaderBase
@@ -201,14 +203,22 @@ class HomeWindow(Screen):
 
         #self.waktu.text = time.asctime()   
     def reset(self):
+        global totalBarang
+        global hargaBarangTotal
+        global ParamBarangArray
         self.ids.list_item.text=''
         self.ids.total_barang.text='0'
-        self.ids.total_pay.text='0.0'
-        self.ids.pembayaran.text='0.0'
-        self.ids.Kembalian.text='0.0'
-        self.JumlahProduct=[]
+        self.ids.total_pay.text=''
+        self.ids.pembayaran.text=''
+        self.ids.Kembalian.text=''
         self.codeItem=[]
         self.NamaProduct=[]
+        self.hargaperBarang=[]
+        self.JumlahProduct=[]
+        self.HargaBarang=[]
+        hargaBarangTotal=0
+        totalBarang=0
+        ParamBarangArray=0
     def nameUser(self):
         global NamaUser
         self.datanama=NamaUser
@@ -325,6 +335,8 @@ class HomeWindow(Screen):
         global JdataPenjualan
         global rowBarang
         global ParamBarangArray
+        global simpanwaktu
+        global totalBarang
         Cash=self.ids.pembayaran.text
         if Cash=='' or Cash=='0.0':
             Cash=0
@@ -335,28 +347,56 @@ class HomeWindow(Screen):
         else:
             Kembalian=int(Cash)-hargaBarangTotal
             self.ids.Kembalian.text=str(Kembalian)
-            rb = xlrd.open_workbook('Penjualan.xls')
-            wb = copy(rb)
-            sheet = rb.sheet_by_index(0)
-            for row in range(1,sheet.nrows):
-                JdataPenjualan+=1
-            w_sheet = wb.get_sheet(0)
-            rowBarang=JdataPenjualan
-            for i in range(0,ParamBarangArray):  
-                w_sheet.write(rowBarang,0,self.codeItem[i])
-                w_sheet.write(rowBarang,1,self.NamaProduct[i])
-                w_sheet.write(rowBarang,2,self.hargaperBarang[i])
-                w_sheet.write(rowBarang,3,self.JumlahProduct[i])
-                w_sheet.write(rowBarang,4,self.HargaBarang[i])
+            datafile='Penjualan '+str(simpanwaktu)+'.xls'
+            if os.path.isfile(datafile):
+                rb = xlrd.open_workbook(datafile)
+                wb = copy(rb)
+                sheet = rb.sheet_by_index(0)
+                for row in range(1,sheet.nrows):
+                    JdataPenjualan+=1
+                w_sheet = wb.get_sheet(0)
+                rowBarang=JdataPenjualan+1
+                w_sheet.write(rowBarang,0,'kode produk')
+                w_sheet.write(rowBarang,1,'nama produk')
+                w_sheet.write(rowBarang,2,'harga produk')
+                w_sheet.write(rowBarang,3,'Jumlah Produk')
+                w_sheet.write(rowBarang,4,'Subtotal')
                 rowBarang+=1
-                wb.save('Penjualan.xls')
+                for i in range(0,ParamBarangArray):  
+                    w_sheet.write(rowBarang,0,self.codeItem[i])
+                    w_sheet.write(rowBarang,1,self.NamaProduct[i])
+                    w_sheet.write(rowBarang,2,self.hargaperBarang[i])
+                    w_sheet.write(rowBarang,3,self.JumlahProduct[i])
+                    w_sheet.write(rowBarang,4,self.HargaBarang[i])
+                    rowBarang+=1
+                    wb.save(datafile)
+            else:
+                wb = xlwt.Workbook()
+                w_sheet = wb.add_sheet('Sheet 1')
+                w_sheet.write(0,0,'kode produk')
+                w_sheet.write(0,1,'nama produk')
+                w_sheet.write(0,2,'harga produk')
+                w_sheet.write(0,3,'Jumlah Produk')
+                w_sheet.write(0,4,'Subtotal')
+                rowBarang=1
+                for i in range(0,ParamBarangArray):  
+                    w_sheet.write(rowBarang,0,self.codeItem[i])
+                    w_sheet.write(rowBarang,1,self.NamaProduct[i])
+                    w_sheet.write(rowBarang,2,self.hargaperBarang[i])
+                    w_sheet.write(rowBarang,3,self.JumlahProduct[i])
+                    w_sheet.write(rowBarang,4,self.HargaBarang[i])
+                    rowBarang+=1
+                    wb.save(datafile)
             self.codeItem=[]
             self.NamaProduct=[]
             self.hargaperBarang=[]
             self.JumlahProduct=[]
+            self.HargaBarang=[]
             self.ids.list_item.text=''
             hargaBarangTotal=0
             JdataPenjualan=1
+            totalBarang=0
+            ParamBarangArray=0
 
 
 
