@@ -369,7 +369,13 @@ class HomeWindow(Screen):
                     w_sheet.write(rowBarang,3,self.JumlahProduct[i])
                     w_sheet.write(rowBarang,4,self.HargaBarang[i])
                     rowBarang+=1
-                    wb.save(datafile)
+                w_sheet.write(rowBarang+1,4,hargaBarangTotal)
+                w_sheet.write(rowBarang+1,0,'Harga Total')
+                w_sheet.write(rowBarang+2,4,Cash)
+                w_sheet.write(rowBarang+2,0,'Pembayaran')
+                w_sheet.write(rowBarang+3,4,Kembalian)
+                w_sheet.write(rowBarang+3,0,'Uang Kembalian')
+                wb.save(datafile)
             else:
                 wb = xlwt.Workbook()
                 w_sheet = wb.add_sheet('Sheet 1')
@@ -386,7 +392,13 @@ class HomeWindow(Screen):
                     w_sheet.write(rowBarang,3,self.JumlahProduct[i])
                     w_sheet.write(rowBarang,4,self.HargaBarang[i])
                     rowBarang+=1
-                    wb.save(datafile)
+                w_sheet.write(rowBarang+1,4,hargaBarangTotal)
+                w_sheet.write(rowBarang+1,0,'Harga Total')
+                w_sheet.write(rowBarang+2,4,Cash)
+                w_sheet.write(rowBarang+2,0,'Pembayaran')
+                w_sheet.write(rowBarang+3,4,Kembalian)
+                w_sheet.write(rowBarang+3,0,'Uang Kembalian')
+                wb.save(datafile)
             self.codeItem=[]
             self.NamaProduct=[]
             self.hargaperBarang=[]
