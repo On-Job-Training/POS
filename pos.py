@@ -1,5 +1,6 @@
 import os
 import os.path
+from win32com.client import Dispatch
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
@@ -337,6 +338,7 @@ class HomeWindow(Screen):
         global ParamBarangArray
         global simpanwaktu
         global totalBarang
+        os.system("taskkill /im EXCEL.EXE /f")#Untuk Meng - Close Program Excel yang running
         Cash=self.ids.pembayaran.text
         if Cash=='' or Cash=='0.0':
             Cash=0
