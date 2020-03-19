@@ -349,7 +349,7 @@ class HomeWindow(Screen):
         else:
             Kembalian=int(Cash)-hargaBarangTotal
             self.ids.Kembalian.text=str(Kembalian)
-            datafile='Penjualan '+str(simpanwaktu)+'.xls'
+            datafile='Penjualan_'+str(simpanwaktu)+'.xls'
             if os.path.isfile(datafile):
                 rb = xlrd.open_workbook(datafile)
                 wb = copy(rb)
