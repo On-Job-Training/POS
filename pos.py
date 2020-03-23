@@ -231,6 +231,122 @@ class HomeWindow(Screen):
         global scandata
         scandata=2
         self.list_data()
+    def oreo(self):
+        global scandata
+        scandata=3
+        self.list_data()
+    def taro(self):
+        global scandata
+        scandata=4
+        self.list_data()
+    def lays(self):
+        global scandata
+        scandata=5
+        self.list_data()
+    def slaiolai(self):
+        global scandata
+        scandata=6
+        self.list_data()
+    def potabee(self):
+        global scandata
+        scandata=7
+        self.list_data()
+    def chitato(self):
+        global scandata
+        scandata=8
+        self.list_data()
+    def romakelapa(self):
+        global scandata
+        scandata=9
+        self.list_data()
+    def sarigandum(self):
+        global scandata
+        scandata=10
+        self.list_data()
+    def rinbee(self):
+        global scandata
+        scandata = 11
+        self.list_data()
+    def sponge(self):
+        global scandata
+        scandata=12
+        self.list_data()
+    def tango(self):
+        global scandata
+        scandata=13
+        self.list_data()
+    def SIIP(self):
+        global scandata
+        scandata= 14
+        self.list_data()
+    def gery(self):
+        global scandata
+        scandata=15
+        self.list_data()
+    def crackers(self):
+        global scandata
+        scandata=16
+        self.list_data()
+    def frestea(self):
+        global scandata
+        scandata=17
+        self.list_data()
+    def goodday(self):
+        global scandata
+        scandata=18
+        self.list_data()
+    def ichiocha(self):
+        global scandata
+        scandata=19
+        self.list_data()
+    def leminerale(self):
+        global scandata
+        scandata=20
+        self.list_data()
+    def minutemaid(self):
+        global scandata
+        scandata=21
+        self.list_data()
+    def tehpucuk(self):
+        global scandata
+        scandata=22
+        self.list_data()
+    def TehKotak(self):
+        global scandata
+        scandata=23
+        self.list_data()
+    def ultramilk(self):
+        global scandata
+        scandata=24
+        self.list_data()
+    def fruittea(self):
+        global scandata
+        scandata=25
+        self.list_data()
+    def fruitbtl(self):
+        global scandata
+        scandata=26
+        self.list_data()
+    def aqua(self):
+        global scandata
+        scandata=27
+        self.list_data()
+    def cleo(self):
+        global scandata
+        scandata=28
+        self.list_data()
+    def tehgelasbtl(self):
+        global scandata
+        scandata=29
+        self.list_data()
+    def hydro(self):
+        global scandata
+        scandata=30
+        self.list_data()
+    def tehbtl(self):
+        global scandata
+        scandata=31
+        self.list_data()
     def logout(self,*args):
         ProfileWindow().open()
     def list_data(self):
