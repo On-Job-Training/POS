@@ -226,7 +226,7 @@ ScreenManager:
     confpasswr:confpass_field
     id: main_win
     orientation: "vertical"
-    on_leave: root.reset_checkbox()
+    #on_leave: root.reset_checkbox()
     canvas.before:
         Color:
             rgba: (1,1,1, 1)
@@ -871,8 +871,8 @@ ScreenManager:
                                         size_hint_x:.4
                                 TextInput:
                                     font_size:12
-                                    readonly:True                          
-                                    text:'Rp 1.000.000'
+                                    #readonly:True 
+                                    text: root.uang                       
                                     font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
                                     color:utils.get_color_from_hex('#000000')
                                     align:'left'
