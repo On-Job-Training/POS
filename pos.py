@@ -8,6 +8,7 @@ from kivy.config import Config
 from kivy.core.window import Window
 from kivy.uix.checkbox import CheckBox
 import xlwt
+import locale
 import xlrd
 import re
 import datetime
@@ -32,8 +33,10 @@ GenderAsli=''
 gender=''
 resetText=0
 JumlahUser=1
+IntegerToRupiah=0
 rowBarang=1
 JdataPenjualan=1
+change=0
 totalBarang=0
 ParamBarangArray=0
 hargaBarangTotal=0
@@ -91,10 +94,11 @@ class WelcomeBack(Screen):
         pwd= self.ids.pwd_field
         kembalian= self.ids.money_field
         info= self.ids.info
-
+        os.system("taskkill /im EXCEL.EXE /f")#Untuk Meng - Close Program Excel yang running
         uname=user.text
         passw=pwd.text
         UangKembalian=kembalian.text
+        UangKembalianUntukHome='Rp '+ str(UangKembalian)
         xparamUangKembalian=re.findall("[a-zA-Z]",UangKembalian)
         xparamUangKembalian2=1
         panjangChange=len(UangKembalian)
@@ -133,6 +137,7 @@ class WelcomeBack(Screen):
                     NamaUser=self.namauser[UserData]
                     self.manager.get_screen('Home_Win').labelText = NamaUser
                     self.manager.get_screen('Home_Win').dataWaktu = simpanwaktu
+                    self.manager.get_screen('Home_Win').uang = UangKembalianUntukHome
                     #untuk mengganti gambar profil cewek atau cowok
                     if self.gender[UserData]=='Male':
                         self.manager.get_screen('Home_Win').img_src = 'man_home.png'
@@ -179,6 +184,7 @@ class HomeWindow(Screen):
     img_src=StringProperty('')
     labelText = StringProperty('')
     dataWaktu=StringProperty('')
+    uang=StringProperty('')
     #datanama = StringProperty(0)
     def setName(self,*args):
         setNamePopup().open()
@@ -528,8 +534,6 @@ class HomeWindow(Screen):
             totalBarang=0
             ParamBarangArray=0
 
-
-
 class LoginWindow(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -542,11 +546,19 @@ class LoginWindow(Screen):
         self.ids.pwd_field.text=''
         self.ids.money_field.text=''
         self.ids.info.text=''
+    def rupiah_format(self):
+        global change
+        global IntegerToRupiah
+        locale.setlocale(locale.LC_NUMERIC, 'IND')
+        IntegerToRupiah = locale.format("%.*f", (2, int(change)), True)
+        print(IntegerToRupiah)
     def validate_user(self):
         global NamaUser
         global reset
         global kondImage
         global GenderAsli
+        global IntegerToRupiah
+        global change#uang kembalian yang dibawa kasir dan untuk perhitungan dalam pembayaran
         loc = ("data.xls")
         wb = xlrd.open_workbook(loc)
         sheet = wb.sheet_by_index(0)
@@ -559,20 +571,20 @@ class LoginWindow(Screen):
             self.password.append(sheet.cell_value(row,6))
             self.namauser.append(sheet.cell_value(row,1))
             self.gender.append(sheet.cell_value(row,4))
-            print(self.username)
+            '''print(self.username)
             print(self.password)
             print(self.namauser)
-            print(self.gender)
+            print(self.gender)'''
         #parameter untuk mengecheck nilai pada array
         UserData=-1
         user= self.ids.username_field
         pwd= self.ids.pwd_field
         kembalian= self.ids.money_field
         info= self.ids.info
-
         uname=user.text
         passw=pwd.text
         UangKembalian=kembalian.text
+        change=UangKembalian
         xparamUangKembalian=re.findall("[a-zA-Z]",UangKembalian)
         xparamUangKembalian2=1
         panjangChange=len(UangKembalian)
@@ -609,8 +621,10 @@ class LoginWindow(Screen):
                     self.ids.money_field.text=''
                     self.ids.info.text=''
                     NamaUser=self.namauser[UserData]
+                    self.rupiah_format()
                     self.manager.get_screen('Home_Win').labelText = NamaUser
                     self.manager.get_screen('Home_Win').dataWaktu = simpanwaktu
+                    self.manager.get_screen('Home_Win').uang = 'Rp '+IntegerToRupiah
                     #untuk mengganti gambar profil cewek atau cowok
                     if self.gender[UserData]=='Male':
                         self.manager.get_screen('Home_Win').img_src = 'man_home.png'
@@ -633,6 +647,8 @@ class LoginWindow(Screen):
         self.namauser=[]
         self.gender=[]
         print(kondImage)
+  
+        #print(IntegerToRupiah)
 #Register
    
 class RegistWindow(Screen):
@@ -656,6 +672,7 @@ class RegistWindow(Screen):
         global simpanwaktu
         global JumlahUser
         info= self.ids.info_regist
+        os.system("taskkill /im EXCEL.EXE /f")#Untuk Meng - Close Program Excel yang running
         # create a workbook and add a worksheet 
         #write some data headers
         rb = xlrd.open_workbook('data.xls')
