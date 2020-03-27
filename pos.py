@@ -36,6 +36,7 @@ JumlahUser=1
 IntegerToRupiah=0
 rowBarang=1
 JdataPenjualan=1
+kondisiPembayaran=0
 change=0
 totalBarang=0
 ParamBarangArray=0
@@ -361,10 +362,14 @@ class HomeWindow(Screen):
         global totalBarang
         global hargaBarangTotal
         global ParamBarangArray
+        global kondisiPembayaran
         if scandata== 0:
             scanproduct = self.ids.qty_inp_scan.text
         else:
             scanproduct=str(scandata)
+        if kondisiPembayaran == 1:
+            self.reset()
+            kondisiPembayaran=0
         loc = ("ListProduk.xls")
         wb = xlrd.open_workbook(loc)
         sheet = wb.sheet_by_index(0)
@@ -460,6 +465,7 @@ class HomeWindow(Screen):
         global ParamBarangArray
         global simpanwaktu
         global totalBarang
+        global kondisiPembayaran
         os.system("taskkill /im EXCEL.EXE /f")#Untuk Meng - Close Program Excel yang running
         Cash=self.ids.pembayaran.text
         if Cash=='' or Cash=='0.0':
@@ -499,6 +505,7 @@ class HomeWindow(Screen):
                 w_sheet.write(rowBarang+2,0,'Pembayaran')
                 w_sheet.write(rowBarang+3,4,Kembalian)
                 w_sheet.write(rowBarang+3,0,'Uang Kembalian')
+                kondisiPembayaran=1
                 wb.save(datafile)
             else:
                 wb = xlwt.Workbook()
@@ -522,13 +529,14 @@ class HomeWindow(Screen):
                 w_sheet.write(rowBarang+2,0,'Pembayaran')
                 w_sheet.write(rowBarang+3,4,Kembalian)
                 w_sheet.write(rowBarang+3,0,'Uang Kembalian')
+                kondisiPembayaran=1
                 wb.save(datafile)
             self.codeItem=[]
             self.NamaProduct=[]
             self.hargaperBarang=[]
             self.JumlahProduct=[]
             self.HargaBarang=[]
-            self.ids.list_item.text=''
+            #self.ids.list_item.text=''
             hargaBarangTotal=0
             JdataPenjualan=1
             totalBarang=0
