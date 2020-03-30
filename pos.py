@@ -56,6 +56,36 @@ class setNamePopup(Popup):
         resetText=1
         self.dismiss()
         print('keluar')
+class Required(Popup):
+    def FadePopup(self):
+        #self.manager.current='login'#program untuk pindah ke layout yang lain berdasarkan name window
+        self.dismiss()
+        print('gajadiKeluar')
+    def FadePopupYes(self):
+        global resetText
+        resetText=1
+        self.dismiss()
+        print('keluar')
+class Invalid(Popup):
+    def FadePopup(self):
+        #self.manager.current='login'#program untuk pindah ke layout yang lain berdasarkan name window
+        self.dismiss()
+        print('gajadiKeluar')
+    def FadePopupYes(self):
+        global resetText
+        resetText=1
+        self.dismiss()
+        print('keluar')
+class TransaksiBerhasil(Popup):
+    def FadePopup(self):
+        #self.manager.current='login'#program untuk pindah ke layout yang lain berdasarkan name window
+        self.dismiss()
+        print('gajadiKeluar')
+    def FadePopupYes(self):
+        global resetText
+        resetText=1
+        self.dismiss()
+        print('keluar')
 class WelcomeBack(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -63,6 +93,12 @@ class WelcomeBack(Screen):
         self.password=[]
         self.namauser=[]
         self.gender=[]
+    def notRegister(self,*args):
+        NotRegistered().open()
+    def Required(self,*args):
+        Required().open()
+    def Invalid(self,*args):
+        Invalid().open()
     def loginreset(self):
         self.ids.username_field.text=''
         self.ids.pwd_field.text=''
@@ -165,7 +201,37 @@ class ProfileWindow(Popup):
     def FadePopup(self):
         print(kondImage)
         self.dismiss()
-
+#Kelas pop up akun belum terdaftar
+class NotRegistered(Popup):
+    def FadePopup(self):
+        #self.manager.current='login'#program untuk pindah ke layout yang lain berdasarkan name window
+        self.dismiss()
+        print('gajadiKeluar')
+    def FadePopupYes(self):
+        global resetText
+        resetText=1
+        self.dismiss()
+        print('keluar')
+class SoldOutWindow(Popup):
+    def FadePopup(self):
+        #self.manager.current='login'#program untuk pindah ke layout yang lain berdasarkan name window
+        self.dismiss()
+        print('gajadiKeluar')
+    def FadePopupYes(self):
+        global resetText
+        resetText=1
+        self.dismiss()
+        print('keluar')
+class InvalidChange(Popup):
+    def FadePopup(self):
+        #self.manager.current='login'#program untuk pindah ke layout yang lain berdasarkan name window
+        self.dismiss()
+        print('gajadiKeluar')
+    def FadePopupYes(self):
+        global resetText
+        resetText=1
+        self.dismiss()
+        print('keluar')
 class HackedDemoNavDrawer(MDNavigationDrawer):
     # DO NOT USE
     def add_widget(self, widget, index=0):
@@ -195,6 +261,10 @@ class HomeWindow(Screen):
         self.codeItem=[]
         self.NamaProduct=[]
         self.HargaBarang=[]
+    def Transaksi_Berhasil(self,*args):
+        TransaksiBerhasil().open()
+    def SoldOut(self,*args):
+        SoldOutWindow().open()
     def __init__(self, **kwargs):
         global d1
         super().__init__(**kwargs)
@@ -549,6 +619,14 @@ class LoginWindow(Screen):
         self.password=[]
         self.namauser=[]
         self.gender=[]
+    def notRegister(self,*args):
+        NotRegistered().open()
+    def Required(self,*args):
+        Required().open()
+    def Invalid(self,*args):
+        Invalid().open()
+    def InvalidChange(self,*args):
+        InvalidChange().open()
     def loginreset(self):
         self.ids.username_field.text=''
         self.ids.pwd_field.text=''
@@ -664,6 +742,14 @@ class RegistWindow(Screen):
         super().__init__(**kwargs)
         self.username=[]
         self.nomorHand=[]
+    def notRegister(self,*args):
+        NotRegistered().open()
+    def Required(self,*args):
+        Required().open()
+    def Invalid(self,*args):
+        Invalid().open()
+    def InvalidChange(self,*args):
+        InvalidChange().open()
     def reset(self):
         self.usernameku.text=''
         self.namaAwal.text=''
@@ -806,10 +892,12 @@ class RegistWindow(Screen):
 
 class ForcaPOSApp(App):
     theme_cls = ThemeManager()
+    def Transaksi_Berhasil(self,*args):
+        TransaksiBerhasil().open()
     def build(self):
 
         main_widget = Builder.load_file(
-            os.path.join(os.path.dirname(__file__), "./designpos.kv")
+            os.path.join(os.path.dirname(__file__), "./designposD1.kv")
         )
         
         self.bottom_navigation_remove_mobile(main_widget)
