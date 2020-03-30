@@ -839,15 +839,16 @@ ScreenManager:
                     
                     BoxLayout:
                         orientation:'horizontal'
-                        size_hint_y:.2
+                        size_hint_y:.3
                         BoxLayout:
                             size_hint_x:.1
-                            padding:20
+                            padding:15
                             Image:
-                                source: 'sale.png'
+                                source: 'ikon/change.png'
+                                #source: 'sale.png'
                                 center_x: self.parent.center_x
                                 center_y: self.parent.center_y
-                                size:30,30
+                                size:50,50
                                 allow_stretch: True
                         BoxLayout:
                             size_hint_x:.3
@@ -857,9 +858,9 @@ ScreenManager:
                                 BoxLayout:
                                     orientation:'horizontal' 
                                     BoxLayout:
-                                        size_hint_x:.1
+                                        size_hint_x:.2
                                         Label:
-                                            font_size:12
+                                            #font_size:12
                                             readonly:True                          
                                             text:'Penjualan'
                                             font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
@@ -881,12 +882,13 @@ ScreenManager:
                             
                     BoxLayout:
                         orientation:'horizontal'
-                        size_hint_y:.2
+                        size_hint_y:.3
                         BoxLayout:
                             size_hint_x:.1
-                            padding:20
+                            padding:15
                             Image:
-                                source: 'sales.png'
+                                source: 'ikon/transaksi.png'
+                                #source: 'sales.png'
                                 center_x: self.parent.center_x
                                 center_y: self.parent.center_y
                                 size:30,30
@@ -902,7 +904,7 @@ ScreenManager:
                                     BoxLayout:
                                         size_hint_x:.1
                                         Label:
-                                            font_size:12
+                                            #font_size:12
                                             readonly:True                          
                                             text:'Transaksi'
                                             font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
@@ -911,38 +913,79 @@ ScreenManager:
                                             bold:True
                                             background_color:0,0,0,0
                                     BoxLayout:
-                                        size_hint_x:.4
-                                    
-                                TextInput:
-                                    font_size:12
-                                    readonly:True                          
-                                    text:'0'
-                                    font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
-                                    color:utils.get_color_from_hex('#000000')
-                                    align:'left'
-                                    background_color:0,0,0,0
+                                        size_hint_x:.2
+                                BoxLayout:
+                                    orientation:'horizontal'
+                                    TextInput:
+                                        font_size:12
+                                        readonly:True                          
+                                        text:'0'
+                                        font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
+                                        color:utils.get_color_from_hex('#000000')
+                                        align:'left'
+                                        background_color:0,0,0,0
+                                    BoxLayout:
+                                        size_hint_x:.1
                     BoxLayout:
                         orientation:'horizontal'
-                        size_hint_y:.2
+                        size_hint_y:.3
                         BoxLayout:
-                            size_hint_x:.1
-                            padding:25
+                            size_hint_x:.2
+                            padding:15
                             Image:
-                                source: 'exit.png'
+                                source: 'ikon/report.png'
                                 center_x: self.parent.center_x
                                 center_y: self.parent.center_y
                                 #on_release: app.root.current = "login"
                                 size:30,30
                                 allow_stretch: True
-
                         BoxLayout:
                             size_hint_x:.3
                             BoxLayout:
                                 orientation:'vertical'
+                                
                                 Button:
                                     background_color:0,0,0,0
                                     background_normal:''
-                                FlatButton:
+                                Button:
+                                    #font_size:12
+                                    font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
+                                    bold:True
+                                    text:'Report Penjualan'
+                                    color:utils.get_color_from_hex('#000000')
+                                    align:'left'
+                                    background_color:utils.get_color_from_hex('#ffffff')
+                                    background_normal:''
+                            
+                                Button:
+                                    background_color:0,0,0,0
+                                    background_normal:''
+                                    #on_press: root.reset()
+                        BoxLayout:  
+                            size_hint_x:.3
+                    
+                    BoxLayout:
+                        orientation:'horizontal'
+                        size_hint_y:.3
+                        BoxLayout:
+                            size_hint_x:.25
+                            padding:15
+                            Image:
+                                source: 'ikon/logout.png'
+                                center_x: self.parent.center_x
+                                center_y: self.parent.center_y
+                                size:30,30
+                                allow_stretch: True
+
+                        BoxLayout:
+                            size_hint_x:.2
+                            BoxLayout:
+                                orientation:'vertical'
+                                
+                                Button:
+                                    background_color:0,0,0,0
+                                    background_normal:''
+                                Button:
                                     text:'Logout'
                                     font_name:'C:\Windows\Fonts\Loucos Lyne - thesimssansbold.otf'
                                     color:utils.get_color_from_hex('#000000')
@@ -956,9 +999,11 @@ ScreenManager:
                                 Button:
                                     background_color:0,0,0,0
                                     background_normal:''
-                            BoxLayout:
-                            BoxLayout:
-                            BoxLayout:
+                                    #on_press: root.reset()
+                            #BoxLayout:
+                        BoxLayout:
+                            size_hint_x:.5
+                            
                     BoxLayout:
                         size_hint_y:.4
         BoxLayout:
@@ -2640,3 +2685,376 @@ ScreenManager:
                                             font_size:12
                                             size_hint_y:.1
                                             color:utils.get_color_from_hex('#042f59')
+#POP UP Ketika akun tidak terdaftar
+<NotRegistered>: 
+    title:'Error'
+    size_hint:.4,.4
+    auto_dismiss: False
+    BoxLayout:  
+        canvas.before:
+            Color:
+                rgba: utils.get_color_from_hex('#ffffff')  
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+                radius:5,5,5,5
+        orientation:'vertical'
+        spacing:5
+        BoxLayout:
+            orientation:"vertical"
+            BoxLayout:
+                size_hint_y:.1
+            BoxLayout:
+                size_hint_y:.2
+                Image:
+                    valign:'top'
+                    source: 'ikon/error.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size:100,100
+                    keep_ratio: True
+                    allow_stretch: True
+            BoxLayout:
+                size_hint_y:.1       
+            BoxLayout:
+                size_hint_y:.4
+                orientation:'vertical'
+                spacing:0
+                FlatButton:
+                    text:'Username and password'
+                    color: utils.get_color_from_hex('#F11B29')
+                FlatButton:
+                    text:'not registered'
+                    color: utils.get_color_from_hex('#F11B29')
+            BoxLayout:
+                size_hint_y:.2
+           
+            BoxLayout:
+                size_hint_y:.3
+                BoxLayout:
+                    size_hint_x:.2
+                Button:
+                    size_hint_x:.1
+                    text:'OK'
+                    bold:True
+                    font_size:15
+                    color: utils.get_color_from_hex('#ffffff')
+                    background_normal:''
+                    background_color:utils.get_color_from_hex('#31C2F8')
+                BoxLayout:
+                    size_hint_x:.2
+            BoxLayout:
+                size_hint_y:.2
+
+#POP UP  Ketika ada form yang kosong
+<Required>: 
+    title:'Error'
+    size_hint:.4,.4
+    auto_dismiss: False
+    BoxLayout:  
+        canvas.before:
+            Color:
+                rgba: utils.get_color_from_hex('#ffffff')  
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+                radius:5,5,5,5
+        orientation:'vertical'
+        spacing:5
+        BoxLayout:
+            orientation:"vertical"
+            BoxLayout:
+                size_hint_y:.1
+            BoxLayout:
+                size_hint_y:.2
+                Image:
+                    valign:'top'
+                    source: 'ikon/error.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size:100,100
+                    keep_ratio: True
+                    allow_stretch: True
+            BoxLayout:
+                size_hint_y:.1       
+            BoxLayout:
+                size_hint_y:.4
+                orientation:'vertical'
+                spacing:0
+                FlatButton:
+                    text:'Username, Password'
+                    color: utils.get_color_from_hex('#F11B29')
+                FlatButton:
+                    text:'and Change required'
+                    color: utils.get_color_from_hex('#F11B29')
+            BoxLayout:
+                size_hint_y:.2
+           
+            BoxLayout:
+                size_hint_y:.3
+                BoxLayout:
+                    size_hint_x:.2
+                Button:
+                    size_hint_x:.1
+                    text:'OK'
+                    bold:True
+                    font_size:15
+                    color: utils.get_color_from_hex('#ffffff')
+                    background_normal:''
+                    background_color:utils.get_color_from_hex('#31C2F8')
+                BoxLayout:
+                    size_hint_x:.2
+            BoxLayout:
+                size_hint_y:.2
+
+#POP UP Ketika invalid username dan password
+
+<Invalid>: 
+    title:'Error'
+    size_hint:.4,.4
+    auto_dismiss: False
+    BoxLayout:  
+        canvas.before:
+            Color:
+                rgba: utils.get_color_from_hex('#ffffff')  
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+                radius:5,5,5,5
+        orientation:'vertical'
+        spacing:5
+        BoxLayout:
+            orientation:"vertical"
+            BoxLayout:
+                size_hint_y:.1
+            BoxLayout:
+                size_hint_y:.2
+                Image:
+                    valign:'top'
+                    source: 'ikon/error.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size:100,100
+                    keep_ratio: True
+                    allow_stretch: True
+            BoxLayout:
+                size_hint_y:.1       
+            BoxLayout:
+                size_hint_y:.4
+                orientation:'vertical'
+                spacing:0
+                FlatButton:
+                    text:'Invalid username or'
+                    color: utils.get_color_from_hex('#F11B29')
+                FlatButton:
+                    text:'password'
+                    color: utils.get_color_from_hex('#F11B29')
+            BoxLayout:
+                size_hint_y:.2
+           
+            BoxLayout:
+                size_hint_y:.3
+                BoxLayout:
+                    size_hint_x:.2
+                Button:
+                    size_hint_x:.1
+                    text:'OK'
+                    bold:True
+                    font_size:15
+                    color: utils.get_color_from_hex('#ffffff')
+                    background_normal:''
+                    background_color:utils.get_color_from_hex('#31C2F8')
+                BoxLayout:
+                    size_hint_x:.2
+            BoxLayout:
+                size_hint_y:.2
+
+#POP UP Ketika transaksi berhasil
+<TransaksiBerhasil>: 
+    title:'Error'
+    size_hint:.4,.4
+    auto_dismiss: False
+    BoxLayout:  
+        canvas.before:
+            Color:
+                rgba: utils.get_color_from_hex('#ffffff')  
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+                radius:5,5,5,5
+        orientation:'vertical'
+        spacing:5
+        BoxLayout:
+            orientation:"vertical"
+            BoxLayout:
+                size_hint_y:.1
+            BoxLayout:
+                size_hint_y:.2
+                Image:
+                    valign:'top'
+                    source: 'ikon/berhasil.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size:100,100
+                    keep_ratio: True
+                    allow_stretch: True
+            BoxLayout:
+                size_hint_y:.1       
+            BoxLayout:
+                size_hint_y:.4
+                orientation:'vertical'
+                spacing:0
+                FlatButton:
+                    text:'Transaksi Berhasil !'
+                    color: utils.get_color_from_hex('#F11B29')
+                
+            BoxLayout:
+                size_hint_y:.2
+           
+            BoxLayout:
+                size_hint_y:.3
+                BoxLayout:
+                    size_hint_x:.2
+                Button:
+                    size_hint_x:.1
+                    text:'OK'
+                    bold:True
+                    font_size:15
+                    color: utils.get_color_from_hex('#ffffff')
+                    background_normal:''
+                    background_color:utils.get_color_from_hex('#31C2F8')
+                BoxLayout:
+                    size_hint_x:.2
+            BoxLayout:
+                size_hint_y:.2
+
+#POPup Barang soldout
+<SoldOutWindow>: 
+    title:'Logout'
+    size_hint:.5,.5
+    auto_dismiss: False
+    BoxLayout:  
+        canvas.before:
+            Color:
+                rgba: utils.get_color_from_hex('#ffffff')  
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+                radius:5,5,5,5
+        orientation:'vertical'
+        spacing:5
+        BoxLayout:
+            
+            Label:
+                font_size:20
+                align:'center'
+                text:'Are you sure ?'
+                color: utils.get_color_from_hex('#000000') 
+        BoxLayout: 
+            orientation:'horizontal'
+            size_hint_y:.2  
+            spacing:30
+            BoxLayout:
+                size_hint_x:.7
+            BoxLayout:   
+                size_hint_x:.2
+                padding:10
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#F60A0A') 
+                    RoundedRectangle:
+                        pos: self.pos
+                        size:self.size
+                        radius: [15, 15, 15, 15]
+                Button:   
+                    bold:True
+                    font_size:13
+                    background_color:0,0,0,0
+                    background_normal:'' 
+                    text:'NO'
+                    pos:self.pos
+                    color:utils.get_color_from_hex('#ffffff')
+                    on_release : app.root.current = "register"
+            BoxLayout:   
+                size_hint_x:.2
+                padding:10
+                canvas:
+                    Color:
+                        rgba: utils.get_color_from_hex('#0096FB') 
+                    RoundedRectangle:
+                        pos: self.pos
+                        size:self.size
+                        radius: [15, 15, 15, 15]
+                Button:   
+                    bold:True
+                    font_size:13
+                    background_color:0,0,0,0
+                    background_normal:'' 
+                    text:'YES'
+                    pos:self.pos
+                    color:utils.get_color_from_hex('#ffffff') 
+            BoxLayout:
+                size_hint_x:.1
+        BoxLayout:
+
+            size_hint_y:.3
+
+#POP UP ketika invalid Change
+<InvalidChange>: 
+    title:'Error'
+    size_hint:.4,.4
+    auto_dismiss: False
+    BoxLayout:  
+        canvas.before:
+            Color:
+                rgba: utils.get_color_from_hex('#ffffff')  
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+                radius:5,5,5,5
+        orientation:'vertical'
+        spacing:5
+        BoxLayout:
+            orientation:"vertical"
+            BoxLayout:
+                size_hint_y:.1
+            BoxLayout:
+                size_hint_y:.2
+                Image:
+                    valign:'top'
+                    source: 'ikon/error.png'
+                    center_x: self.parent.center_x
+                    center_y: self.parent.center_y
+                    size:100,100
+                    keep_ratio: True
+                    allow_stretch: True
+            BoxLayout:
+                size_hint_y:.1       
+            BoxLayout:
+                size_hint_y:.4
+                orientation:'vertical'
+                spacing:0
+                FlatButton:
+                    text:'Invalid change'
+                    color: utils.get_color_from_hex('#F11B29')
+
+            BoxLayout:
+                size_hint_y:.2
+           
+            BoxLayout:
+                size_hint_y:.3
+                BoxLayout:
+                    size_hint_x:.2
+                Button:
+                    size_hint_x:.1
+                    text:'OK'
+                    bold:True
+                    font_size:15
+                    color: utils.get_color_from_hex('#ffffff')
+                    background_normal:''
+                    background_color:utils.get_color_from_hex('#31C2F8')
+                BoxLayout:
+                    size_hint_x:.2
+            BoxLayout:
+                size_hint_y:.2
+
